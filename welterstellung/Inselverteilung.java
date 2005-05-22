@@ -1,13 +1,18 @@
+/**
+ * VerteilungAusfuehren() aus Konstruktor entfernt
+ * Programmaufruf nach instatiierung ausführen
+ * besser Lösung statt überladene Konstruktoren wären getter und setter
+ * 
+ * letzte Änderung von Andreas am 22. Mai 2005
+ */
+
 package welterstellung;
 
 import java.io.*;
 
-//import java.nio.ByteBuffer;
+
 import java.lang.Math;
 
-// VerteilungAusfuehren() aus Konstruktor entfernt
-// Programmaufruf nach instatiierung ausführen
-// besser Lösung statt überladene Konstruktoren wären getter und setter
 
 public class Inselverteilung
 {
@@ -71,8 +76,6 @@ public class Inselverteilung
 		
 	    int[] Bildpunkte;
 		Karte = new double[1000][1000];
-		//ByteBuffer Bildpunkte;
-		//Bildpunkte = new ByteBuffer
 
 		for (int i=0; i<1000; i++)
 			for (int j=0; j<1000; j++)
