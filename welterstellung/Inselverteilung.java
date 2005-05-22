@@ -9,8 +9,6 @@
 package welterstellung;
 
 import java.io.*;
-
-
 import java.lang.Math;
 
 
