@@ -5,7 +5,9 @@ import java.io.*;
 //import java.nio.ByteBuffer;
 import java.lang.Math;
 
-
+// VerteilungAusfuehren() aus Konstruktor entfernt
+// Programmaufruf nach instatiierung ausführen
+// besser Lösung statt überladene Konstruktoren wären getter und setter
 
 public class Inselverteilung
 {
@@ -13,15 +15,15 @@ public class Inselverteilung
 	public Insel[] Orte;
 	public int Inselzahl;
 	
+	private double empfindlichkeit = 0.5;
+	private int Inselanzahl = 1000;
+	String Bildpfad = "C:\\Eigene Dateien\\C- Programme\\SeaWars\\Blubber.bmp";
+	
 /**
  *  Erzeugt 1000 Inseln mit dem Bild "Blubber.bmp" und der Empfindlichkeit 0.5
  */	
 	public Inselverteilung()
 	{
-		final String Bildpfad = "C:\\Eigene Dateien\\C- Programme\\SeaWars\\Blubber.bmp";
-		final double empfindlichkeit = 0.5;
-		final int Inselanzahl = 1000;
-		VerteilungAusfuehren (Inselanzahl, Bildpfad, empfindlichkeit);
 	}
 	/**
 	 * Erzeugt mit Inseln dem Bild Blubber.bmp und der Empfindlichkeit 0.5 
@@ -29,9 +31,7 @@ public class Inselverteilung
 	 */
 	public Inselverteilung(int Inselanzahl)
 	{
-		final String Bildpfad = "C:\\Eigene Dateien\\C- Programme\\SeaWars\\Blubber.bmp";
-		final double empfindlichkeit = 0.5;
-		VerteilungAusfuehren (Inselanzahl, Bildpfad, empfindlichkeit);
+		this.Inselanzahl = Inselanzahl;
 	}
 	/**
 	 * Erzeugt Inseln mit der Empfindlichkeit 0.5.
@@ -41,8 +41,8 @@ public class Inselverteilung
 	 */
 	public Inselverteilung(int Inselanzahl, String Bildpfad)
 	{
-		final double empfindlichkeit = 0.5;
-		VerteilungAusfuehren (Inselanzahl, Bildpfad, empfindlichkeit);
+		this(Inselanzahl);
+		this.Bildpfad = Bildpfad;
 	}
 	/**
 	 * Erzeugt Inselkoordinaten
@@ -57,12 +57,18 @@ public class Inselverteilung
 	 */
 	public Inselverteilung(int Inselanzahl, String Bildpfad, double empfindlichkeit)
 	{
-		VerteilungAusfuehren (Inselanzahl, Bildpfad, empfindlichkeit);
+		this(Inselanzahl, Bildpfad);
+		this.empfindlichkeit = empfindlichkeit;
 	}
 	
 	
-	public void VerteilungAusfuehren(int Inselanzahl, String Bildpfad, double empfindlichkeit)
+	public void VerteilungAusfuehren()
 	{
+		// Reading from defaults
+		int Inselanzahl = this.Inselanzahl;
+		String Bildpfad = this.Bildpfad;
+		double empfindlichkeit = this.empfindlichkeit;
+		
 	    int[] Bildpunkte;
 		Karte = new double[1000][1000];
 		//ByteBuffer Bildpunkte;
