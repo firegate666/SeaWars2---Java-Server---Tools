@@ -1,6 +1,6 @@
 /**
  * This Package allows you to spread a variable Number of Points
- * over a field of 1000 by 1000 units
+ * over a field of 1000 by 1000 Points
  * Copyright (C) 2005  Andreas Wagener
  * 
  * This library is free software; you can redistribute it and/or
