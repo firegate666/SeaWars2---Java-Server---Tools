@@ -21,7 +21,7 @@
  * Programmaufruf nach instatiierung ausführen
  * besser Lösung statt überladene Konstruktoren wären getter und setter
  * 
- * letzte Änderung von Andreas am 22. Mai 2005
+ * letzte Änderung von Andreas am 25. Mai 2005
  */
 
 package welterstellung;
@@ -33,12 +33,12 @@ import java.lang.Math;
 public class Inselverteilung
 {
 	private double[][] Karte;
-	public Insel[] Orte;
+	public Atoll[] Orte;
 	public int Inselzahl;
 	
 	private double empfindlichkeit = 0.5;
 	private int Inselanzahl = 1000;
-	String Bildpfad = "C:\\Eigene Dateien\\C- Programme\\SeaWars\\Blubber.bmp";
+	String Bildpfad = "Blubber.bmp";
 	
 /**
  *  Erzeugt 1000 Inseln mit dem Bild "Blubber.bmp" und der Empfindlichkeit 0.5
@@ -182,7 +182,7 @@ public class Inselverteilung
 				Meeresspiegel = i;
 		}
 		// Positionen aller Inseln, die über dem Meeresspiegel liegen, speichern
-		Orte = new Insel[Inselzaehler+1];
+		Orte = new Atoll[Inselzaehler+1];
 		Inselzahl = Inselzaehler;
 		Inselzaehler = 0;
 		for (int i=0; i<1000; i++)
@@ -192,7 +192,7 @@ public class Inselverteilung
 				{
 					
 					try{
-						Orte[Inselzaehler++] = new Insel(i, j);
+						Orte[Inselzaehler++] = new Atoll(i, j);
 					}
 					catch (ArrayIndexOutOfBoundsException e)
 					{
