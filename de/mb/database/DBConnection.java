@@ -70,7 +70,7 @@ public abstract class DBConnection {
     }
 
     /**
-     *  Connect to database using given username and password.
+     *  Connect to database using the given username and password.
      *
      *@return                   A succesfull connection
      *@exception  SQLException

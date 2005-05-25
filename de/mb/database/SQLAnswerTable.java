@@ -34,7 +34,8 @@ public class SQLAnswerTable {
     /**
      *  Constructor for the SQLAnswerTable object
      *
-     *@param  rs                rs contains a <code>ResultSet</code> with the return data from a select query
+     *@param  rs contains a <code>ResultSet</code> with the 
+     *return data from a select query
      *@exception  SQLException
      */
     public SQLAnswerTable(OracleResultSet rs) throws SQLException {
@@ -45,7 +46,8 @@ public class SQLAnswerTable {
     /**
      * Gets the column description of column number columnNumber
      *
-     *@param  columnNumber  column number from which to get description starting with 1
+     *@param  columnNumber  column number from which to get the description starting
+     * with the first one
      *@return               column description
      */
     public String getHeaderCell(int columnNumber) {
@@ -96,7 +98,7 @@ public class SQLAnswerTable {
     }
 
     /**
-     *  Gets the number of rows, excluding the header, this answer table contains
+     *  Gets the number of rows this answer table contains, excluding the header. 
      *
      *@return    row count
      */
@@ -123,7 +125,8 @@ public class SQLAnswerTable {
     }
 
     /**
-     *  Sets the column header names by getting the attributes from a given <code>ResultSetMetaData</code>.
+     *  Sets the column header names by getting the attributes
+     * from a given <code>ResultSetMetaData</code>.
      *
      *@param  metaData          contains header information
      *@exception  SQLException
