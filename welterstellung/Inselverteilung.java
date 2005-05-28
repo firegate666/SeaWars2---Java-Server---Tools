@@ -38,7 +38,7 @@ public class Inselverteilung
 	
 	private double empfindlichkeit = 0.5;
 	private int Inselanzahl = 1000;
-	String Bildpfad = "Blubber.bmp";
+	private String Bildpfad = "Blubber.bmp";
 	
 /**
  *  Erzeugt 1000 Inseln mit dem Bild "Blubber.bmp" und der Empfindlichkeit 0.5
