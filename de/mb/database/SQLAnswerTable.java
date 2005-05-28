@@ -15,11 +15,11 @@ package de.mb.database;
  * ===========================================================================
  */
 
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.Vector;
-
-import oracle.jdbc.OracleResultSet;
-import oracle.jdbc.OracleResultSetMetaData;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *  Description of the Class
@@ -28,9 +28,27 @@ import oracle.jdbc.OracleResultSetMetaData;
  *@created    November 19, 2001
  */
 public class SQLAnswerTable {
-    private Vector fdata = new Vector();
-    private Vector fheader = new Vector();
+    private ArrayList fdata = new ArrayList();
+    private ArrayList fheader = new ArrayList();
 
+    /**
+     * return iterator of header cells
+     * 
+     * @return	iterator
+     */
+    public Iterator getHeaderIterator() {
+    	return fheader.iterator();
+    }
+    
+    /**
+     * return iterator of data rows
+     * 
+     * @return	iterator
+     */
+    public Iterator getDataIterator() {
+    	return fdata.iterator();
+    }
+    
     /**
      *  Constructor for the SQLAnswerTable object
      *
@@ -38,8 +56,8 @@ public class SQLAnswerTable {
      *return data from a select query
      *@exception  SQLException
      */
-    public SQLAnswerTable(OracleResultSet rs) throws SQLException {
-        initializeHeader((OracleResultSetMetaData) (rs.getMetaData()));
+    public SQLAnswerTable(ResultSet rs) throws SQLException {
+        initializeHeader( (rs.getMetaData()));
         initializeData(rs);
     }
 
@@ -62,7 +80,7 @@ public class SQLAnswerTable {
      *@return               data cell
      */
     public String getDataCell(int columnNumber, int rowNumber) {
-        return (String) (((Vector) fdata.get(rowNumber - 1)).get(columnNumber - 1));
+        return (String) (((ArrayList) fdata.get(rowNumber - 1)).get(columnNumber - 1));
     }
 
     /**
@@ -112,13 +130,13 @@ public class SQLAnswerTable {
      *@param  rs                return data from a select query
      *@exception  SQLException
      */
-    private void initializeData(OracleResultSet rs) throws SQLException {
+    private void initializeData(ResultSet rs) throws SQLException {
         int rowNumber = 0;
 
         while (rs.next()) {
-            fdata.add(new Vector());
+            fdata.add(new ArrayList());
             for (int i = 1; i <= columnCount(); i++)
-                 ((Vector) (fdata.get(rowNumber))).add(rs.getString(i));
+                 ((ArrayList) (fdata.get(rowNumber))).add(rs.getString(i));
 
             rowNumber++;
         }
@@ -131,7 +149,7 @@ public class SQLAnswerTable {
      *@param  metaData          contains header information
      *@exception  SQLException
      */
-    private void initializeHeader(OracleResultSetMetaData metaData)
+    private void initializeHeader(ResultSetMetaData metaData)
         throws SQLException {
         for (int i = 1; i <= metaData.getColumnCount(); i++) {
             fheader.add(metaData.getColumnName(i));
