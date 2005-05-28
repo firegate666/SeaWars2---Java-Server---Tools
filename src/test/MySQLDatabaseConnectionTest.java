@@ -10,8 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import de.mb.database.SQLAnswerTable;
-import de.mb.database.mysql.MySQLConnectionFactory;
-import de.mb.database.mysql.MySQLExecution;
+import de.mb.database.mysql.MysqlConnectionFactory;
+import de.mb.database.mysql.MysqlSQLExecution;
 
 /**
  * Testclass
@@ -24,8 +24,8 @@ public class MySQLDatabaseConnectionTest {
 		try {
 			String url = "localhost";
 			String dbname = "usr_web4_2";
-			MySQLConnectionFactory f = new MySQLConnectionFactory(url, dbname);
-			MySQLExecution exec = new MySQLExecution(f.getConnection("web4",
+			MysqlConnectionFactory f = new MysqlConnectionFactory(url, dbname);
+			MysqlSQLExecution exec = new MysqlSQLExecution(f.getConnection("web4",
 					"sw666#GHf"));
 
 			// one way: Give Query

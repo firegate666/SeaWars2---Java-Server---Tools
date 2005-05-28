@@ -4,10 +4,9 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package de.mb.database.mysql;
+package de.mb.database;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
@@ -16,11 +15,11 @@ import java.sql.SQLException;
  * @author Marco Behnke
  *
  */
-public class MySQLConnectionFactory {
+public abstract class AbstractConnectionFactory {
 	
-	private String _url;
-	private String _port;
-	private String _dbname;
+	protected String _url;
+	protected String _port;
+	protected String _dbname;
 	
 	/**
 	 * Public constructor
@@ -29,7 +28,7 @@ public class MySQLConnectionFactory {
 	 * @param port		database port
 	 * @param dbname	database name
 	 */
-	public MySQLConnectionFactory(String url, String port, String dbname) {
+	public AbstractConnectionFactory(String url, String port, String dbname) {
 		this._dbname = dbname;
 		this._port = port;
 		this._url = url;
@@ -37,27 +36,9 @@ public class MySQLConnectionFactory {
 	}
 	
 	/**
-	 * Public constructor, port is default 3306
-	 * 
-	 * @param url		database servername / address
-	 * @param dbname	database name
-	 */
-	public MySQLConnectionFactory(String url, String dbname) {
-		this(url, "3306", dbname);
-	}
-	
-	/**
 	 * initializes database driver
 	 */
-	protected void initialize() {
-		try {
-			// load mysql driver from library
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			System.err.println(e.getLocalizedMessage());
-		}
-		
-	}
+	protected abstract void initialize();
 	
 	/**
 	 * Returns connection to database
@@ -66,11 +47,7 @@ public class MySQLConnectionFactory {
 	 * @return				database connection
 	 * @throws SQLException
 	 */
-	public Connection getConnection(String username, String password) throws SQLException {
-		String url = "jdbc:mysql://"+_url+":"+_port+"/"+_dbname+"?user="+username+"&password="+password;
-		System.out.println(url);
-		return DriverManager.getConnection(url);
-	}
+	public abstract Connection getConnection(String username, String password) throws SQLException;
 
 	/**
 	 * @return Returns the _dbname.

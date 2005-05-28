@@ -1,4 +1,4 @@
-package de.mb.database.mysql;
+package de.mb.database;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -13,15 +13,15 @@ import de.mb.database.SQLAnswerTable;
  * 
  * @author Marco Behnke
  */
-public class MySQLExecution {
-	private Connection _conn;
+public abstract class AbstractSQLExecution {
+	protected Connection _conn;
 
 	/**
 	 * Public constructor
 	 * 
 	 * @param conn	database connection
 	 */
-	public MySQLExecution(Connection conn){
+	public AbstractSQLExecution(Connection conn){
 		this._conn = conn;
 	}
 	
@@ -41,7 +41,7 @@ public class MySQLExecution {
 	/**
 	 * private
 	 */
-	private String buildlist(ArrayList list, String prefix, String seperator){
+	protected String buildlist(ArrayList list, String prefix, String seperator){
 		String result = prefix+" ";
 		Iterator i = list.iterator();
 		result += (String)i.next();
@@ -54,7 +54,7 @@ public class MySQLExecution {
 	/**
 	 * private
 	 */
-	private String makeSelect(ArrayList fields){
+	protected String makeSelect(ArrayList fields){
 		if(fields.isEmpty()) { // if no field are given, get all fields
 			return "SELECT * ";
 		}
@@ -64,7 +64,7 @@ public class MySQLExecution {
 	/**
 	 * private
 	 */
-	private String makeWhere(ArrayList conditions, boolean and){
+	protected String makeWhere(ArrayList conditions, boolean and){
 		String result = "WHERE ";
 		String op = " AND ";
 		if(!and) op = "OR";
@@ -82,7 +82,7 @@ public class MySQLExecution {
 	/**
 	 * private
 	 */
-	private String makeFrom(ArrayList tables) throws IllegalArgumentException {
+	protected String makeFrom(ArrayList tables) throws IllegalArgumentException {
 		if(tables.isEmpty()) { // if no field are given, get all fields
 			throw new IllegalArgumentException("no table is given for FROM section of SQL statement");
 		}
