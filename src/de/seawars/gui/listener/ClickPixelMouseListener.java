@@ -53,7 +53,7 @@ public class ClickPixelMouseListener implements MouseListener {
 		 * @see java.awt.event.MouseListener#mouseEntered(MouseEvent)
 		 */
 		public void mouseEntered(MouseEvent e) {
-			if (e.getModifiers() == e.BUTTON1_MASK)
+			if (e.getModifiers() == MouseEvent.BUTTON1_MASK)
 				draw();
 		}
 
@@ -67,7 +67,7 @@ public class ClickPixelMouseListener implements MouseListener {
 		 * @see java.awt.event.MouseListener#mousePressed(MouseEvent)
 		 */
 		public void mousePressed(MouseEvent e) {
-			if (e.getModifiers() == e.BUTTON1_MASK)
+			if (e.getModifiers() == MouseEvent.BUTTON1_MASK)
 				draw();
 		}
 
