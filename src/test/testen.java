@@ -12,10 +12,11 @@ class testen{
 	public static void main(String[] args) {
 		String Inselpositionen = "";
 		Archipelverteilung neueWelt;
-		neueWelt = new Archipelverteilung(1000,"C:\\Eigene Dateien\\C- Programme\\SeaWars\\Antichrist.bmp",0.5);
+		//neueWelt = new Archipelverteilung(1000,"C:\\Eigene Dateien\\C- Programme\\SeaWars\\Antichrist.bmp",0.5);
+		neueWelt = new Archipelverteilung(100,"C:\\Eigene Dateien\\C- Programme\\SeaWars\\Blubber.bmp",0.5);
 		neueWelt.VerteilungAusfuehren();
 		
-		for (int i=0; i<neueWelt.Inselzahl; i++)
+		for (int i=0; i<neueWelt.Archipelzahl; i++)
 		{
 			Inselpositionen = Inselpositionen + neueWelt.Orte[i].x + ", "+
 			neueWelt.Orte[i].y + "\r\n";
@@ -32,6 +33,6 @@ class testen{
         	} catch (IOException e) {
 	            System.out.println("Sorry, die Positionsdatei konnte nicht erstellt werden");
         	}
-        System.out.println("Fertig. Dieses Mal wurden " + neueWelt.Inselzahl + " Inseln erzeugt.");
+        System.out.println("Fertig. Dieses Mal wurden " + neueWelt.Archipelzahl + " Inseln erzeugt.");
 	}
 }

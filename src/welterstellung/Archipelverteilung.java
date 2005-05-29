@@ -34,51 +34,51 @@ public class Archipelverteilung
 {
 	private double[][] Karte;
 	public Archipel[] Orte;
-	public int Inselzahl;
+	public int Archipelzahl;
 	
 	private double empfindlichkeit = 0.5;
-	private int Inselanzahl = 1000;
+	private int Archipelanzahl = 1000;
 	private String Bildpfad = "Blubber.bmp";
 	
 /**
- *  Erzeugt 1000 Inseln mit dem Bild "Blubber.bmp" und der Empfindlichkeit 0.5
+ *  Erzeugt 1000 Archipel mit dem Bild "Blubber.bmp" und der Empfindlichkeit 0.5
  */	
 	public Archipelverteilung()
 	{
 	}
 	/**
-	 * Erzeugt mit Inseln dem Bild Blubber.bmp und der Empfindlichkeit 0.5 
-	 * @param Inselanzahl Anzahl der Inseln
+	 * Erzeugt mit Archipel dem Bild Blubber.bmp und der Empfindlichkeit 0.5 
+	 * @param Archipelanzahl Anzahl der Archipel
 	 */
-	public Archipelverteilung(int Inselanzahl)
+	public Archipelverteilung(int Archipelanzahl)
 	{
-		this.Inselanzahl = Inselanzahl;
+		this.Archipelanzahl = Archipelanzahl;
 	}
 	/**
-	 * Erzeugt Inseln mit der Empfindlichkeit 0.5.
-	 * @param Inselanzahl Anzahl der Inseln
+	 * Erzeugt Archipel mit der Empfindlichkeit 0.5.
+	 * @param Archipelanzahl Anzahl der Archipel
 	 * @param Bildpfad Pfad zu einem Bild im BMP-Format, 1000x1000 Pixel, 
 	 * 8-Bit Graustufen
 	 */
-	public Archipelverteilung(int Inselanzahl, String Bildpfad)
+	public Archipelverteilung(int Archipelanzahl, String Bildpfad)
 	{
-		this(Inselanzahl);
+		this(Archipelanzahl);
 		this.Bildpfad = Bildpfad;
 	}
 	/**
-	 * Erzeugt Inselkoordinaten
-	 * @param Inselanzahl Anzahl der Inseln
+	 * Erzeugt Archipelkoordinaten
+	 * @param Archipelanzahl Anzahl der Archipel
 	 * @param Bildpfad Pfad zu einem Bild im BMP-Format, 1000*1000 Pixel,
 	 * 8-Bit Graustufen
 	 * @param empfindlichkeit stellt ein, wie empfindlich die Verteilungsfunktion
 	 * auf das BMP reagiert. Bei Werten von 1 oder höher sammeln sich fast alle 
-	 * Inseln nur in den weißen Bereichen des BMP. Je kleiner der Wert, desto weniger
+	 * Archipel nur in den weißen Bereichen des BMP. Je kleiner der Wert, desto weniger
 	 * hält sich die Verteilungsfunktion an die Vorgaben des BMP. Sinnvoll ist 0,5 bis
 	 * 0,7 bei den meisten Bildern. Bei empfindlichkeit =0 wird das Bild nicht beachtet.
 	 */
-	public Archipelverteilung(int Inselanzahl, String Bildpfad, double empfindlichkeit)
+	public Archipelverteilung(int Archipelanzahl, String Bildpfad, double empfindlichkeit)
 	{
-		this(Inselanzahl, Bildpfad);
+		this(Archipelanzahl, Bildpfad);
 		this.empfindlichkeit = empfindlichkeit;
 	}
 	
@@ -86,7 +86,7 @@ public class Archipelverteilung
 	public void VerteilungAusfuehren()
 	{
 		// Reading from defaults
-		int Inselanzahl = this.Inselanzahl;
+		int Archipelanzahl = this.Archipelanzahl;
 		String Bildpfad = this.Bildpfad;
 		double empfindlichkeit = this.empfindlichkeit;
 		
@@ -133,7 +133,7 @@ public class Archipelverteilung
 					"vielleicht zu klein?");
 			return;
 		}
-		/* Nachdem nun hoffentlich ein Integer-Array des Bilds vorliegt, sollen die Inseln
+		/* Nachdem nun hoffentlich ein Integer-Array des Bilds vorliegt, sollen die Archipel
 		 * mit dem Array verrechnet werden. 
 		 */
 		if (empfindlichkeit > 0.01)
@@ -157,7 +157,7 @@ public class Archipelverteilung
 					Karte[i][j]=Karte[i][j] * (Punkt +1)/2; 
 				}
 		}
-		//Inseln aus dem Boden heben, Werte zwischen 0 und "genauigkeit"
+		//Archipel aus dem Boden heben, Werte zwischen 0 und "genauigkeit"
 		final int genauigkeit = 100000;
 		for (int i=0; i<1000; i++)
 			for (int j=0; j<1000; j++)
@@ -172,37 +172,38 @@ public class Archipelverteilung
 				if ((Karte[i][j]<genauigkeit) && (Karte[i][j]>0))
 					histogramm[(int)Karte[i][j]]++;
 			}
-		//Meeresspiegel für die perfekte Inselanzahl aus dem Histogramm auslesen
-		int Inselzaehler = 0;
+		//Meeresspiegel für die perfekte Archipelanzahl aus dem Histogramm auslesen
+		int Archipelzaehler = 0;
 		int Meeresspiegel =0;
 		for (int i=(genauigkeit -1); ((Meeresspiegel==0) && (i>0)); i--)
 		{
-			Inselzaehler += histogramm[i];
-			if (Inselzaehler > Inselanzahl)
+			Archipelzaehler += histogramm[i];
+			if (Archipelzaehler > Archipelanzahl)
 				Meeresspiegel = i;
 		}
-		// Positionen aller Inseln, die über dem Meeresspiegel liegen, speichern
-		Orte = new Archipel[Inselzaehler+1];
-		Inselzahl = Inselzaehler;
-		Inselzaehler = 0;
+		// Positionen aller Archipel, die über dem Meeresspiegel liegen, speichern
+		Orte = new Archipel[Archipelzaehler+1];
+		Archipelzahl = Archipelzaehler;
+		Archipelzaehler = 0;
+		int Archipelgroesse = 0;
 		for (int i=0; i<1000; i++)
 			for (int j=0; j<1000; j++)
 			{
 				if (Karte[i][j] > Meeresspiegel)
 				{
-					
+					Archipelgroesse = (int) (Math.random()*5.49 + 0.5);					
 					try{
-						Orte[Inselzaehler++] = new Archipel(i, j);
+						Orte[Archipelzaehler++] = new Archipel(i, j, Archipelgroesse );
 					}
 					catch (ArrayIndexOutOfBoundsException e)
 					{
 						System.out.println("Die Empfindlichkeit war zu niedrig. \n" +
-								"Wahrscheinlich ist nicht die ganze Karte mit Inseln bedeckt" +
+								"Wahrscheinlich ist nicht die ganze Karte mit Archipeln bedeckt" +
 								"worden.");
 						return;
 					}
 				}
 			}//for
-	}//Inseln erzeugen
+	}//Archipel erzeugen
 }//Klasse
 
