@@ -72,7 +72,10 @@ public class InselErstellung
 				}
 				else 
 				{
-					silbe[i]=silbe[i]+voka[c[j]-kuKonso.length-laKonso.length];
+					System.out.println(c[j]);
+					c[j]=c[j]-(kuKonso.length+laKonso.length);
+
+					silbe[i]=silbe[i]+voka[c[j]-1];
 				}
 			}
 		}

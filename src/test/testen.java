@@ -7,10 +7,14 @@
 package test;
 import welterstellung.Archipelverteilung;
 import java.io.*;
+import welterstellung.InselErstellung;
 
 class testen{
 	public static void main(String[] args) {
-		String Inselpositionen = "";
+		
+		InselErstellung Insel= new InselErstellung();
+		System.out.println(Insel.setZufallsName());
+/*		String Inselpositionen = "";
 		Archipelverteilung neueWelt;
 		//neueWelt = new Archipelverteilung(1000,"C:\\Eigene Dateien\\C- Programme\\SeaWars\\Antichrist.bmp",0.5);
 		neueWelt = new Archipelverteilung(100,"C:\\Eigene Dateien\\C- Programme\\SeaWars\\Blubber.bmp",0.5);
@@ -34,5 +38,6 @@ class testen{
 	            System.out.println("Sorry, die Positionsdatei konnte nicht erstellt werden");
         	}
         System.out.println("Fertig. Dieses Mal wurden " + neueWelt.Archipelzahl + " Inseln erzeugt.");
+        */
 	}
 }
