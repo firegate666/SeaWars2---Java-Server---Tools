@@ -29,7 +29,7 @@ public class MySQLDatabaseConnectionTest {
 					"sw666#GHf"));
 
 			// one way: Give Query
-			SQLAnswerTable t = exec.executeQuery("SELECT * FROM insel");
+			SQLAnswerTable t = exec.executeQuery("SELECT * FROM spieler");
 			System.out.println(t.toString(true));
 			
 			// second way

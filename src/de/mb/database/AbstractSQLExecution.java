@@ -39,6 +39,47 @@ public abstract class AbstractSQLExecution {
 	}
 
 	/**
+	 * Executes SQL Update and returns affected rows
+	 * 
+	 * @param query			SQL Statement
+	 * @return				number of affected rows
+	 * @throws SQLException
+	 */
+	public int executeUpdate(String query) throws SQLException {
+		Statement stmt = _conn.createStatement();
+		int rows = stmt.executeUpdate(query);
+		return rows;
+	}
+
+	/**
+	 * Executes SQL Insert and returns affected rows
+	 * 
+	 * @param query			SQL Statement
+	 * @return				number of affected rows
+	 * @throws SQLException
+	 */
+	public int executeInsert(String query) throws SQLException {
+		// TODO still the same as executeUpdate
+		Statement stmt = _conn.createStatement();
+		int rows = stmt.executeUpdate(query);
+		return rows;
+	}
+
+	/**
+	 * Executes SQL Delete and returns affected rows
+	 * 
+	 * @param query			SQL Statement
+	 * @return				number of affected rows
+	 * @throws SQLException
+	 */
+	public int executeDelete(String query) throws SQLException {
+		// TODO still the same as executeUpdate
+		Statement stmt = _conn.createStatement();
+		int rows = stmt.executeUpdate(query);
+		return rows;
+	}
+	
+	/**
 	 * private
 	 */
 	protected String buildlist(ArrayList list, String prefix, String seperator){
