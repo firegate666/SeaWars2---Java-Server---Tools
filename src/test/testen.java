@@ -5,14 +5,14 @@
  */
 
 package test;
-import welterstellung.Inselverteilung;
+import welterstellung.Archipelverteilung;
 import java.io.*;
 
 class testen{
 	public static void main(String[] args) {
 		String Inselpositionen = "";
-		Inselverteilung neueWelt;
-		neueWelt = new Inselverteilung(1000,"C:\\Eigene Dateien\\C- Programme\\SeaWars\\Antichrist.bmp",0.5);
+		Archipelverteilung neueWelt;
+		neueWelt = new Archipelverteilung(1000,"C:\\Eigene Dateien\\C- Programme\\SeaWars\\Antichrist.bmp",0.5);
 		neueWelt.VerteilungAusfuehren();
 		
 		for (int i=0; i<neueWelt.Inselzahl; i++)

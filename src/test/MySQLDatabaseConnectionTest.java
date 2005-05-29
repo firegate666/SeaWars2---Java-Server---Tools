@@ -40,9 +40,7 @@ public class MySQLDatabaseConnectionTest {
 			from.add("insel");
 			t = exec.executeQuery(fields, from);
 			System.out.println(t.toString(true));
-			
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 

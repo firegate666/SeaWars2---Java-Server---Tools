@@ -1,11 +1,11 @@
 package welterstellung;
 
-public class Atoll
+public class Archipel
 {
 	public int x;
 	public int y;
 	public int groesse;
-	public Atoll(int x, int y)
+	public Archipel(int x, int y)
 	{
 		this.x = x;
 		this.y = y;

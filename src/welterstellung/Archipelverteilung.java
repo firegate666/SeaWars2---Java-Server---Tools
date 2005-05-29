@@ -30,7 +30,7 @@ import java.io.*;
 import java.lang.Math;
 
 
-public class Inselverteilung
+public class Archipelverteilung
 {
 	private double[][] Karte;
 	public Archipel[] Orte;
@@ -43,14 +43,14 @@ public class Inselverteilung
 /**
  *  Erzeugt 1000 Inseln mit dem Bild "Blubber.bmp" und der Empfindlichkeit 0.5
  */	
-	public Inselverteilung()
+	public Archipelverteilung()
 	{
 	}
 	/**
 	 * Erzeugt mit Inseln dem Bild Blubber.bmp und der Empfindlichkeit 0.5 
 	 * @param Inselanzahl Anzahl der Inseln
 	 */
-	public Inselverteilung(int Inselanzahl)
+	public Archipelverteilung(int Inselanzahl)
 	{
 		this.Inselanzahl = Inselanzahl;
 	}
@@ -60,7 +60,7 @@ public class Inselverteilung
 	 * @param Bildpfad Pfad zu einem Bild im BMP-Format, 1000x1000 Pixel, 
 	 * 8-Bit Graustufen
 	 */
-	public Inselverteilung(int Inselanzahl, String Bildpfad)
+	public Archipelverteilung(int Inselanzahl, String Bildpfad)
 	{
 		this(Inselanzahl);
 		this.Bildpfad = Bildpfad;
@@ -76,7 +76,7 @@ public class Inselverteilung
 	 * hält sich die Verteilungsfunktion an die Vorgaben des BMP. Sinnvoll ist 0,5 bis
 	 * 0,7 bei den meisten Bildern. Bei empfindlichkeit =0 wird das Bild nicht beachtet.
 	 */
-	public Inselverteilung(int Inselanzahl, String Bildpfad, double empfindlichkeit)
+	public Archipelverteilung(int Inselanzahl, String Bildpfad, double empfindlichkeit)
 	{
 		this(Inselanzahl, Bildpfad);
 		this.empfindlichkeit = empfindlichkeit;
