@@ -8,12 +8,14 @@ package test;
 import welterstellung.Archipelverteilung;
 import java.io.*;
 import welterstellung.InselErstellung;
+import welterstellung.ZufallsNamen;
 
 class testen{
 	public static void main(String[] args) {
 		
-		InselErstellung Insel= new InselErstellung();
-		System.out.println(Insel.setZufallsName());
+ ZufallsNamen name = new ZufallsNamen();
+ for (int i=0; i<1000; i++)System.out.println(name.setZufallsName());
+		
 /*		String Inselpositionen = "";
 		Archipelverteilung neueWelt;
 		//neueWelt = new Archipelverteilung(1000,"C:\\Eigene Dateien\\C- Programme\\SeaWars\\Antichrist.bmp",0.5);

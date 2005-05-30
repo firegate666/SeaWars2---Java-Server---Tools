@@ -1,6 +1,7 @@
 package welterstellung;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
+import welterstellung.ZufallsNamen;
 
 /**
  * Diese Klasse erstellt Inseln für die Archipele und verteilt sie angemessen.
@@ -38,56 +39,12 @@ public class InselErstellung
 	 */
 	public String setZufallsName()
 	{
-		/**
-		 * TODO: Methode zu Ende schreiben
-		 */ 
-		String name = "Zufallsname";
-		ArrayList silben = new ArrayList();
-		int silbenlaenge = 0;
-		int silbenzahl = 0;
-		int[] c = new int[4];
-		String[] silbe = new String[1000]; 
-		String[] kuKonso = new String[] {"b", "c", "d", "g", "k", "p", "qu", "t", "x", "z"}; 
-		String[] laKonso = new String[] {"f", "h", "m", "n", "r", "s", "v", "w", "y", "sch", "ch"}; 
-		String[] voka = new String[] {"a", "e", "i", "j", "o", "u", "ä", "ö", "ü"}; 
-		for (int i=0; i < 1000;  i++)
-		{
-			//Zahlen zwischen 2 und 4
-			silbenlaenge = (int) (Math.random()*3+1.9999);
-			for (int j=0; j < silbenlaenge; j++)
-			{
-				c[j]=(int)(Math.random()*(kuKonso.length + laKonso.length + voka.length)+0.9999);
-			}
-			boolean kuKonsoErlaubt = true;
-			for (int j=0; j < silbenlaenge; j++)
-			{
-				if (c[j]<kuKonso.length && kuKonsoErlaubt)
-				{
-					silbe[i]=silbe[i]+kuKonso[c[j]];
-					kuKonsoErlaubt = false;
-				}
-				else if (c[j]<(kuKonso.length+laKonso.length) && c[j]>=kuKonso.length)
-				{
-					silbe[i]=silbe[i]+laKonso[c[j]-kuKonso.length];
-				}
-				else 
-				{
-					System.out.println(c[j]);
-					c[j]=c[j]-(kuKonso.length+laKonso.length);
-
-					silbe[i]=silbe[i]+voka[c[j]-1];
-				}
-			}
-		}
-		silbenzahl = (int) (Math.random() * 2.999+1);
-		name = "";
-		for (int i=0; i<silbenzahl; i++)
-		{
-			name = name + silbe[(int)(Math.random()*999.999+1)];
-		}
+		ZufallsNamen neuerName = new ZufallsNamen();
+		String name = neuerName.setZufallsName();
 		this.name = name;
 		return name;
 	}
+	
 	public String getName()
 	{
 		return this.name;
