@@ -1,3 +1,10 @@
+/**
+ * Klasse zum Erstellen von zufälligen Namen. Buchstaben werden nach ihrer Häufigkeit
+ * verwendet, einige Regeln für Konsonanten und Vokale implementiert. 
+ * 
+ * Letzte Änderungen von 
+ * Andreas Wagener am 1. 06. 2005: Kommentar und Änderungsdatum hinzugefügt ;-)
+ */
 // puh..... hard stuff, aber klasse ergebniss !!
 // evtl. könntest du hier mal schauen, es etwas objektorientierter zu gestalten?
 // deine Methoden sind alle so lang ;)
@@ -77,12 +84,7 @@ public class ZufallsNamen
 	 
 	public String setZufallsName()
 	{
-	/**
-	 * TODO: Methode zu Ende schreiben
-	 * 1) Derzeit ständige IndexOutOfBoundsExeptions
-	 * 2) Derzeit noch unschöne Silben & Namen
-	 * 3) Keine lauffähige Version vorhanden
-	 */
+
 		String name = "Zufallsname";
 		//ArrayList silben = new ArrayList();
 		int silbenlaenge = 0;

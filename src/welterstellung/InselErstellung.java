@@ -6,6 +6,11 @@ import welterstellung.ZufallsNamen;
 /**
  * Diese Klasse erstellt Inseln für die Archipele und verteilt sie angemessen.
  * Es können Atolle oder Archipele erzeugt werden.
+ * 
+ * Letzte Änderung von Andreas Wagener, 1.6.2005:
+ * Diese Klasse ist noch nicht so richtig Betriebsbereit! Vor allem kenne ich 
+ * nicht mehr unsere Vereinbarung über die Größe, die eine Insel haben soll.
+ * Wie war das noch? 
  */
 public class InselErstellung
 {
