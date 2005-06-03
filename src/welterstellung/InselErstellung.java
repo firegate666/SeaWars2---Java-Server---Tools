@@ -132,5 +132,3 @@ public class InselErstellung
 		return (int)groesse;
 	}
 }
-
-
