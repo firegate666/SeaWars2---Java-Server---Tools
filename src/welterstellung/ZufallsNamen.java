@@ -12,6 +12,16 @@ import java.util.StringTokenizer; // used for external properties file
 
 // Namensklasse
  
+/**
+ * 
+ * @author Andreas
+ *
+ * Diese Buchstabenklasse stellt für jeden Buchstaben auch die Wahrscheinlichkeit
+ * seines auftretens in einem Lexikon zur Verfügung. Man könnte sich überlegen, 
+ * ob zusätzlich die Wahrscheinlichkeit des Auftretens am Wortanfang berücksichtigt
+ * wird, um zusätzliche Sprachähnlichkeit der generierten Wörter mit echten Wörtern
+ * zu erreichen.
+ */
 class Buch {
 	String buchstabe;
 	double wahrscheinlichkeit;
@@ -101,6 +111,20 @@ public class ZufallsNamen
 		weicKonErlaubt = false,
 		hartKonErlaubt = false;
 		
+		/*
+		 * Hier werden zunächst die einzelnen Silben zusammengestellt. Dabei wird 
+		 * erst eine Buchstabengruppe ausgesucht, die in der aktuellen Situation
+		 * gerade erlaubt ist. Wenn das geschehen ist, wird auf Zufall einer der 
+		 * Buchstaben aus der aktuellen Gruppe ausgesucht und mit einem Zufalls-
+		 * generator sichergestellt, dass er in seiner "natürlichen" Häufigkeit vom
+		 * Namensgenerator verwendet wird.
+		 * Wenn dieser Buchstabe tatsächlich ausgesucht wird, dann werden die Er-
+		 * laubnisse und Verbote für weitere Buchstaben neu gesetzt. Wenn nicht, wirds
+		 * noch einmal probiert.
+		 * 
+		 * Alle Silben fangen nun mit einem Vokal an, damit sie zusammengesetzt gut 
+		 * klingen.
+		 */
 		int gruppenwahl=0, buchstabenwahl=0;
 		for (int i=0; i<silbenzahl;i++)
 		{
@@ -220,18 +244,44 @@ public class ZufallsNamen
 			}//for k
 			//System.out.println(silbe[i]);
 		}
+<<<<<<< ZufallsNamen.java
+
+		/*
+		 * Aus den Silben werden nun Namen zusammengesetzt. Um Ollis Augen zu schonen, entspreche
+		 * ich hier seinem Wunsch und schneide die Namensgenerierung bereits bei 10 Buchstaben langen
+		 * Namen ab. Wenn ein Wort länger geworden ist, wird stattdessen ein wirklich existierender
+		 * Name aus der Liste der fertigen Namen ausgewählt und verwendet.
+		 * Wenn der Name weniger als 9 Buchstaben enthält, wird eins der Präfixe oder Suffixe aus-
+		 * gewählt. So kommen Namen wie "Quranameki Island" zustande: Das "Island" wird nachträglich
+		 * angehängt. Dazu habe ich einen bunten Strauß aus Deutschen, Englischen, Spanischen und 
+		 * Französischen Suffixen und Präfixen zusammengestellt. Wenn einem von euch noch mehr ein-
+		 * fallen, nur zu, je bunter der Namensgenerator ist, desto besser!
+		 */
+		name="";
+=======
 		
 		int silbennummer;
 		name=""; //$NON-NLS-1$
+>>>>>>> 1.4
 		for (int i=0; i<silbenzahl; i++)
 		{
 			name = name + silbe[i];
 			if (name.length()>10) break;
 		}
 		name= name.toUpperCase().charAt(0)+name.toLowerCase().substring(1, name.length());
+<<<<<<< ZufallsNamen.java
+		String [] praefix = new String[] {"Porta de ", "Große ", "La " , "Le ", "Little ", "Cruz de ", "St. ", "Îles de la ", "Isla del ", "Great ", "Santo ", "Sao ", ""};
+		String [] suffix = new String [] {" Grove"," Island", "oog", " Felsen",  " Grande", "'s Vineyard", "er Hallig", "strand", "'s Home", " del Sol", " Rock", " Reef", "au", "'s Reef", "'s Place", " Harbour", "der Höft", " Cave", " Cavern", " el Grotto"};
+		/*
+		 * Hier eine Liste von ca. 600 fertigen Namen. 
+		 * TODO: Die Liste der fertigen Namen unbedingt in eine Textdatei auslagern!
+		 */
+		String [] fertigeNamen = new String [] {"Grönland", "Königin-Elisabeth", "Amund-Ringnes", "Axel-Heiberg", "Bathurst", "Borden", "Brock", "Byam-Martin", "Cameron", "Coburg", "Cornwall", "Cornwallis", "Devon", "Eglinton", "Ellef-Ringnes", "Ellesmere", "Emerald", "Graham", "König-Christian", "Lougheed", "Mackenzie-King", "Meighen", "Melville", "Prinz-Patrick", "Baffin", "Banksinsel", "Prince-of-Wales", "Victoria", "Aurelias Eiland", "Rekas Rock", "Aurelias Rock", "Southampton", "Coats", "Mansel", "Belcherinseln", "Akimiski", "Wrangelinsel", "Sewernaja Semlja", "Nowaja Semlja", "Kolgujew", "Franz-Joseph Land", "Spitzbergen", "Bäreninsel", "Lofoten", "Jan Mayen", "Island", "Bermuda", "Färöer", "Shetland", "Britische Inseln", "Großbritannien", "Irland", "Isle of Man", "Hebriden", "Orkney", "Anglesey", "Isle of Wight", "Makaronesien", "Kapverden", "Barlavento-Gruppe", "Santo Antão", "Vicente", "Nicolau", "Sal", "Boa Vista", "Santa Luzia", "Branco", "Razo", "Sotavento-Gruppe", "Maio", "Santiago", "Fogo", "Brava", "Ilheus Secos ou do Rombo.", "Lanzarote", "Fuerteventura", "Gran Canaria", "Teneriffa", "La Gomera", "La Palma", "El Hierro", "Alegranza", "Graciosa", "Montaña Clara", "Los Lobos", "Roque del Este", "Roque del Oeste", "Anaga", "Salmor", "Garachico", "Madeira", "Azoren", "Corvo", "Flores", "Faial", "Pico", "Jorge", "Graciosa", "Terceira", "Miguel", "Santa Maria", "Formigas", "Alderney", "Brecqhou oder Brechou", "Guernsey", "Herm", "Jersey", "Jethou", "Lihou", "Sark", "Ouessant", "Belle-Isle", "Ré", "Oléron", "Île d'Yeu", "Texel", "Vlieland", "Terschelling", "Ameland", "Schiermonnikoog", "Rottumerplaat", "Rottumeroog", "Noord-Beeveland", "Borkum", "Memmert", "Kachelotplate", "Juist", "Norderney", "Baltrum", "Langeoog", "Spiekeroog", "Wangerooge", "Neuwerk", "Scharhörn", "Trischen", "Amrum", "Föhr", "Nordstrand", "Pellworm", "Sylt", "Halligen", "Langeneß", "Hooge", "Gröde", "Nordstrandischmoor", "Oland", "Süderoog", "Südfall", "Hamburger Hallig", "Norderoog", "Habel", "Helgoland", "Læsø", "Anholt", "Seeland", "Fünen", "Alsen", "Langeland", "Lolland", "Falster", "Møn", "Fehmarn", "Rügen", "Hiddensee", "Greifswalder Oie", "Usedom", "Wolin", "Bornholm", "Öland", "Gotland", "Åland", "Hiiumaa", "Dagö", "Saaremaa", "Ösel", "Balearen", "Mallorca", "Menorca", "Ibiza", "Formentera", "Îles d'Hyères", "Îles Lérins", "Korsika", "Sardinien", "Insel San Pietro", "Insel Sant'Antioco", "La Maddalena", "Caprera", "Capraia", "Elba", "Giglio", "Pianosa", "Montecristo", "Giannutri", "Gorgona", "Ponza", "Palmarola", "Zannone", "Ventotene", "Capri", "Ischia", "Procida", "Stromboli", "Panarea", "Vulcano", "Lipari", "Salina", "Filicudi", "Alicudi", "Favignana", "Levanzo", "Marettimo", "Sizilien", "Pantelleria", "Lampedusa", "Linosa", "Lampione", "Malta", "Malta", "Gozo", "Comino", "Cominotto", "Kemmunett", "Filfla", "Filfola", "St. Pauls Island", "La Galit", "Kerkenna", "Djerba", "Venedig", "Murano", "Burano", "Torcello", "Lido di Venezia", "Pellegrina", "Brijuni", "Krk", "Cres", "Rab", "Pag", "Losinj", "Unije", "Susak", "Veli", "Mali Sakrane", "Ilovik", "Sveti Petar", "Lošinj", "Dugi Otok", "Kornat", "Šolia", "Bra?", "Hvar", "Vis", "Kor?ula", "Lastovo", "Mijet", "Isole Tremiti", "Othoni", "Erikoussa", "Mathraki", "Korfu", "Paxos oder Paxi", "Antipaxi", "Lefkada", "Kephalonia", "Ithaka", "Zakynthos", "Strofaden", "Ägäis", "Thasos", "Samothrake", "Límnos", "Agios Efstratios", "Gökçe Ada", "Imbros", "Bozca Ada", "Skiathos", "Skopelos", "Alonnisos", "Peristéra", "Psathúra", "Kyrá Panagía", "Giúra", "Pipérion", "Skantzúra", "Skyros", "Skíros", "Skirópoula", "Sarakinón", "Euböa", "Évvia", "Uzun Ada", "Lesbos", "Alibey adas?", "Chios", "Psará", "Ikaria", "Fourni", "Samos", "Salamis", "Äjina/Ägina", "Póros", "Sapiéntza", "Schíza", "Benétiko", "Elafónisos", "Kythera", "Antikythera", "Vourtzi", "Spetsä", "Spétses", "Dokós", "Hydra", "Ídra", "Kykladen", "Amorgós", "Anafi", "Ándros", "Antiparos", "Delos", "Folégandros", "Gyáros", "Íos", "Kea", "Kímolos", "Makrónisos", "Makrónissos", "Mílos", "Náxos", "Paros", "Kythnos", "Kíthnos", "Mýkonos", "Serifos", "Sifnos", "Síkinos", "Sýros", "Tínos", "Thíra", "Thirasía", "Therasia", "Aspronísi", "Nea Kameni", "Palea Kameni", "Iráklia", "Schinoússa", "Epano Koufonissi", "Kato Koufonissi", "Glaros", "Glaronissi", "Kéros", "Antikeros", "Epano Antikeri", "Drima", "Kato Antikeri", "Donoússa", "Dodekanes", "Agathonisi", "Arki", "Astipalaia", "Chálki", "Khalki", "Kalymnos", "Karpathos", "Kasos", "Kastellórizo", "Kós", "Leros", "Lero", "Lipsi", "Nisyros", "Patmos", "Pserimos", "Rhodos", "Sými", "Telendos", "Tilos", "Giali", "Yiali", "Rhodos", "Kreta", "Afsia", "Aloni", "Pascha Liman", "?mral?", "Inseln ?stanbuls", "Kalolimui", "Kulali", "Marmara", "Türkeli adas?", "", "Sasyk", "Kunduk", "Sagany", "Alibej", "Dolgij", "Tendrovskaja kosa", "Dscharilgatsch", "Birutschi", "Obilotschnaja kosa", "Berdanskaja kosa", "Zypern", "Prinz-Eduard", "Cape Breton", "Anticosti", "Îles de la Madeleine", "Neufundland", "Fogo Island", "St. Pierre", "Miquelon", "Nantucket", "Martha's Vineyard", "Rhode Island", "Long Island", "Manhattan", "Hatteras", "Sea Islands", "Florida Keys", "Bahamas", "Kuba", "Hispaniola", "Puerto Rico", "Jamaika", "Bouvetinsel", "Gough", "Inaccessible", "Tristan da Cunha", "Trindade", "St. Helena", "Ascension", "Fernando de Noronha", "Sao Paulo", "Tomé und Príncipe", "Annobón", "Bioko", "Sankt-Peter-und-Sankt-Pauls-Felsen", "Queimada Grande", "Diego-Ramirez", "Falkland", "Feuerland", "Shadw?n", "Nora", "Dahlak", "Qishran", "Faras?n", "Hanish", "Great Hanish", "Little Hanish", "Jabal Zuqur", "Jabal al Zair", "Jabal Zal Tair", "Humar", "Muqayshit", "Bahrain", "Faylakah", "B?b?y?n", "Jaz?reh ye Kh?rk", "Jaz?reh ye K?sh", "Jaz?reh Qeshm", "Sokotra", "Kuria-Muria", "al-Marirah", "Sansibar", "Pemba", "Mafia", "Seychellen", "Mahé", "Praslin", "La Digue", "Amiranten", "Aldabra", "Cosmoledo", "Farquhar", "Komoren", "Grande Comore", "Anjouan", "Nzwani", "Moheli", "Mwali", "Mayotte", "Mahore", "Maore", "Îles Glorieuses", "Madagaskar", "Maskarenen", "Reunion", "Mauritius", "Rodrigues", "Cargados", "Lakkadiven", "Malediven", "Tschagos-Archipel", "Diego Garcia", "Kokosinseln/Keelinginseln", "Weihnachtsinsel", "Sri Lanka", "Ceylon", "Andamanen", "Nikobaren", "Mergui", "Koh Phayam", "Koh Chan", "Phuket", "Koh Yao Yai", "Koh Lanta", "Koh Muk", "Koh Libong", "Koh Sukhon", "Koh Kerutao", "Lankawi", "Pinang", "Prinz-Edward", "Crozetinseln", "Kerguelen", "Heard", "McDonald", "Neu Amsterdam", "St. Paul", "Große Sunda", "Borneo", "Kalimantan", "Sumatra", "Sulawesi", "Java", "Indonesien", "Kleine Sunda", "Bali", "Timor", "Molukken", "Philippinen", "Mindanao", "Luzon", "Palawan", "Leyte", "Sonstige", "Anamba", "Nias", "Hainan", "Honsh?", "Hokkaid?", "Kyushu", "Oshima", "Shikoku", "Tsushima", "Kurilen", "Paracel", "Ryukyu", "Sachalin", "Spratly", "Taiwan", "Phangan", "Phuket", "Samui", "Tao", "Kommandeur", "Aleuten", "Kodiak", "Königin-Charlotte", "Vancouver Island", "Guadalupe", "Revillagigedo", "Revillagigedo", "Clipperton", "Cocos", "Galápagos", "Juan-Fernández", "Chiloé", "", "", "Ozeanien", "Sala y Gomez", "Osterinsel", "Pitcairn", "Französisch-Polynesien", "Marquesas", "Tuamotu", "Gesellschaftsinseln", "Cookinseln", "Hawaii", "Johnston", "Wake", "Bonin", "Marianen", "Guam", "Karolinen", "Palau", "Eniwetok", "Marshallinsel", "Bikini-Atoll", "Nauru", "Gilbert", "Tuvalu", "Ellice", "Phoenix", "Tokelau", "Samoa", "West-Samoa", "Wallis", "Futuna", "Niue", "Tonga", "Fidschi", "Vanuatu", "Salomonen", "Bismarck", "Neuguinea", "Neukaledonien", "Norfolkinsel", "Kermadecinseln", "Neuseeland", "Nordinsel", "Südinsel", "Antipoden", "Tasmanien", "Alexander-I.", "Balleny", "Berkner", "Ross", "Südgeorgien", "Fraueninsel", "Heidseeinseln", "Herreninsel", "Lindau", "Mainau", "L'Ile d'Ogoz", "Reichenau", "Roseninsel", "Schnäggei", "Schwanau", "Ufenau"};
+=======
 		String [] praefix = getPraefix();
 		String [] suffix = getSuffix();
 		String [] fertigeNamen = getIslandNames();
+>>>>>>> 1.4
 		if (name.length()<9){
 			if (Math.random() > 0.5)
 			{
