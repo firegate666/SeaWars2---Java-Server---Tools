@@ -8,6 +8,8 @@
  * Andreas Wagener am 06.06.2005: Das Silbensystem entfernt, Vorschlag zur Ausgliederung von Insel-
  * 				namen umgesetzt, Konsonanten als Anfangsbuchstaben erlaubt, "?" aus den Fremdsprach-
  * 				lichen Inselnamen entfernt und durch passende Umlaute ersetzt
+ * Andreas Wagener am 06.06.2005: Diese Klasse wird langsam zum Hobby. Namensgenerierung beschleunigt,
+ * 				"L" hinzugefügt... Jaja, es hat bislang einfach gefehlt, ich gebs ja zu!
  */
 package welterstellung;
 
@@ -71,13 +73,14 @@ public class ZufallsNamen
 	    langKon[3] = new Buch("sch", 2.00); 
 	    langKon[4] = new Buch("ch", 1.00); //$NON-NLS-1$
 	    
-	    this.klinKon = new Buch[6];// {"m", "n", "r", "w", "y", "j"};
+	    this.klinKon = new Buch[7];// {"m", "n", "r", "w", "y", "j"};
 	    klinKon[0] = new Buch("m", 2.53); //$NON-NLS-1$
 	    klinKon[1] = new Buch("n", 9.78); //$NON-NLS-1$
 	    klinKon[2] = new Buch("r", 7.00); //$NON-NLS-1$
 	    klinKon[3] = new Buch("w", 1.89); //$NON-NLS-1$
 	    klinKon[4] = new Buch("y", 0.04); //$NON-NLS-1$
 	    klinKon[5] = new Buch("j", 0.27); //$NON-NLS-1$
+	    klinKon[6] = new Buch("l", 3.44);
 	    
 		this.voka = new Buch[5];// {"a", "e", "i", "o", "u" };
 	    voka[0] = new Buch("a", 6.51); //$NON-NLS-1$
@@ -101,176 +104,187 @@ public class ZufallsNamen
 		 
 		int[] c = new int[4];
 		
-		//Zahlen zwischen 4 und 12
-		int namenslaenge = (int) (Math.random()*9+4);
+		//Zahlen zwischen 4 und 11
 		boolean vokalErlaubt = true,
 		umlaErlaubt = true,
 		klinKonErlaubt = true,
 		langKonErlaubt = true,
 		weicKonErlaubt = true,
 		hartKonErlaubt = true;
-		int vokaMuss = 0; //Je mehr Konsonanten nacheinander stehen, desto dringlicher wird ein Vokal
-		
-		/*
-		 * Hier wird ein neuer Name zusammengestellt. Dabei wird 
-		 * erst eine Buchstabengruppe ausgesucht, die in der aktuellen Situation
-		 * gerade erlaubt ist. Wenn das geschehen ist, wird auf Zufall einer der 
-		 * Buchstaben aus der aktuellen Gruppe ausgesucht und mit einem Zufalls-
-		 * generator sichergestellt, dass er in seiner "natürlichen" Häufigkeit vom
-		 * Namensgenerator verwendet wird.
-		 * Wenn dieser Buchstabe tatsächlich ausgesucht wird, dann werden die Er-
-		 * laubnisse und Verbote für weitere Buchstaben neu gesetzt. Wenn nicht, wirds
-		 * noch einmal probiert.
-		 * 
-		 * Alle Silben fangen nun mit einem Vokal an, damit sie zusammengesetzt gut 
-		 * klingen.
-		 */
-		int gruppenwahl=0, buchstabenwahl=0;
-		name="";
-		for (int i=0; i<namenslaenge;i++)
+		int vokaMuss = 1; //Je mehr Konsonanten nacheinander stehen, desto dringlicher wird ein Vokal
+		int namenslaenge = (int) (Math.random()*8+4);
+		if (namenslaenge <= 10) //Folgenden Kram nur machen,  wenn der Name übernommen wird
 		{
-//			silbe[i] = ""; //$NON-NLS-1$
-
-			gruppenwahl = (int)(Math.random()*5);
-			switch (gruppenwahl)
+			/*
+			 * Hier wird ein neuer Name zusammengestellt. Dabei wird 
+			 * erst eine Buchstabengruppe ausgesucht, die in der aktuellen Situation
+			 * gerade erlaubt ist. Wenn das geschehen ist, wird auf Zufall einer der 
+			 * Buchstaben aus der aktuellen Gruppe ausgesucht und mit einem Zufalls-
+			 * generator sichergestellt, dass er in seiner "natürlichen" Häufigkeit vom
+			 * Namensgenerator verwendet wird.
+			 * Wenn dieser Buchstabe tatsächlich ausgesucht wird, dann werden die Er-
+			 * laubnisse und Verbote für weitere Buchstaben neu gesetzt. Wenn nicht, wirds
+			 * noch einmal probiert.
+			 * 
+			 * Alle Silben fangen nun mit einem Vokal an, damit sie zusammengesetzt gut 
+			 * klingen.
+			 */
+			int gruppenwahl=0, buchstabenwahl=0;
+			name="";
+			for (int i=0; i<namenslaenge;i++)
 			{
-			case 0: {
-				if (vokalErlaubt)
+	//			silbe[i] = ""; //$NON-NLS-1$
+	
+				gruppenwahl = (int)(Math.random()*5);
+				switch (gruppenwahl)
 				{
-					buchstabenwahl = (int) (Math.random()*voka.length);
-					if (voka[buchstabenwahl].wahrscheinlichkeit > Math.random()*100
-							|| vokaMuss >= 2)
+				case 0: {
+					if (vokalErlaubt)
 					{
-						name=name+voka[buchstabenwahl].buchstabe;
-						klinKonErlaubt = true;
-						langKonErlaubt = true;
-						weicKonErlaubt = true;
-						hartKonErlaubt = true;
-						vokalErlaubt = false;
-						vokaMuss = 0;
-						break;
+						buchstabenwahl = (int) (Math.random()*voka.length);
+						if (voka[buchstabenwahl].wahrscheinlichkeit > Math.random()*100
+								|| vokaMuss >= 2)
+						{
+							name=name+voka[buchstabenwahl].buchstabe;
+							klinKonErlaubt = true;
+							langKonErlaubt = true;
+							weicKonErlaubt = true;
+							hartKonErlaubt = true;
+							vokalErlaubt = false;
+							vokaMuss = 0;
+							break;
+						}
 					}
 				}
-			}
-			case 1: {
-				if (klinKonErlaubt)
-				{
-					buchstabenwahl = (int) (Math.random()*klinKon.length);
-					if (klinKon[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
+				case 1: {
+					if (klinKonErlaubt)
 					{
-						name=name+klinKon[buchstabenwahl].buchstabe;
-						klinKonErlaubt = false;
-						langKonErlaubt = false;
-						weicKonErlaubt = true;
-						hartKonErlaubt = true;
-						vokalErlaubt = true;
-						vokaMuss++;
-						break;
+						buchstabenwahl = (int) (Math.random()*klinKon.length);
+						if (klinKon[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
+						{
+							name=name+klinKon[buchstabenwahl].buchstabe;
+							klinKonErlaubt = false;
+							langKonErlaubt = false;
+							weicKonErlaubt = true;
+							hartKonErlaubt = true;
+							vokalErlaubt = true;
+							//Falls es ein "L" ist, das direkt auf einen Vokal folgt...
+							if (klinKon[buchstabenwahl].buchstabe == "l" && vokaMuss ==0)
+							{
+								klinKonErlaubt = true;
+								langKonErlaubt = true;
+							}
+							else
+								vokaMuss++;
+							break;
+						}
 					}
 				}
-			}
-			case 2: {
-				if (langKonErlaubt)
-				{
-					buchstabenwahl = (int) (Math.random()*langKon.length);
-					if (langKon[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
+				case 2: {
+					if (langKonErlaubt)
 					{
-						name=name +langKon[buchstabenwahl].buchstabe;
-						klinKonErlaubt = true;
-						langKonErlaubt = false;
-						weicKonErlaubt = false;
-						hartKonErlaubt = true;
-						vokalErlaubt = true;
-						vokaMuss++;
-						break;
+						buchstabenwahl = (int) (Math.random()*langKon.length);
+						if (langKon[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
+						{
+							name=name +langKon[buchstabenwahl].buchstabe;
+							klinKonErlaubt = true;
+							langKonErlaubt = false;
+							weicKonErlaubt = false;
+							hartKonErlaubt = true;
+							vokalErlaubt = true;
+							vokaMuss++;
+							break;
+						}
 					}
 				}
-			}
-			case 3: {
-				if (weicKonErlaubt)
-				{
-					buchstabenwahl = (int) (Math.random()*weicKon.length);
-					if (weicKon[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
+				case 3: {
+					if (weicKonErlaubt)
 					{
-						name=name+weicKon[buchstabenwahl].buchstabe;
-						klinKonErlaubt = false;
-						langKonErlaubt = false;
-						weicKonErlaubt = false;
-						hartKonErlaubt = false;
-						vokalErlaubt = true;
-						vokaMuss++;
-						break;
+						buchstabenwahl = (int) (Math.random()*weicKon.length);
+						if (weicKon[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
+						{
+							name=name+weicKon[buchstabenwahl].buchstabe;
+							klinKonErlaubt = false;
+							langKonErlaubt = false;
+							weicKonErlaubt = false;
+							hartKonErlaubt = false;
+							vokalErlaubt = true;
+							vokaMuss++;
+							break;
+						}
 					}
 				}
-			}
-			case 4: {
-				if (hartKonErlaubt)
-				{
-					buchstabenwahl = (int) (Math.random()*hartKon.length);
-					if (hartKon[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
+				case 4: {
+					if (hartKonErlaubt)
 					{
-						name=name+hartKon[buchstabenwahl].buchstabe;
-						klinKonErlaubt = false;
-						langKonErlaubt = false;
-						weicKonErlaubt = false;
-						hartKonErlaubt = false;
-						vokalErlaubt = true;
-						vokaMuss++;
-						break;
+						buchstabenwahl = (int) (Math.random()*hartKon.length);
+						if (hartKon[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
+						{
+							name=name+hartKon[buchstabenwahl].buchstabe;
+							klinKonErlaubt = false;
+							langKonErlaubt = false;
+							weicKonErlaubt = false;
+							hartKonErlaubt = false;
+							vokalErlaubt = true;
+							vokaMuss++;
+							break;
+						}
 					}
 				}
-			}
-			case 5: {
-				if (umlaErlaubt && ((Math.random()*100) < 1))
-				{
-					buchstabenwahl = (int) (Math.random()*umlaute.length);
-					if (umlaute[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
+				case 5: {
+					if (umlaErlaubt && ((Math.random()*100) < 1))
 					{
-						name=name+umlaute[buchstabenwahl].buchstabe;
-						umlaErlaubt = false;
-						klinKonErlaubt = true;
-						langKonErlaubt = true;
-						weicKonErlaubt = true;
-						hartKonErlaubt = true;
-						vokalErlaubt = false;
-						vokaMuss = 0;
-						break;
+						buchstabenwahl = (int) (Math.random()*umlaute.length);
+						if (umlaute[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
+						{
+							name=name+umlaute[buchstabenwahl].buchstabe;
+							umlaErlaubt = false;
+							klinKonErlaubt = true;
+							langKonErlaubt = true;
+							weicKonErlaubt = true;
+							hartKonErlaubt = true;
+							vokalErlaubt = false;
+							vokaMuss = 0;
+							break;
+						}
 					}
 				}
+				default:{ //Die Buchstabenwahl ist ins Leere gelaufen? Nochmal versuchen.
+					gruppenwahl = (int)(Math.random()*5+1);
+					i--;
+				}
+				
+				}
 			}
-			default:{ //Die Buchstabenwahl ist ins Leere gelaufen? Nochmal versuchen.
-				gruppenwahl = (int)(Math.random()*5+1);
-				i--;
-			}
-			
+	
+			/*
+			 * Wenn der Name weniger als 9 Buchstaben enthält, wird eins der Präfixe oder Suffixe aus-
+			 * gewählt. So kommen Namen wie "Quranameki Island" zustande: Das "Island" wird nachträglich
+			 * angehängt. Dazu habe ich einen bunten Strauß aus Deutschen, Englischen, Spanischen und 
+			 * Französischen Suffixen und Präfixen zusammengestellt. Wenn einem von euch noch mehr ein-
+			 * fallen, nur zu, je bunter der Namensgenerator ist, desto besser!
+			 */
+			name= name.toUpperCase().charAt(0)+name.toLowerCase().substring(1, name.length());
+			String [] praefix = getPraefix();
+			String [] suffix = getSuffix();
+	
+			if (Math.random()<0.7){
+				if (Math.random() > 0.5)
+				{
+					name = praefix[(int)(Math.random()*praefix.length)] + name;
+				}
+				else
+				{
+					name = name + suffix[(int)(Math.random()*suffix.length)];
+				}
+	
 			}
 		}
-
-		/*
-		 * Wenn der Name weniger als 9 Buchstaben enthält, wird eins der Präfixe oder Suffixe aus-
-		 * gewählt. So kommen Namen wie "Quranameki Island" zustande: Das "Island" wird nachträglich
-		 * angehängt. Dazu habe ich einen bunten Strauß aus Deutschen, Englischen, Spanischen und 
-		 * Französischen Suffixen und Präfixen zusammengestellt. Wenn einem von euch noch mehr ein-
-		 * fallen, nur zu, je bunter der Namensgenerator ist, desto besser!
-		 */
-		name= name.toUpperCase().charAt(0)+name.toLowerCase().substring(1, name.length());
-		String [] fertigeNamen = getInselNamen();
-		String [] praefix = getPraefix();
-		String [] suffix = getSuffix();
-
-		if (name.length()<9){
-			if (Math.random() > 0.5)
-			{
-				name = praefix[(int)(Math.random()*praefix.length)] + name;
-			}
-			else
-			{
-				name = name + suffix[(int)(Math.random()*suffix.length)];
-			}
-
-		}
-		else if (name.length()>10)
+		else //else zu if (namenslaenge <= 10)
+		{
+			String [] fertigeNamen = getInselNamen();
 			name = fertigeNamen[(int)(Math.random()*fertigeNamen.length)];
+		}
 		return name.trim();
 	}
 

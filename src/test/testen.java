@@ -15,8 +15,17 @@ class testen{
 		
  ZufallsNamen name = new ZufallsNamen();
  for (int i=0; i<1000; i++)System.out.println(name.setZufallsName());
-		
-/*		String Inselpositionen = "";
+ /* Test der Zufallsgenerierung über ein Histogramm
+  int[] j= new int[] {0,0,0,0,0,0,0,0,0,0};
+ for (int i=0; i<1000000; i++)
+ {
+ 	j[(int) (Math.random()*10)]++;
+ }
+ for (int i=0; i<j.length; i++) System.out.println("j["+i+"]= " + j[i] + "\n");
+	*/	
+
+ /* Test der Positionsverteilung
+  * 		String Inselpositionen = "";
 		Archipelverteilung neueWelt;
 		//neueWelt = new Archipelverteilung(1000,"C:\\Eigene Dateien\\C- Programme\\SeaWars\\Antichrist.bmp",0.5);
 		neueWelt = new Archipelverteilung(100,"C:\\Eigene Dateien\\C- Programme\\SeaWars\\Blubber.bmp",0.5);
