@@ -113,7 +113,7 @@ public class ZufallsNamen
 		hartKonErlaubt = true;
 		int vokaMuss = 1; //Je mehr Konsonanten nacheinander stehen, desto dringlicher wird ein Vokal
 		int namenslaenge = (int) (Math.random()*8+4);
-		if (namenslaenge <= 10) //Folgenden Kram nur machen,  wenn der Name übernommen wird
+		if (namenslaenge <= 10) //Folgenden Kram nur machen,  wenn der Name auch übernommen wird
 		{
 			/*
 			 * Hier wird ein neuer Name zusammengestellt. Dabei wird 
@@ -133,17 +133,16 @@ public class ZufallsNamen
 			name="";
 			for (int i=0; i<namenslaenge;i++)
 			{
-	//			silbe[i] = ""; //$NON-NLS-1$
-	
 				gruppenwahl = (int)(Math.random()*5);
+				if (vokaMuss >= 2) 
+					gruppenwahl =0;
 				switch (gruppenwahl)
 				{
 				case 0: {
 					if (vokalErlaubt)
 					{
 						buchstabenwahl = (int) (Math.random()*voka.length);
-						if (voka[buchstabenwahl].wahrscheinlichkeit > Math.random()*100
-								|| vokaMuss >= 2)
+						if (voka[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
 						{
 							name=name+voka[buchstabenwahl].buchstabe;
 							klinKonErlaubt = true;
@@ -250,13 +249,18 @@ public class ZufallsNamen
 					}
 				}
 				default:{ //Die Buchstabenwahl ist ins Leere gelaufen? Nochmal versuchen.
-					gruppenwahl = (int)(Math.random()*5+1);
+					gruppenwahl = (int)(Math.random()*5);
 					i--;
 				}
 				
 				}
 			}
-	
+			if (vokaMuss >=2 )
+			{
+				buchstabenwahl = (int) (Math.random()*voka.length);
+				name=name+voka[buchstabenwahl].buchstabe;
+			}
+
 			/*
 			 * Wenn der Name weniger als 9 Buchstaben enthält, wird eins der Präfixe oder Suffixe aus-
 			 * gewählt. So kommen Namen wie "Quranameki Island" zustande: Das "Island" wird nachträglich
