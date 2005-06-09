@@ -61,9 +61,9 @@ public class InselErstellung
 	 // y_pos von 0 bis 999, theoretisch auf der Hauptkarte anzeigbar
 	public int y_pos; 	 	 	 	 	 	 	 	
 	// IDs von Inselbezogenem Kram
-	public long spieler_id; 	 	 	 	 	 	 	 	
-	public long archipel_id; 	 	 	 	 	 	 	 	
-	public int lager_id; 
+	public long spielerID; 	 	 	 	 	 	 	 	
+	public long archipelID; 	 	 	 	 	 	 	 	
+	public int lagerID; 
 	
 	/**
 	 * Erstellt eine neue Insel mit zufälligen Koordinaten und zufälliger Größe
@@ -73,6 +73,8 @@ public class InselErstellung
 		this.x_pos = (int)(Math.random()*1000);
 		this.y_pos = (int)(Math.random()*1000);
 		this.groesse = (int)(Math.random()*999000 + 1000);
+		this.name = this.setZufallsName();
+		this.archipelID =0;
 	}
 	/**
 	 * Erstellt eine Insel mit definierter Position und Größe
@@ -82,9 +84,25 @@ public class InselErstellung
 	 */
 	public InselErstellung(int x, int y, int groesse)
 	{
+		this();
 		this.x_pos = x;
 		this.y_pos = y;
 		this.groesse =  groesse;
+	}
+	/**
+	 * Erstellt eine Insel mit definierter Position und Größe
+	 * @param x ist die x-Koordinate der Insel auf der Hauptkarte.
+	 * @param y ist die y-Koordinate der Insel auf der Hauptkarte.
+	 * @param groesse ist ein Wert zwischen 1k und 1M und gibt den Platz auf der Insel an.
+	 * @param archipelID ist die ID des Archipels, zu dem diese Insel gehört.
+	 */
+	public InselErstellung(int x, int y, int groessenklasse, int archipelID)
+	{
+		this.x_pos = x;
+		this.y_pos = y;
+		this.groesse =  setGroesse(groessenklasse);
+		this.archipelID = archipelID;
+		this.name = this.setZufallsName();
 	}
 	/**
 	 * Erstellt eine Insel mit definierter Position

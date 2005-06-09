@@ -186,6 +186,7 @@ public class Archipelverteilung
 		Archipelzahl = Archipelzaehler;
 		Archipelzaehler = 0;
 		int Archipelgroesse = 0;
+		int archipelID = 0;
 		for (int i=0; i<1000; i++)
 			for (int j=0; j<1000; j++)
 			{
@@ -193,7 +194,7 @@ public class Archipelverteilung
 				{
 					Archipelgroesse = (int) (Math.random()*5);					
 					try{
-						Orte[Archipelzaehler++] = new Archipel(i, j, Archipelgroesse );
+						Orte[Archipelzaehler++] = new Archipel(i, j, Archipelgroesse, 0, archipelID++ );
 					}
 					catch (ArrayIndexOutOfBoundsException e)
 					{
