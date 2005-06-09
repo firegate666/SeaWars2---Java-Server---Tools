@@ -191,15 +191,14 @@ public class Archipelverteilung
 			{
 				if (Karte[i][j] > Meeresspiegel)
 				{
-					Archipelgroesse = (int) (Math.random()*5.49 + 0.5);					
+					Archipelgroesse = (int) (Math.random()*5);					
 					try{
 						Orte[Archipelzaehler++] = new Archipel(i, j, Archipelgroesse );
 					}
 					catch (ArrayIndexOutOfBoundsException e)
 					{
-						System.out.println("Die Empfindlichkeit war zu niedrig. \n" +
-								"Wahrscheinlich ist nicht die ganze Karte mit Archipeln bedeckt" +
-								"worden.");
+						System.out.println("Wahrscheinlich ist nicht die ganze Karte mit Archipeln bedeckt" +
+								"worden. Dieser Fehler ist aus der Klasse 'Archipelverteilung'.");
 						return;
 					}
 				}

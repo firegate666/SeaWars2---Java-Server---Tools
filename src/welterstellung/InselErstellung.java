@@ -29,6 +29,7 @@ public class InselErstellung
 	{
 		if (name.length()>100)
 		{
+			this.name = name.substring(0, 99);
 			return 1;
 		}
 		else
@@ -45,9 +46,8 @@ public class InselErstellung
 	public String setZufallsName()
 	{
 		ZufallsNamen neuerName = new ZufallsNamen();
-		String name = neuerName.setZufallsName();
-		this.name = name;
-		return name;
+		this.name = neuerName.setZufallsName();
+		return this.name;
 	}
 	
 	public String getName()
@@ -56,9 +56,9 @@ public class InselErstellung
 	}
 	// Die Größe reicht von 1000 bis 1000000 
 	public int groesse;
-	// x_pos von 0 bis 1000, theoretisch auf der Hauptkarte anzeigbar
+	// x_pos von 0 bis 999, theoretisch auf der Hauptkarte anzeigbar
 	public int x_pos; 	 	 	 	 	 	 	 	
-	 // y_pos von 0 bis 1000, theoretisch auf der Hauptkarte anzeigbar
+	 // y_pos von 0 bis 999, theoretisch auf der Hauptkarte anzeigbar
 	public int y_pos; 	 	 	 	 	 	 	 	
 	// IDs von Inselbezogenem Kram
 	public long spieler_id; 	 	 	 	 	 	 	 	
@@ -75,7 +75,7 @@ public class InselErstellung
 		this.groesse = (int)(Math.random()*999000 + 1000);
 	}
 	/**
-	 * Erstellt eine Insel
+	 * Erstellt eine Insel mit definierter Position und Größe
 	 * @param x ist die x-Koordinate der Insel auf der Hauptkarte.
 	 * @param y ist die y-Koordinate der Insel auf der Hauptkarte.
 	 * @param groesse ist ein Wert zwischen 1k und 1M und gibt den Platz auf der Insel an.
@@ -87,7 +87,7 @@ public class InselErstellung
 		this.groesse =  groesse;
 	}
 	/**
-	 * Erstellt eine Insel
+	 * Erstellt eine Insel mit definierter Position
 	 * @param x ist die x-Koordinate der Insel auf der Hauptkarte.
 	 * @param y ist die y-Koordinate der Insel auf der Hauptkarte.
 	 */
@@ -97,6 +97,7 @@ public class InselErstellung
 		this.x_pos = x;
 		this.y_pos = y;
 	}
+	
 	
 	/**
 	 * Wer sich nicht mit den Größen beschäftigen will aber eine gewisse Kontrolle über
