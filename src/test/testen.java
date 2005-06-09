@@ -7,15 +7,18 @@
 package test;
 import welterstellung.Archipelverteilung;
 import java.io.*;
-import welterstellung.InselErstellung;
-import welterstellung.ZufallsNamen;
+//import welterstellung.InselErstellung;
+//import welterstellung.ZufallsNamen;
 
 class testen{
 	public static void main(String[] args) {
 		
- ZufallsNamen name = new ZufallsNamen();
+ /* Test des Namensgenerators
+   ZufallsNamen name = new ZufallsNamen();
  for (int i=0; i<1000; i++)System.out.println(name.setZufallsName());
- /* Test der Zufallsgenerierung über ein Histogramm
+ */
+
+	/* Test der Zufallsgenerierung über ein Histogramm
   int[] j= new int[] {0,0,0,0,0,0,0,0,0,0};
  for (int i=0; i<1000000; i++)
  {
@@ -24,18 +27,25 @@ class testen{
  for (int i=0; i<j.length; i++) System.out.println("j["+i+"]= " + j[i] + "\n");
 	*/	
 
- /* Test der Positionsverteilung
-  * 		String Inselpositionen = "";
+  //Test der Positionsverteilung
+   		String Inselpositionen = "";
 		Archipelverteilung neueWelt;
-		//neueWelt = new Archipelverteilung(1000,"C:\\Eigene Dateien\\C- Programme\\SeaWars\\Antichrist.bmp",0.5);
-		neueWelt = new Archipelverteilung(100,"C:\\Eigene Dateien\\C- Programme\\SeaWars\\Blubber.bmp",0.5);
+		neueWelt = new Archipelverteilung(100,"C:\\Eigene Dateien\\C- Programme\\SeaWars\\Antichrist.bmp",0);
+		//neueWelt = new Archipelverteilung(100,"C:\\Eigene Dateien\\C- Programme\\SeaWars\\Blubber.bmp",0.5);
 		neueWelt.VerteilungAusfuehren();
-		
+		int inselzahl = 0;
 		for (int i=0; i<neueWelt.Archipelzahl; i++)
 		{
-			Inselpositionen = Inselpositionen + neueWelt.Orte[i].x + ", "+
-			neueWelt.Orte[i].y + "\r\n";
+			neueWelt.Orte[i].inselnImArchipelVerteilen();
+			System.out.println(i);
+			for (int j=0; j<neueWelt.Orte[i].inselAnzahl;j++)
+			{
+				Inselpositionen = Inselpositionen + neueWelt.Orte[i].insel[j].x_pos + ", "+
+				neueWelt.Orte[i].insel[j].y_pos + "\r\n";
+				inselzahl++;
+			}
 		}
+
 
 
         try {
@@ -48,7 +58,7 @@ class testen{
         	} catch (IOException e) {
 	            System.out.println("Sorry, die Positionsdatei konnte nicht erstellt werden");
         	}
-        System.out.println("Fertig. Dieses Mal wurden " + neueWelt.Archipelzahl + " Inseln erzeugt.");
-        */
+        System.out.println("Fertig. Dieses Mal wurden " + inselzahl+ " Inseln erzeugt.");
+        
 	}
 }

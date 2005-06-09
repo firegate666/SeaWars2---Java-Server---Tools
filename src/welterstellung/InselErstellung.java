@@ -127,7 +127,6 @@ public class InselErstellung
 	 */
 	public int setGroesse(int groessenklasse)
 	{
-		double groesse=0;
 		switch (groessenklasse)
 		{
 			case 1: this.groesse = 1000;
@@ -148,6 +147,6 @@ public class InselErstellung
 				this.groesse = (int)(Math.random()*49900000)+ 100000;
 			}
 		}
-		return (int)groesse;
+		return this.groesse;
 	}
 }

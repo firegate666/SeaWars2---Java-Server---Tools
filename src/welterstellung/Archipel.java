@@ -7,6 +7,7 @@ public class Archipel
 	public int groesse;
 	public int kartenabschnitt_id;
 	public int inselAnzahl;
+	public InselErstellung[] insel;
 	private int archipelID;
 	
 	public Archipel(int x, int y)
@@ -76,12 +77,18 @@ public class Archipel
 	 * @return gibt die Anzahl der Inseln zurück, wenn alles geklappt hat.
 	 * Wenn 0 zurückgegeben wird, muss die Inselherstellung wiederholt werden.
 	 */
+	public int inselnImArchipelVerteilen()
+	{
+		return inselnImArchipelVerteilen(this.x, this.y, this.groesse);
+	}
+
 	public int inselnImArchipelVerteilen(int ArchipelX, int ArchipelY, int groessenklasse)
 	{
 		int archipelGebiet = 13;
 		// Der AtollOperator kann verwendet werden, wenn ein Atoll gewünscht wird.
 		// Multipliziert man ihn mit einem zufällig gefüllten Archipelgebiet, 
 		// bleibt nur noch der Atollring übrig.
+		// Er muss genauso hoch und breit sein wie das archipelGebiet.
 		int[][] atollOperator =
 		{{0,0,0,0,0,1,1,1,0,0,0,0,0},
 		 {0,0,0,1,1,1,1,1,1,1,0,0,0},
@@ -102,8 +109,6 @@ public class Archipel
 		 {0,1,0},
 		 {0,0,0}};
 		
-	//	double winkel;  // im Bogenmaß, natürlich
-	//	double abstand; // in Feldern, von 1 bis 6
 		
 		// Archipelgebiet mit Zufallszahlen füllen
 		double [][] Archipel = new double[archipelGebiet][archipelGebiet];
@@ -143,7 +148,7 @@ public class Archipel
 		//Inselanzahl aus dem Histogramm auslesen
 		int inselZaehler = 0;
 		int meeresspiegel =0;
-		int inselAnzahl = (int) Math.random()*15;
+		int inselAnzahl = (int) Math.random()*5+10;
 		for (int i=(genauigkeit -1); ((meeresspiegel==0) && (i>0)); i--)
 		{
 			inselZaehler += histogramm[i];
@@ -159,6 +164,7 @@ public class Archipel
 		do
 		{
 			meeresspiegel--;
+			inselZaehler=0;
 			for (int i=0; i<archipelGebiet; i++)
 				for (int j=0; j<archipelGebiet; j++)
 				{
@@ -177,7 +183,7 @@ public class Archipel
 									//Nichts schlimmes ist passiert. Nur der abstandsOperator
 									//wurde am Rand des Archipels ausgeführt. Programm darf
 									//ganz normal weiter laufen. Zum Vermeiden dieses Fehlers
-									//könnte man das Archipel um jeweils eine blinde Zeile
+									//könnte man das Archipel um jeweils eine blinde Reihe
 									//an jedem Rand erweitern...
 								}
 							}
@@ -192,7 +198,7 @@ public class Archipel
 		if (meeresspiegel ==0) return 0;
 		//Inseln generieren, Schritt 5: Inselobjekte erzeugen
 		int inselGroesse;
-		InselErstellung[] insel = new InselErstellung[inselZaehler];
+		insel = new InselErstellung[inselZaehler];
 		inselZaehler=0;
 		for (int i=0; i<archipelGebiet; i++)
 			for (int j=0; j<archipelGebiet; j++)
