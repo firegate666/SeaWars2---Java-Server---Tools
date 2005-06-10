@@ -172,29 +172,141 @@ public class Archipelverteilung
 				if ((Karte[i][j]<genauigkeit) && (Karte[i][j]>0))
 					histogramm[(int)Karte[i][j]]++;
 			}
-		//Meeresspiegel für die perfekte Archipelanzahl aus dem Histogramm auslesen
-		int Archipelzaehler = 0;
-		int Meeresspiegel =0;
-		for (int i=(genauigkeit -1); ((Meeresspiegel==0) && (i>0)); i--)
+		//meeresspiegel für die perfekte Archipelanzahl aus dem Histogramm auslesen
+		int archipelZaehler = 0;
+		int meeresspiegel =0;
+		for (int i=(genauigkeit -1); ((meeresspiegel==0) && (i>0)); i--)
 		{
-			Archipelzaehler += histogramm[i];
-			if (Archipelzaehler > Archipelanzahl)
-				Meeresspiegel = i;
+			archipelZaehler += histogramm[i];
+			if (archipelZaehler > Archipelanzahl)
+				meeresspiegel = i;
 		}
-		// Positionen aller Archipel, die über dem Meeresspiegel liegen, speichern
-		Orte = new Archipel[Archipelzaehler+1];
-		Archipelzahl = Archipelzaehler;
-		Archipelzaehler = 0;
+
+		//Inseln generieren, Schritt 4: Positionen aller Inseln mit (höhe > meeresspiegel) auslesen, 
+		//Abstände kontrollieren, notfalls Inseln löschen und meeresspiegel senken
+		{ //Neuen Bereich anfangen, damit der saugroße Abstandsoperator wieder gelöscht wird,
+		  //	wenn er nicht mehr gebraucht wird
+		int[][] abstandsOperator = 
+		{{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
+		};
+		this.Archipelzahl = archipelZaehler;
+		archipelZaehler = 0;
+		meeresspiegel++; 
+		do
+		{
+			meeresspiegel--;
+			archipelZaehler=0;
+			for (int i=0; i<1000; i++)
+				for (int j=0; j<1000; j++)
+				{
+					if (Karte[i][j] > meeresspiegel)
+					{
+						archipelZaehler++; //Insel gefunden! Zählen!
+						for (int k =0; k<25; k++)
+							for (int l = 0; l<25; l++)
+							{
+								try{
+									//Nachbarschaft eliminieren
+									Karte[i-12+k][j-12+l] *= abstandsOperator[k][l];
+								}
+								catch (ArrayIndexOutOfBoundsException e)
+								{
+									//Nichts schlimmes ist passiert. Nur der abstandsOperator
+									//wurde am Rand des Archipels ausgeführt. Programm darf
+									//ganz normal weiter laufen. Zum Vermeiden dieses Fehlers
+									//könnte man das Archipel um jeweils eine blinde Reihe
+									//an jedem Rand erweitern...
+								}
+							}
+					}
+				}//for
+		}
+		while(archipelZaehler < Archipelzahl || meeresspiegel == 0);
+		this.Archipelzahl = archipelZaehler;
+		
+		// Wenn der meeresspiegel auf 0 sinkt, ist die Inselherstellung misslungen und muss
+		// wiederholt werden.
+		if (meeresspiegel ==0) 
+		{
+			System.out.println("meeresspiegel auf Null gesunken, defektes Archipel erzeugt");
+		}
+		} //Abstandsoperator-Bereich beenden
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		// Positionen aller Archipel, die über dem meeresspiegel liegen, speichern
+		Orte = new Archipel[archipelZaehler+1];
+		Archipelzahl = archipelZaehler;
+		archipelZaehler = 0;
 		int Archipelgroesse = 0;
 		int archipelID = 0;
 		for (int i=0; i<1000; i++)
 			for (int j=0; j<1000; j++)
 			{
-				if (Karte[i][j] > Meeresspiegel)
+				if (Karte[i][j] > meeresspiegel)
 				{
 					Archipelgroesse = (int) (Math.random()*5);					
 					try{
-						Orte[Archipelzaehler++] = new Archipel(i, j, Archipelgroesse, 0, archipelID++ );
+						Orte[archipelZaehler++] = new Archipel(i, j, Archipelgroesse, 0, archipelID++ );
 					}
 					catch (ArrayIndexOutOfBoundsException e)
 					{

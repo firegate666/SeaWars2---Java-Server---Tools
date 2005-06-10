@@ -93,6 +93,18 @@ public class ZufallsNamen
 		umlaute[0] = new Buch("ä", 0.4); //$NON-NLS-1$
 		umlaute[1] = new Buch("ö", 0.4); //$NON-NLS-1$
 		umlaute[2] = new Buch("ü", 0.4); //$NON-NLS-1$
+		
+		/*
+		 * Buchstabenhäufigkeiten am Wortanfang
+		 * 	3.00, 10.01, 1.50, 4.00, 2.00, 4.00, 5.71, 7.61, 0.90, 2.00, 9.91, 4.30, 6.11, 2.10, 1.10, 4.50, 0.20, 5.31, 13.21, 3.10, 0.50, 1.90, 5.81, 0.00, 0.10, 1.10
+		 * Kumulative Buchstabenhäufigkeiten am Wortanfang
+		 * 3.00, 13.01, 14.51, 18.52, 20.52, 24.52, 30.23, 37.84, 38.74, 40.74, 50.65, 54.95, 61.06, 63.16, 64.26, 68.77, 68.97, 74.27, 87.49, 90.59, 91.09, 92.99, 98.80, 98.80, 98.90, 100.00
+		Sie sind in alphabetischer Reihenfolge. Das C enthält die Häufigkeit 
+		für das CH gleich mit, das S ebenfalls die Häufigkeit von SCH. Ä,Ö,Ü und X 
+		sind zu vernachlässigen, so selten sind sie. Das S kann vielleicht tatsächlich
+		geteilt werden in S und SCH, weil das SCH so häufig ist, dass man es normal
+		nicht vernachlässigen sollte.
+		 */
 	
 	}
 	 
@@ -100,17 +112,24 @@ public class ZufallsNamen
 	{
 
 		String name = "Zufallsname"; //$NON-NLS-1$
-		//ArrayList silben = new ArrayList();
-		 
-		int[] c = new int[4];
+			/*
+ 			 * Weil ich das L und das N so schön finde, habe ich die Wahrscheinlichkeiten 
+			 * ein wenig höher geschummelt. Sorry dafür! ;-)
+ 			*/
+		double[] kumulativeBuchstabenHaeufigkeitWortAnfang = {0.00, 3.00, 13.01, 14.51, 18.52, 20.52, 
+				24.52, 30.23, 37.84, 38.74, 39.14, 49.05, 54.55, 60.66, 63.16, 64.26, 68.77, 
+				68.97, 74.27, 87.49, 90.59, 91.09, 92.99, 98.80, 98.90, 100.00};
+		char[] alphabet = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
+							'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'Y', 'Z'};
 		
-		//Zahlen zwischen 4 und 11
+		
 		boolean vokalErlaubt = true,
 		umlaErlaubt = true,
 		klinKonErlaubt = true,
 		langKonErlaubt = true,
 		weicKonErlaubt = true,
 		hartKonErlaubt = true;
+		
 		int vokaMuss = 1; //Je mehr Konsonanten nacheinander stehen, desto dringlicher wird ein Vokal
 		int namenslaenge = (int) (Math.random()*8+4);
 		if (namenslaenge <= 10) //Folgenden Kram nur machen,  wenn der Name auch übernommen wird
@@ -125,26 +144,55 @@ public class ZufallsNamen
 			 * Wenn dieser Buchstabe tatsächlich ausgesucht wird, dann werden die Er-
 			 * laubnisse und Verbote für weitere Buchstaben neu gesetzt. Wenn nicht, wirds
 			 * noch einmal probiert.
-			 * 
-			 * Alle Silben fangen nun mit einem Vokal an, damit sie zusammengesetzt gut 
-			 * klingen.
 			 */
 			int gruppenwahl=0, buchstabenwahl=0;
 			name="";
-			for (int i=0; i<namenslaenge;i++)
+			double anfang = Math.random() * 100;
+			for (int i=kumulativeBuchstabenHaeufigkeitWortAnfang.length-1; i>=0 ; i--)
 			{
-				gruppenwahl = (int)(Math.random()*5);
-				if (vokaMuss >= 2) 
-					gruppenwahl =0;
+				if (anfang > kumulativeBuchstabenHaeufigkeitWortAnfang[i])
+				{
+					name = name + alphabet[i];
+					i=0;
+				}
+			}
+			if (   name.charAt(0) == 'A' 
+				|| name.charAt(0) == 'E'
+				|| name.charAt(0) == 'I'
+				|| name.charAt(0) == 'O'
+				|| name.charAt(0) == 'U')
+			{
+				klinKonErlaubt = true;
+				langKonErlaubt = true;
+				weicKonErlaubt = true;
+				hartKonErlaubt = true;
+				vokalErlaubt = false;
+				vokaMuss = 0;
+			}
+			else
+			{
+				klinKonErlaubt = false;
+				langKonErlaubt = false;
+				weicKonErlaubt = false;
+				hartKonErlaubt = false;
+				vokalErlaubt = true;
+				vokaMuss = 2;
+			}
+			for (int i=0; name.length()<namenslaenge;i++)
+			{
+				if (vokaMuss >= 2) gruppenwahl =0;
+				else gruppenwahl = (int)(Math.random()*5);
+				
 				switch (gruppenwahl)
 				{
 				case 0: {
-					if (vokalErlaubt)
+					if (vokalErlaubt || vokaMuss >=2)
 					{
 						buchstabenwahl = (int) (Math.random()*voka.length);
 						if (voka[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
 						{
 							name=name+voka[buchstabenwahl].buchstabe;
+							//voka[buchstabenwahl].wahrscheinlichkeit=0;
 							klinKonErlaubt = true;
 							langKonErlaubt = true;
 							weicKonErlaubt = true;
@@ -162,6 +210,7 @@ public class ZufallsNamen
 						if (klinKon[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
 						{
 							name=name+klinKon[buchstabenwahl].buchstabe;
+							//klinKon[buchstabenwahl].wahrscheinlichkeit=0;
 							klinKonErlaubt = false;
 							langKonErlaubt = false;
 							weicKonErlaubt = true;
@@ -186,6 +235,7 @@ public class ZufallsNamen
 						if (langKon[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
 						{
 							name=name +langKon[buchstabenwahl].buchstabe;
+							//langKon[buchstabenwahl].wahrscheinlichkeit=0;
 							klinKonErlaubt = true;
 							langKonErlaubt = false;
 							weicKonErlaubt = false;
@@ -203,6 +253,7 @@ public class ZufallsNamen
 						if (weicKon[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
 						{
 							name=name+weicKon[buchstabenwahl].buchstabe;
+							//weicKon[buchstabenwahl].wahrscheinlichkeit=0;
 							klinKonErlaubt = false;
 							langKonErlaubt = false;
 							weicKonErlaubt = false;
@@ -220,6 +271,7 @@ public class ZufallsNamen
 						if (hartKon[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
 						{
 							name=name+hartKon[buchstabenwahl].buchstabe;
+							hartKon[buchstabenwahl].wahrscheinlichkeit=0;
 							klinKonErlaubt = false;
 							langKonErlaubt = false;
 							weicKonErlaubt = false;
@@ -249,7 +301,10 @@ public class ZufallsNamen
 					}
 				}
 				default:{ //Die Buchstabenwahl ist ins Leere gelaufen? Nochmal versuchen.
-					gruppenwahl = (int)(Math.random()*5);
+					if (vokaMuss<2) 
+						gruppenwahl = (int)(Math.random()*5);
+					else
+						gruppenwahl =0;
 					i--;
 				}
 				

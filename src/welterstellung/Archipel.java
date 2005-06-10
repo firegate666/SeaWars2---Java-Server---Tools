@@ -1,5 +1,10 @@
 package welterstellung;
-
+/**
+ *	Diese Klasse stellt alle Datenbankrelevanten Werte für ein Archipel zur Verfügung und
+ *	bietet obendrein die Möglichkeit, neue Archipele zu erstellen. Dabei werden verschiedene
+ *  Archipel-Operatoren angeboten, mit denen man das Aussehen eines Archipels verändern kann.
+ *  letzte Änderung von Andreas am 25. Mai 2005
+ */
 public class Archipel
 {
 	public int x;
@@ -89,26 +94,68 @@ public class Archipel
 		// Multipliziert man ihn mit einem zufällig gefüllten Archipelgebiet, 
 		// bleibt nur noch der Atollring übrig.
 		// Er muss genauso hoch und breit sein wie das archipelGebiet.
-		int[][] atollOperator =
-		{{0,0,0,0,0,1,1,1,0,0,0,0,0},
-		 {0,0,0,1,1,1,1,1,1,1,0,0,0},
+		int[][][] archipelOperator ={
+		{{0,0,0,0,1,1,1,1,1,0,0,0,0},
 		 {0,0,1,1,1,1,1,1,1,1,1,0,0},
-		 {0,1,1,1,1,0,0,0,1,1,1,1,0},
 		 {0,1,1,1,0,0,0,0,0,1,1,1,0},
-		 {1,1,1,0,0,0,0,0,0,0,1,1,1},
-		 {1,1,1,0,0,0,0,0,0,0,1,1,1},
-		 {1,1,1,0,0,0,0,0,0,0,1,1,1},
+		 {0,1,1,0,0,0,0,0,0,0,1,1,0},
+		 {1,1,0,0,0,0,0,0,0,0,0,1,1},
+		 {1,1,0,0,0,0,0,0,0,0,0,1,1},
+		 {1,1,0,0,0,0,0,0,0,0,0,1,1},
+		 {1,1,0,0,0,0,0,0,0,0,0,1,1},
+		 {1,1,0,0,0,0,0,0,0,0,0,1,1},
+		 {0,1,1,0,0,0,0,0,0,0,1,1,0},
 		 {0,1,1,1,0,0,0,0,0,1,1,1,0},
-		 {0,1,1,1,1,0,0,0,1,1,1,1,0},
 		 {0,0,1,1,1,1,1,1,1,1,1,0,0},
-		 {0,0,0,1,1,1,1,1,1,1,0,0,0},
-		 {0,0,0,0,0,1,1,1,0,0,0,0,0}};
+		 {0,0,0,0,1,1,1,1,1,0,0,0,0}},
 		
+		{{0,0,0,0,0,0,0,0,0,0,0,0,0},
+		 {0,0,0,1,1,1,1,1,1,0,0,0,0},
+		 {0,0,1,1,1,1,1,1,1,1,1,0,0},
+		 {0,1,1,1,1,1,1,1,1,1,1,0,0},
+		 {0,1,1,1,1,1,1,1,1,1,1,1,0},
+		 {0,1,1,1,1,1,1,1,1,1,1,1,0},
+		 {0,1,1,1,1,1,1,1,1,1,1,1,0},
+		 {0,1,1,1,1,1,1,1,1,1,1,1,0},
+		 {0,1,1,1,1,1,1,1,1,1,1,1,0},
+		 {0,0,1,1,1,1,1,1,1,1,1,0,0},
+		 {0,0,1,1,1,1,1,1,1,1,1,0,0},
+		 {0,0,0,0,1,1,1,1,1,0,0,0,0},
+		 {0,0,0,0,0,0,0,0,0,0,0,0,0}},
+
+		{{1,1,1,1,0,0,0,0,0,0,0,0,0},
+		 {1,1,1,1,1,1,1,0,0,0,0,0,0},
+		 {1,1,1,1,1,1,1,1,0,0,0,0,0},
+		 {0,1,1,1,1,1,1,1,1,0,0,0,0},
+		 {0,1,1,1,1,1,1,1,1,1,0,0,0},
+		 {0,1,1,1,1,1,1,1,1,1,1,0,0},
+		 {0,1,1,1,1,1,1,1,1,1,1,1,0},
+		 {0,1,1,1,1,1,1,1,1,1,1,1,0},
+		 {0,0,0,1,1,1,1,1,1,1,1,1,0},
+		 {0,0,0,0,0,0,1,1,1,1,1,1,1},
+		 {0,0,0,0,0,0,1,1,1,1,1,1,1},
+		 {0,0,0,0,0,0,1,1,1,1,1,1,1},
+		 {0,0,0,0,0,0,0,0,0,1,1,1,1}},
+
+		{{0,0,0,0,0,0,0,0,0,1,1,0,0},
+		 {0,0,0,0,0,0,1,1,1,1,1,1,0},
+		 {0,0,0,0,0,1,1,1,1,1,1,1,1},
+		 {0,0,0,0,1,1,1,1,1,1,1,0,0},
+		 {0,0,0,1,1,1,1,1,1,1,0,0,0},
+		 {0,1,1,1,1,1,1,1,1,0,0,0,0},
+		 {1,1,1,1,1,1,1,1,0,0,0,0,0},
+		 {0,1,1,1,1,1,1,1,1,0,0,0,0},
+		 {0,0,0,1,1,1,1,1,1,1,0,0,0},
+		 {0,0,0,0,0,1,1,1,1,1,1,0,0},
+		 {0,0,0,0,0,0,1,1,1,1,1,1,0},
+		 {0,0,0,0,0,0,0,1,1,1,1,1,0},
+		 {0,0,0,0,0,0,0,0,0,1,1,0,0}},};
+
 		int [][] abstandsOperator =
 		{{0,0,0},
 		 {0,1,0},
 		 {0,0,0}};
-		
+		int archipelwaehler = 0;
 		
 		// Archipelgebiet mit Zufallszahlen füllen
 		double [][] Archipel = new double[archipelGebiet][archipelGebiet];
@@ -118,17 +165,79 @@ public class Archipel
 				Archipel[i][j]=(Math.random());
 			}
 		// Je nach Größenklasse verchiedene Dinge mit dem Archipelgebiet anstellen
-		if (groessenklasse == 1)
+		archipelwaehler = (int) (Math.random()*4-2+this.groesse);
+		if (archipelwaehler < 0) archipelwaehler = 0;
+		if (archipelwaehler >= archipelOperator.length-1) archipelwaehler = archipelOperator.length-1;
+		
+		int operatorDrehung;
+		if (archipelwaehler > 1)operatorDrehung = (int) (Math.random()*4);
+		else operatorDrehung = 0;
+		
+		int[][] operator = new int[13][13];
+		switch (operatorDrehung)
 		{
-			for (int i = 0; i<archipelGebiet; i++)
-				for (int j =0; j<archipelGebiet; j++)
+		case 0:{
+			for (int i=0; i< operator.length; i++)
+			{
+				for (int j=0; j< operator.length; j++)
 				{
-					Archipel[i][j]=Archipel[i][j] * (double)atollOperator[i][j];
+					operator[i][j] = archipelOperator[archipelwaehler][i][j];
 				}
+			}
+			break;
+		}
+		case 1: {//90° drehen
+			for (int i=0; i< operator.length; i++)
+			{
+				for (int j=0; j< operator.length; j++)
+				{
+					operator[j][operator.length-1-i] = archipelOperator[archipelwaehler][i][j];
+				}
+			}
+
+			break;
+			}
+		case 2: {//180° drehen
+			for (int i=0; i< operator.length; i++)
+			{
+				for (int j=0; j< operator.length; j++)
+				{
+					operator[operator.length -1-i][j] = archipelOperator[archipelwaehler][i][j];
+				}
+			}
+			break;
+			}
+		case 3: {//270° drehen
+			for (int i=0; i< operator.length; i++)
+			{
+				for (int j=0; j< operator.length; j++)
+				{
+					operator[operator.length -1-j][i] = archipelOperator[archipelwaehler][i][j];
+				}
+			}
+			break;
+			}
+		default: {
+			for (int i=0; i< operator.length; i++)
+			{
+				for (int j=0; j< operator.length; j++)
+				{
+					operator[i][j] = archipelOperator[archipelwaehler][i][j];
+				}
+			}
+			break;
+		}
 		}
 		
+		// Jetzt wird das Archipelgebiet mit dem Operator getrimmt, so kann das Aussehen bestimmt werden.
+		for (int i = 0; i<archipelGebiet; i++)
+			for (int j =0; j<archipelGebiet; j++)
+			{
+				Archipel[i][j]=Archipel[i][j] * operator[i][j];
+			}
+	
 		// Zur Sache: Inseln generieren, Schritt 1
-		final int genauigkeit = 1000;
+		final int genauigkeit = 10000;
 		for (int i=0; i<archipelGebiet; i++)
 			for (int j=0; j<archipelGebiet; j++)
 			{
@@ -148,14 +257,14 @@ public class Archipel
 		//Inselanzahl aus dem Histogramm auslesen
 		int inselZaehler = 0;
 		int meeresspiegel =0;
-		int inselAnzahl = (int) Math.random()*5+10;
+		int inselAnzahl = (int) (Math.random()*8)+8;
 		for (int i=(genauigkeit -1); ((meeresspiegel==0) && (i>0)); i--)
 		{
 			inselZaehler += histogramm[i];
 			if (inselZaehler > inselAnzahl)
 				meeresspiegel = i;
 		}
-
+		if (meeresspiegel == 0) return 0;
 		//Inseln generieren, Schritt 4: Positionen aller Inseln mit (höhe > meeresspiegel) auslesen, 
 		//Abstände kontrollieren, notfalls Inseln löschen und Meeresspiegel senken
 		this.inselAnzahl = inselZaehler;
@@ -164,6 +273,7 @@ public class Archipel
 		do
 		{
 			meeresspiegel--;
+
 			inselZaehler=0;
 			for (int i=0; i<archipelGebiet; i++)
 				for (int j=0; j<archipelGebiet; j++)
@@ -190,12 +300,16 @@ public class Archipel
 					}
 				}//for
 		}
-		while(inselZaehler < inselAnzahl || meeresspiegel == 0);
+		while(inselZaehler < inselAnzahl || meeresspiegel <= 1);
 		this.inselAnzahl = inselZaehler;
-		
+		System.gc();		
 		// Wenn der Meeresspiegel auf 0 sinkt, ist die Inselherstellung misslungen und muss
 		// wiederholt werden.
-		if (meeresspiegel ==0) return 0;
+		if (meeresspiegel <=1) 
+		{
+			System.out.println("Meeresspiegel auf Null gesunken, defektes Archipel erzeugt");
+			return 0;
+		}
 		//Inseln generieren, Schritt 5: Inselobjekte erzeugen
 		int inselGroesse;
 		insel = new InselErstellung[inselZaehler];
