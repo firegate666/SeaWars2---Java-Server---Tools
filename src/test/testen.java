@@ -42,22 +42,24 @@ class testen{
    		String Inselpositionen = "";
 		Archipelverteilung neueWelt;
 		int Archipelzahl = 500;
+		System.out.println("Welterstellung gestartet. Archipel werden verteilt...");
 		neueWelt = new Archipelverteilung(Archipelzahl,"C:\\Eigene Dateien\\C- Programme\\SeaWars\\Beispiel.bmp",0.7);
 		//neueWelt = new Archipelverteilung(100,"C:\\Eigene Dateien\\C- Programme\\SeaWars\\Blubber.bmp",0.5);
 		neueWelt.VerteilungAusfuehren();
+		System.out.println(neueWelt.Archipelzahl + " Archipel wurden verteilt. Inselverteilung wird gestartet...");
 		int inselzahl = 0;
-//		int zeilenumbruch=0; String zeile = "";
 		for (int i=0; i<neueWelt.Archipelzahl; i++)
 		{
 			int controller, kontrollzaehler=0;
 			do{
 				controller = neueWelt.Orte[i].inselnImArchipelVerteilen();
 				kontrollzaehler++;
-				if (kontrollzaehler > 1)System.out.println("kontrollzaehler = " + kontrollzaehler);
+				if (kontrollzaehler > 1) System.out.println("kontrollzaehler = " + kontrollzaehler);
 			}
 			while(controller == 0);
 //			System.out.println(neueWelt.Orte[i].inselAnzahl);
 			if (i%10 ==0) System.out.println("         "+(int)((double)i*100/Archipelzahl) + "% ");
+//			int zeilenumbruch=0; String zeile = "";
 //			zeile = zeile + neueWelt.Orte[i].inselAnzahl + ";  ";
 //			if (zeilenumbruch++ == 20) 
 //				{

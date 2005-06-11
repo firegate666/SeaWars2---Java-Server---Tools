@@ -246,52 +246,16 @@ public class Archipelverteilung
 					}
 				}//for
 		}
-		while(archipelZaehler < Archipelzahl || meeresspiegel == 0);
+		while(archipelZaehler < Archipelzahl && meeresspiegel > 0);
 		this.Archipelzahl = archipelZaehler;
 		
 		// Wenn der meeresspiegel auf 0 sinkt, ist die Inselherstellung misslungen und muss
 		// wiederholt werden.
 		if (meeresspiegel ==0) 
 		{
-			System.out.println("meeresspiegel auf Null gesunken, defektes Archipel erzeugt");
+			System.out.println("Meeresspiegel auf Null gesunken, defekte Weltkarte erzeugt");
 		}
 		} //Abstandsoperator-Bereich beenden
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		// Positionen aller Archipel, die über dem meeresspiegel liegen, speichern
 		Orte = new Archipel[archipelZaehler+1];

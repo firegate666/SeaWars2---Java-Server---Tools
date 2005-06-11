@@ -188,9 +188,12 @@ public class ZufallsNamen
 				case 0: {
 					if (vokalErlaubt || vokaMuss >=2)
 					{
-						buchstabenwahl = (int) (Math.random()*voka.length);
-						if (voka[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
-						{
+						do
+							buchstabenwahl = (int) (Math.random()*voka.length);
+						while (voka[buchstabenwahl].wahrscheinlichkeit < Math.random()*100);
+						
+						//if (voka[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
+						//{
 							name=name+voka[buchstabenwahl].buchstabe;
 							//voka[buchstabenwahl].wahrscheinlichkeit=0;
 							klinKonErlaubt = true;
@@ -200,7 +203,7 @@ public class ZufallsNamen
 							vokalErlaubt = false;
 							vokaMuss = 0;
 							break;
-						}
+						//}
 					}
 				}
 				case 1: {
@@ -348,7 +351,6 @@ public class ZufallsNamen
 	}
 
 	private String[] getInselNamen() {
-		//uncomment to use external properties file
 		String inselnamen = Messages.getString("ZufallsNamen.Inselnamen"); //$NON-NLS-1$
 		String delim_inselname = Messages.getString("ZufallsNamen.Delim_Inselnamen"); //$NON-NLS-1$
 		StringTokenizer st = new StringTokenizer(inselnamen, delim_inselname); //$NON-NLS-1$
@@ -361,7 +363,6 @@ public class ZufallsNamen
 	}
 	
 	private String[] getSuffix(){
-//		uncomment to use external properties file
 		String inselsuffixe = Messages.getString("ZufallsNamen.Inselsuffixe"); //$NON-NLS-1$
 		String delim_inselsuffixe = Messages.getString("ZufallsNamen.Delim_Inselsuffixe"); //$NON-NLS-1$
 		StringTokenizer st = new StringTokenizer(inselsuffixe, delim_inselsuffixe); //$NON-NLS-1$
@@ -374,7 +375,6 @@ public class ZufallsNamen
 	}
 	
 	private String[] getPraefix() {
-//		uncomment to use external properties file
 		String inselpraefixe = Messages.getString("ZufallsNamen.Inselpraefixe"); //$NON-NLS-1$
 		String delim_inselpraefixe = Messages.getString("ZufallsNamen.Delim_Inselpraefixe"); //$NON-NLS-1$
 		StringTokenizer st = new StringTokenizer(inselpraefixe, delim_inselpraefixe); //$NON-NLS-1$

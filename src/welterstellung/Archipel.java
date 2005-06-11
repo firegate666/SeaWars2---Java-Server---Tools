@@ -90,10 +90,24 @@ public class Archipel
 	public int inselnImArchipelVerteilen(int ArchipelX, int ArchipelY, int groessenklasse)
 	{
 		int archipelGebiet = 13;
-		// Der AtollOperator kann verwendet werden, wenn ein Atoll gewünscht wird.
-		// Multipliziert man ihn mit einem zufällig gefüllten Archipelgebiet, 
-		// bleibt nur noch der Atollring übrig.
-		// Er muss genauso hoch und breit sein wie das archipelGebiet.
+		/* Der AtollOperator kann verwendet werden, wenn ein Atoll gewünscht wird.
+		 * Multipliziert man ihn mit einem zufällig gefüllten Archipelgebiet, 
+		 * bleibt nur noch der Atollring übrig.
+		 * Er muss genauso hoch und breit sein wie das archipelGebiet.
+		 * Wenn weitere Archipeloperatoren gewünscht werden, tut euch keinen Zwang an, nur 
+		 * zu. Es muss beachtet werden, dass er 13x13 Felder groß ist und ausreichend viele
+		 * Einsen enthält, um 8 bis 15 Inseln darauf unterzubringen. Eine Insel verbraucht 
+		 * Aufgrund des Abstandsoperators im Schnitt 4.5 Einsen. Da die Inselverteilung zu- 
+		 * fällig läuft, sollte jedoch auf gar keinen Fall derartig knapp kalkuliert werden.
+		 * 
+		 * Derzeit sind folgende Operatoren eingebaut:
+		 * Der erste Operator erzeugt einen typischen Atollring.
+		 * Der zweite Operator stellt im Prinzip den vollen Archipelplatz zur Verfügung, ist 
+		 * jedoch abgerundet, damit den Spielern die Ecken nicht so ins Auge fallen.
+		 * Der dritte Operator erzeugt ein schmaleres, langgestrecktes Archipel, das schräg 
+		 * liegt.
+		 * Der vierte Operator erzeugt ein pfeilförmiges Archipel.
+		 */
 		int[][][] archipelOperator ={
 		{{0,0,0,0,1,1,1,1,1,0,0,0,0},
 		 {0,0,1,1,1,1,1,1,1,1,1,0,0},
@@ -156,30 +170,34 @@ public class Archipel
 		 {0,1,0},
 		 {0,0,0}};
 		int archipelwaehler = 0;
+		int i, j;
 		
 		// Archipelgebiet mit Zufallszahlen füllen
-		double [][] Archipel = new double[archipelGebiet][archipelGebiet];
-		for (int i = 0; i<archipelGebiet; i++)
-			for (int j =0; j< archipelGebiet; j++)
+		double [][] archipel = new double[archipelGebiet][archipelGebiet];
+		for (i = 0; i<archipelGebiet; i++)
+			for (j =0; j< archipelGebiet; j++)
 			{
-				Archipel[i][j]=(Math.random());
+				archipel[i][j]=(Math.random());
 			}
-		// Je nach Größenklasse verchiedene Dinge mit dem Archipelgebiet anstellen
+		// Je nach Größenklasse verchiedene Dinge mit dem Archipelgebiet anstellen.
 		archipelwaehler = (int) (Math.random()*4-2+this.groesse);
 		if (archipelwaehler < 0) archipelwaehler = 0;
 		if (archipelwaehler >= archipelOperator.length-1) archipelwaehler = archipelOperator.length-1;
 		
+		/* Der Archipeloperator wurde ausgewählt. Im Folgenden wird der Archipeloperator gedreht, damit
+		 * die Karte nicht ganz so eintönig aussieht und trotzdem nicht dutzende Operatoren im Quelltext 
+		 * stehen müssen.
+		 */
 		int operatorDrehung;
 		if (archipelwaehler > 1)operatorDrehung = (int) (Math.random()*4);
 		else operatorDrehung = 0;
-		
 		int[][] operator = new int[13][13];
 		switch (operatorDrehung)
 		{
-		case 0:{
-			for (int i=0; i< operator.length; i++)
+		case 0:{//Nicht drehen
+			for (i=0; i< operator.length; i++)
 			{
-				for (int j=0; j< operator.length; j++)
+				for (j=0; j< operator.length; j++)
 				{
 					operator[i][j] = archipelOperator[archipelwaehler][i][j];
 				}
@@ -187,9 +205,9 @@ public class Archipel
 			break;
 		}
 		case 1: {//90° drehen
-			for (int i=0; i< operator.length; i++)
+			for (i=0; i< operator.length; i++)
 			{
-				for (int j=0; j< operator.length; j++)
+				for (j=0; j< operator.length; j++)
 				{
 					operator[j][operator.length-1-i] = archipelOperator[archipelwaehler][i][j];
 				}
@@ -198,9 +216,9 @@ public class Archipel
 			break;
 			}
 		case 2: {//180° drehen
-			for (int i=0; i< operator.length; i++)
+			for (i=0; i< operator.length; i++)
 			{
-				for (int j=0; j< operator.length; j++)
+				for (j=0; j< operator.length; j++)
 				{
 					operator[operator.length -1-i][j] = archipelOperator[archipelwaehler][i][j];
 				}
@@ -208,63 +226,77 @@ public class Archipel
 			break;
 			}
 		case 3: {//270° drehen
-			for (int i=0; i< operator.length; i++)
+			for (i=0; i< operator.length; i++)
 			{
-				for (int j=0; j< operator.length; j++)
+				for (j=0; j< operator.length; j++)
 				{
 					operator[operator.length -1-j][i] = archipelOperator[archipelwaehler][i][j];
 				}
 			}
 			break;
 			}
-		default: {
-			for (int i=0; i< operator.length; i++)
+		default: { //Nicht drehen
+			for (i=0; i< operator.length; i++)
 			{
-				for (int j=0; j< operator.length; j++)
+				for (j=0; j< operator.length; j++)
 				{
 					operator[i][j] = archipelOperator[archipelwaehler][i][j];
 				}
 			}
 			break;
 		}
-		}
+		}// Switch
 		
-		// Jetzt wird das Archipelgebiet mit dem Operator getrimmt, so kann das Aussehen bestimmt werden.
-		for (int i = 0; i<archipelGebiet; i++)
-			for (int j =0; j<archipelGebiet; j++)
+		/* Jetzt wird das Archipelgebiet mit dem Operator getrimmt, so kann das Aussehen bestimmt werden.
+		 * Zusätzlich wird das Archipel um jeweils eine blinde Reihe rundherum erweitert, damit der Ab-
+		 * standsoperator keine ArrayIndexOutOfBoundsExceptions hervorruft, wenn er ganz am Rand aus-
+		 * geführt wird. Das Verfahren beschleunigt die Inselherstellung ein wenig im Vergleich zur Try/-
+		 * Catch-Arithmetik, die für die Exceptions notwendig wäre.
+		 */
+		double[][]archipelErweitert = new double[15][15];
+		for (i = 0; i<archipelGebiet; i++)
+			for (j =0; j<archipelGebiet; j++)
 			{
-				Archipel[i][j]=Archipel[i][j] * operator[i][j];
+				archipelErweitert[i+1][j+1]= archipel[i][j] * operator[i][j];
 			}
 	
-		// Zur Sache: Inseln generieren, Schritt 1
+		// Zur Sache: Inseln generieren, Schritt 1, Inseln aus dem Boden heben
 		final int genauigkeit = 10000;
-		for (int i=0; i<archipelGebiet; i++)
-			for (int j=0; j<archipelGebiet; j++)
+		for (i=1; i<=archipelGebiet; i++)
+			for (j=1; j<=archipelGebiet; j++)
 			{
-				Archipel[i][j]=Archipel[i][j]*genauigkeit;
+				archipelErweitert[i][j]=archipelErweitert[i][j]*genauigkeit;
 			}
 
 		//Inseln generieren, Schritt 2: Histogramm erstellen
 		int[] histogramm = new int[genauigkeit];
-		for (int i=0; i<archipelGebiet; i++)
-			for (int j=0; j<archipelGebiet; j++)
+		for (i=1; i<=archipelGebiet; i++)
+			for (j=1; j<=archipelGebiet; j++)
 			{
-				if ((Archipel[i][j]<genauigkeit) && (Archipel[i][j]>0))
-					histogramm[(int)Archipel[i][j]]++;
+				if ((archipelErweitert[i][j]<genauigkeit) && (archipelErweitert[i][j]>0))
+					histogramm[(int)archipelErweitert[i][j]]++;
 			}
 
 		//Inseln generieren, Schritt 3: Meeresspiegel für die perfekte 
 		//Inselanzahl aus dem Histogramm auslesen
 		int inselZaehler = 0;
 		int meeresspiegel =0;
-		int inselAnzahl = (int) (Math.random()*8)+8;
-		for (int i=(genauigkeit -1); ((meeresspiegel==0) && (i>0)); i--)
+		int inselAnzahl = (int) (Math.random()*8)+7;
+		for (i=(genauigkeit -1); ((meeresspiegel==0) && (i>0)); i--)
 		{
 			inselZaehler += histogramm[i];
 			if (inselZaehler > inselAnzahl)
 				meeresspiegel = i;
 		}
-		if (meeresspiegel == 0) return 0;
+		// TODO: Wenn der Fall "meeresspiegel == 0" auftritt, sind zu wenig Inseln in dem Archipel
+		// erzeugt worden. Derzeit wird einfach abgebrochen, das Wiederholen der Methode wird der
+		// aufrufenden Klasse überlassen. Hier sollte noch nachgebessert werden!
+		if (meeresspiegel <= 0){
+			System.out.println("Meeresspiegel auf 0 gefallen. Keine Inseln erzeugt.");
+			return 0;
+			
+		}
+		
 		//Inseln generieren, Schritt 4: Positionen aller Inseln mit (höhe > meeresspiegel) auslesen, 
 		//Abstände kontrollieren, notfalls Inseln löschen und Meeresspiegel senken
 		this.inselAnzahl = inselZaehler;
@@ -273,37 +305,25 @@ public class Archipel
 		do
 		{
 			meeresspiegel--;
-
 			inselZaehler=0;
-			for (int i=0; i<archipelGebiet; i++)
-				for (int j=0; j<archipelGebiet; j++)
+			for (i=1; i<=archipelGebiet; i++)
+				for (j=1; j<=archipelGebiet; j++)
 				{
-					if (Archipel[i][j] > meeresspiegel)
+					if (archipelErweitert[i][j] > meeresspiegel)
 					{
 						inselZaehler++; //Insel gefunden! Zählen!
 						for (int k =0; k<3; k++)
 							for (int l = 0; l<3; l++)
 							{
-								try{
-									//Nachbarschaft eliminieren
-									Archipel[i-1+k][j-1+l] *= abstandsOperator[k][l];
-								}
-								catch (ArrayIndexOutOfBoundsException e)
-								{
-									//Nichts schlimmes ist passiert. Nur der abstandsOperator
-									//wurde am Rand des Archipels ausgeführt. Programm darf
-									//ganz normal weiter laufen. Zum Vermeiden dieses Fehlers
-									//könnte man das Archipel um jeweils eine blinde Reihe
-									//an jedem Rand erweitern...
-								}
+								//Nachbarschaft eliminieren
+								archipelErweitert[i-1+k][j-1+l] *= abstandsOperator[k][l];
 							}
 					}
 				}//for
 		}
-		while(inselZaehler < inselAnzahl || meeresspiegel <= 1);
+		while(inselZaehler < inselAnzahl && meeresspiegel >= 1);
 		this.inselAnzahl = inselZaehler;
-		System.gc();		
-		// Wenn der Meeresspiegel auf 0 sinkt, ist die Inselherstellung misslungen und muss
+		// TODO: Wenn der Meeresspiegel auf 0 sinkt, ist die Inselherstellung misslungen und muss
 		// wiederholt werden.
 		if (meeresspiegel <=1) 
 		{
@@ -314,21 +334,13 @@ public class Archipel
 		int inselGroesse;
 		insel = new InselErstellung[inselZaehler];
 		inselZaehler=0;
-		for (int i=0; i<archipelGebiet; i++)
-			for (int j=0; j<archipelGebiet; j++)
+		for (i=0; i<archipelGebiet; i++)
+			for (j=0; j<archipelGebiet; j++)
 			{
-				if (Archipel[i][j] > meeresspiegel)
+				if (archipelErweitert[i+1][j+1] > meeresspiegel)
 				{
 					inselGroesse = (int) (Math.random()*this.groesse);					
-					try{
-						insel[inselZaehler++] = new InselErstellung(i, j, this.groesse, this.archipelID);
-					}
-					catch (ArrayIndexOutOfBoundsException e)
-					{
-						System.out.println("Wahrscheinlich ist nicht die ganze Karte mit Inseln bedeckt" +
-								"worden. Dieser Fehler kommt aus der Klasse 'Archipel'.");
-						return 0;
-					}
+					insel[inselZaehler++] = new InselErstellung(i, j, this.groesse, this.archipelID);
 				}
 			}//for
 
@@ -339,7 +351,7 @@ public class Archipel
 		if (this.x > 999 - (int)(archipelGebiet/2))	this.x = (int)(archipelGebiet/2);
 		if (this.y > 999 - (int)(archipelGebiet/2))	this.y = (int)(archipelGebiet/2);
 		
-		for (int i=0; i<this.inselAnzahl;i++)
+		for (i=0; i<this.inselAnzahl;i++)
 		{
 			insel[i].x_pos = insel[i].x_pos-(int)(archipelGebiet/2)+this.x;
 			insel[i].y_pos = insel[i].y_pos-(int)(archipelGebiet/2)+this.y;
