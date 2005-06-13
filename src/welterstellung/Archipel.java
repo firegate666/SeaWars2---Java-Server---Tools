@@ -13,7 +13,17 @@ public class Archipel
 	public int kartenabschnitt_id;
 	public int inselAnzahl;
 	public InselErstellung[] insel;
-	private int archipelID;
+	public int archipelID;
+	
+	public Archipel()
+	{
+		this.x = 0;
+		this.y = 0;
+		this.groesse = 1;
+		this.kartenabschnitt_id = 1;
+		this.inselAnzahl = 10;
+		this.archipelID = 0;
+	}
 	
 	public Archipel(int x, int y)
 	{
@@ -74,11 +84,8 @@ public class Archipel
 	}
 	
 	/**
-	 * Setzt die Position einer Insel in Abhängigkeit von ihrer Archipelposition.
+	 * Setzt die Positionen einiger Inseln in Abhängigkeit von ihrer Archipelposition.
 	 * Dabei werden je nach Größenklasse verschiedene Verteilungen angestrebt.
-	 * @param ArchipelX ist die Zentrale Postion des Archipels in X-Richtung
-	 * @param ArchipelY ist die Zentrale Position des Archipels in Y-Richtung
-	 * @param groessenklasse ist die Größenklasse des Archipels
 	 * @return gibt die Anzahl der Inseln zurück, wenn alles geklappt hat.
 	 * Wenn 0 zurückgegeben wird, muss die Inselherstellung wiederholt werden.
 	 */
@@ -87,6 +94,15 @@ public class Archipel
 		return inselnImArchipelVerteilen(this.x, this.y, this.groesse);
 	}
 
+	/**
+	 * Setzt die Positionen einiger Inseln in Abhängigkeit von ihrer Archipelposition.
+	 * Dabei werden je nach Größenklasse verschiedene Verteilungen angestrebt.
+	 * @param ArchipelX ist die Zentrale Postion des Archipels in X-Richtung
+	 * @param ArchipelY ist die Zentrale Position des Archipels in Y-Richtung
+	 * @param groessenklasse ist die Größenklasse des Archipels
+	 * @return gibt die Anzahl der Inseln zurück, wenn alles geklappt hat.
+	 * Wenn 0 zurückgegeben wird, muss die Inselherstellung wiederholt werden.
+	 */
 	public int inselnImArchipelVerteilen(int ArchipelX, int ArchipelY, int groessenklasse)
 	{
 		int archipelGebiet = 13;

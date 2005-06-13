@@ -48,7 +48,7 @@ public class InselErstellung
 	{
 		return this.name;
 	}
-	// Die Größe reicht von 1000 bis 1000000 
+	// Die Größe reicht von 100 bis 50000
 	public int groesse;
 	// x_pos von 0 bis 999, theoretisch auf der Hauptkarte anzeigbar
 	public int x_pos; 	 	 	 	 	 	 	 	
@@ -66,7 +66,7 @@ public class InselErstellung
 	{
 		this.x_pos = (int)(Math.random()*1000);
 		this.y_pos = (int)(Math.random()*1000);
-		this.groesse = (int)(Math.random()*999000 + 1000);
+		this.groesse = setGroesse(3);
 		this.name = this.setZufallsName();
 		this.archipelID =0;
 	}
@@ -74,14 +74,14 @@ public class InselErstellung
 	 * Erstellt eine Insel mit definierter Position und Größe
 	 * @param x ist die x-Koordinate der Insel auf der Hauptkarte.
 	 * @param y ist die y-Koordinate der Insel auf der Hauptkarte.
-	 * @param groesse ist ein Wert zwischen 1k und 1M und gibt den Platz auf der Insel an.
+	 * @param groesse ist ein Wert zwischen 1 und 5 und gibt den Platz auf der Insel an.
 	 */
 	public InselErstellung(int x, int y, int groesse)
 	{
 		this();
 		this.x_pos = x;
 		this.y_pos = y;
-		this.groesse =  groesse;
+		this.groesse =  setGroesse(groesse);
 	}
 	/**
 	 * Erstellt eine Insel mit definierter Position und Größe
@@ -115,30 +115,20 @@ public class InselErstellung
 	 * Wer sich nicht mit den Größen beschäftigen will aber eine gewisse Kontrolle über
 	 * die Größe der Insel behalten will, benutzt diese Methode. Sehr zu empfehlen, weil
 	 * die Größenklasse mit der Technologiestufe ziemlich gleichzusetzen sein sollte. 
-	 * @param groessenklasse setzt die Maximalgröße der Insel, wobei die Klasse maximal
-	 * um 2 unterschritten wird. Das heißt zum Beispiel: Klasse 4 kann von 2 bis 4 reichen.
-	 * Sonderfall Klasse 1: Die Starterinsel ist für alle gleich.
+	 * @param groessenklasse setzt die Maximalgröße der Insel.
 	 */
 	public int setGroesse(int groessenklasse)
 	{
 		switch (groessenklasse)
 		{
-			case 1: this.groesse = 1000;
-			case 2: {
-				this.groesse = (int)(Math.random()*9000) + 1000;
-			}
-			case 3: {
-				this.groesse = (int)(Math.random()*99000) + 1000;
-			}
-			case 4: {
-			this.groesse = (int)(Math.random()*490000)+ 10000;
-			}
-			case 5: {
-				this.groesse = (int)(Math.random()*9900000)+ 100000;
-			}
+			case 1: this.groesse = (int)(Math.random()*400) + 100;
+			case 2: this.groesse = (int)(Math.random()*900) + 100;
+			case 3: this.groesse = (int)(Math.random()*4000)+ 1000;
+			case 4: this.groesse = (int)(Math.random()*9000)+ 1000;
+			case 5: this.groesse = (int)(Math.random()*40000)+ 10000;
 			default:{
 				//Größer als Klasse 5? Na gut, meinetwegen.
-				this.groesse = (int)(Math.random()*49900000)+ 100000;
+				this.groesse = (int)(Math.random()*90000)+ 10000;
 			}
 		}
 		return this.groesse;

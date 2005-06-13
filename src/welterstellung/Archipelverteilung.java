@@ -185,7 +185,7 @@ public class Archipelverteilung
 		//Inseln generieren, Schritt 4: Positionen aller Inseln mit (höhe > meeresspiegel) auslesen, 
 		//Abstände kontrollieren, notfalls Inseln löschen und meeresspiegel senken
 		{ //Neuen Bereich anfangen, damit der saugroße Abstandsoperator wieder gelöscht wird,
-		  //	wenn er nicht mehr gebraucht wird
+		  //wenn er nicht mehr gebraucht wird
 		int[][] abstandsOperator = 
 		{{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},

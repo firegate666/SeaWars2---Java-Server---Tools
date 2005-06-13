@@ -188,12 +188,9 @@ public class ZufallsNamen
 				case 0: {
 					if (vokalErlaubt || vokaMuss >=2)
 					{
-						do
 							buchstabenwahl = (int) (Math.random()*voka.length);
-						while (voka[buchstabenwahl].wahrscheinlichkeit < Math.random()*100);
-						
-						//if (voka[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
-						//{
+						if (voka[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
+						{
 							name=name+voka[buchstabenwahl].buchstabe;
 							//voka[buchstabenwahl].wahrscheinlichkeit=0;
 							klinKonErlaubt = true;
@@ -203,7 +200,7 @@ public class ZufallsNamen
 							vokalErlaubt = false;
 							vokaMuss = 0;
 							break;
-						//}
+						}
 					}
 				}
 				case 1: {

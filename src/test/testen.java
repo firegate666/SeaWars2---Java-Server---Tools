@@ -5,18 +5,41 @@
  */
 
 package test;
-import welterstellung.Archipelverteilung;
 import java.io.*;
+import welterstellung.*;
 //import welterstellung.InselErstellung;
 // import welterstellung.ZufallsNamen;
 
 class testen{
 	public static void main(String[] args) {
+
+for (int i=0; i<args.length; i++)
+{
+		if (args[i] == "-Verbose")
+		{
+			i++;
+			
+			
+		}
+}
+// ******************************************************************************************
+// Test der Welterstellung (Schluck!)
+	Welterstellung welt = new Welterstellung(1);
+	welt.archipelAnzahl = 500;
+	welt.bildPfad = "C:\\Eigene Dateien\\C- Programme\\SeaWars\\Beispiel.bmp";
+	welt.empfindlichkeit = 0.7;
+	welt.dateiAusgabeFlag = 0;
+	welt.testausgabe = 0;
+	welt.Erstellung();
+
+
+// ******************************************************************************************
+		/*  */
 		
+
 /*		
 // ******************************************************************************************
-
-  // Test des Namensgenerators
+ // Test des Namensgenerators
  for (int i=0; i<100; i++)
  	{
  	ZufallsNamen name = new ZufallsNamen();
@@ -27,7 +50,7 @@ class testen{
 
 /*
 // ******************************************************************************************
-	// Test der Zufallsgenerierung über ein Histogramm
+// Test der Zufallsgenerierung über ein Histogramm
    int[] j= new int[] {0,0,0,0,0,0,0,0,0,0};
    for (int i=0; i<1000000; i++)
    {
@@ -38,7 +61,8 @@ class testen{
 /*	*/	
 
 // *******************************************************************************************
-  //Test der Positionsverteilung
+/*
+		//Test der Positionsverteilung
    		String Inselpositionen = "";
 		Archipelverteilung neueWelt;
 		int Archipelzahl = 500;
@@ -82,11 +106,13 @@ class testen{
         	FileOutputStream fout = new FileOutputStream(file);
         	fout.write(Inselpositionen.getBytes());
         	fout.close();
-        	} catch (FileNotFoundException e) {
+        } 
+        catch (FileNotFoundException e) {
 	            System.out.println("Sorry, die Positionsdatei konnte nicht erstellt werden");
-        	} catch (IOException e) {
+        } 
+        catch (IOException e) {
 	            System.out.println("Sorry, die Positionsdatei konnte nicht erstellt werden");
-        	}
+        }
         System.out.println("Fertig. Dieses Mal wurden " + inselzahl+ " Inseln erzeugt.");
 /*	*/        
 // *******************************************************************************************
