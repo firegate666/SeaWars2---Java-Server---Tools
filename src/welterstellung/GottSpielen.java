@@ -15,7 +15,9 @@ class GottSpielen
 	 * 
 	 */	
 	public static void main(String[] args) {
-
+		System.out.println("Übergabeparameter: ");
+		for(int i = 0; i < args.length; i++)
+			System.out.println("Parameter "+i+" Wert: "+args[i]);
 		Welterstellung welt = new Welterstellung(1);
 		welt.archipelAnzahl = 500;
 		welt.bildPfad = "C:\\Beispiel.bmp";
@@ -52,7 +54,7 @@ class GottSpielen
 				if (args[i] == "-fileOutputPath")
 				{
 					i++;
-					welt.dateiAusgabeFlag = Integer.parseInt(args[i]);
+					welt.dateiAusgabePfad = args[i];
 				}
 				if (args[i] == "-talkative")
 				{
@@ -74,6 +76,7 @@ class GottSpielen
 			}
 			catch (NumberFormatException e)
 			{
+				 System.out.println("Exception: "+e.getMessage());
 				 System.out.println("Welt wurde nicht erstellt. Falsche Kommandozeilenparameter.");
 				 System.out.println("Gültig sind folgende Parameter:");
 				 System.out.println("-cardpart 7 setzt den Kartenabschnitt der neuen Welt auf 7,");
