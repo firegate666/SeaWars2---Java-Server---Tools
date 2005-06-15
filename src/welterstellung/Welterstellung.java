@@ -5,13 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.sql.Statement;
+//import java.sql.Statement;
 //import java.util.ArrayList;
 
 import de.mb.database.SQLAnswerTable;
 import de.mb.database.mysql.MysqlConnectionFactory;
 import de.mb.database.mysql.MysqlSQLExecution;
-import de.mb.database.*;
+//import de.mb.database.*;
 import welterstellung.ZufallsNamen;
 
 /**
