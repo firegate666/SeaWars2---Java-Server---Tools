@@ -15,10 +15,6 @@ class GottSpielen
 	 * 
 	 */	
 	public static void main(String[] args) {
-		System.out.println("Übergabeparameter: ");
-		for(int i = 0; i < args.length; i++)
-			System.out.println("Parameter "+i+" Wert: "+args[i]);
-		
 		Welterstellung welt = new Welterstellung(1);
 		welt.archipelAnzahl = 500;
 		welt.bildPfad = "C:\\Beispiel.bmp";
@@ -30,7 +26,6 @@ class GottSpielen
 
 		for (int i=0; i<args.length; i++)
 		{
-System.out.println("args-Auswahl = " + args[i]);
 			try
 			{
 				if (args[i].matches("-cardpart"))
