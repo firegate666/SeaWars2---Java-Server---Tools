@@ -13,6 +13,7 @@ import de.mb.database.mysql.MysqlConnectionFactory;
 import de.mb.database.mysql.MysqlSQLExecution;
 //import de.mb.database.*;
 import welterstellung.ZufallsNamen;
+import java.util.Date;
 
 /**
  * Diese Klasse kann eine neue Welt erschaffen. 
@@ -124,7 +125,7 @@ public class Welterstellung{
 	
 	public int Erstellung(){
 		if (OpenConn()==1) return 1; //Datenbankanbindung öffnen wenn möglich.
-		
+		long zeitstempel = new Date().getTime();
 		/* Zunächst wird das neueWelt-Objekt erzeugt, das die Archipelpositionen und -größen enthält.
 		 */
 		if (testausgabe>0) System.out.println("Welterstellung gestartet. Archipel werden verteilt...");
@@ -154,7 +155,11 @@ public class Welterstellung{
 			}
 
 		}
-		if (testausgabe>0) System.out.println(neueWelt.Archipelzahl + " Archipel wurden verteilt. Inselverteilung wird gestartet...");
+		if (testausgabe>0) 
+		{
+			System.out.println("Bisherige Laufzeit:" + ((new Date().getTime())-zeitstempel) + " ms." );
+			System.out.println(neueWelt.Archipelzahl + " Archipel wurden verteilt. Inselverteilung wird gestartet...");
+		}
 
 		/* Archipel sind jetzt auf der Karte verteilt und können in die Datenbank eingetragen werden.
 		 * Ab hier werden die Inseln in den Archipeln verteilt. Es werden alle Archipele nacheinander
@@ -190,13 +195,24 @@ public class Welterstellung{
 			for (int j=0; j<archipel.inselAnzahl; j++)
 			{
 				SqlSyntaxName = archipel.insel[j].getName().replaceAll("'","\\\\'");
+				// Lager für die Insel erstellen. Kapazität =0. Egal. Ihr wolltet es so.
+				try
+				{
+					SQLexec.executeInsert("INSERT LOW_PRIORITY INTO lager (kapazitaet) VALUES (0);");
+				}
+				catch (SQLException e)
+				{
+					System.out.println ("Es konnte kein Lager für diese Insel erstellt werden: "+ SqlSyntaxName);
+				}
+				SendQuery("SELECT  max(id)FROM lager;");
 				archipelQuery = "INSERT LOW_PRIORITY "+
-				"INTO insel (name, groesse, x_pos, y_pos, archipel_id) "+
+				"INTO insel (name, groesse, x_pos, y_pos, archipel_id, lager_id) "+
 				"VALUES('"+SqlSyntaxName+"'"+
 				", "+ archipel.insel[j].groesse +
 				", "+ archipel.insel[j].x_pos +
 				", "+ archipel.insel[j].y_pos +
 				", "+ archipel.insel[j].archipelID +
+				", "+ SQLAntwort.getDataCell(1,1) +
 				");";
 				try
 				{
@@ -210,7 +226,11 @@ public class Welterstellung{
 			}
 			
 		}
-		if (testausgabe>0) System.out.println("Fertig. Dieses Mal wurden " + inselzahl+ " Inseln erzeugt.");
+		if (testausgabe>0)
+		{ 
+			System.out.println("Fertig. Dieses Mal wurden " + inselzahl+ " Inseln erzeugt.");
+			System.out.println("gesamte Laufzeit:" + ((new Date().getTime())-zeitstempel) + " ms." );
+		}
 	    CloseConn(); //SQL-Datenbankanbindung wieder schließen
 		return 0;
 	} //Verteilung
