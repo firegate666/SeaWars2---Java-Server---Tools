@@ -128,12 +128,33 @@ public class Welterstellung{
 		long zeitstempel = new Date().getTime();
 		/* Zunächst wird das neueWelt-Objekt erzeugt, das die Archipelpositionen und -größen enthält.
 		 */
+		SendQuery("SELECT max(id) FROM kartenabschnitt;");
+		try
+		{
+			kartenabschnitt = Integer.parseInt(SQLAntwort.getDataCell(1,1)) +1;
+		}
+		catch (NumberFormatException e)
+		{
+			if (testausgabe>0) System.out.println(e);
+			kartenabschnitt = 1;
+		}
+		try
+		{
+			SQLexec.executeInsert("INSERT LOW_PRIORITY INTO kartenabschnitt (id,  kartennummer, links_id) VALUES ("+
+					kartenabschnitt +", "+ kartenabschnitt+ ", "+ (kartenabschnitt-1)+ ");");
+			if (kartenabschnitt > 1)
+				SQLexec.executeUpdate("UPDATE LOW_PRIORITY kartenabschnitt SET rechts_id = "+kartenabschnitt+" WHERE id = " +
+									(kartenabschnitt -1) + ";");
+		}
+		catch(SQLException e)
+		{
+
+		}		
 		if (testausgabe>0) System.out.println("Welterstellung gestartet. Archipel werden verteilt...");
 		Archipelverteilung neueWelt;
 		neueWelt = new Archipelverteilung(archipelAnzahl, bildPfad, empfindlichkeit);
 		neueWelt.VerteilungAusfuehren();
 		/* Neue Archipel in die Datenbank eintragen und mit Namen versehen.
-		 * TODO:
 		 */
 		String archipelQuery="";
 		ZufallsNamen name = new ZufallsNamen();
@@ -143,7 +164,7 @@ public class Welterstellung{
 			SqlSyntaxName = name.setZufallsName().replaceAll("'","\\\\'");
 			archipelQuery = "INSERT LOW_PRIORITY "+
 			"INTO archipel (x_pos, y_pos, name, groessenklasse, kartenabschnitt_id) "+
-			"VALUES("+ neueWelt.Orte[i].x+", "+ neueWelt.Orte[i].y +", '"+ SqlSyntaxName +"', "+ neueWelt.Orte[i].groesse +", "+ kartenabschnitt +");";
+			"VALUES("+ neueWelt.Orte[i].x+", "+ neueWelt.Orte[i].y +", '"+ SqlSyntaxName +"', "+ (neueWelt.Orte[i].groesse+1) +", "+ kartenabschnitt +");";
 			try
 			{
 				SQLexec.executeInsert(archipelQuery);
@@ -157,8 +178,8 @@ public class Welterstellung{
 		}
 		if (testausgabe>0) 
 		{
-			System.out.println("Bisherige Laufzeit:" + ((new Date().getTime())-zeitstempel) + " ms." );
-			System.out.println(neueWelt.Archipelzahl + " Archipel wurden verteilt. Inselverteilung wird gestartet...");
+			System.out.println("Bisherige Laufzeit: " + ((new Date().getTime())-zeitstempel) + " ms. Pro Archipel sind das " +((new Date().getTime())-zeitstempel)/neueWelt.Archipelzahl + " ms.");
+			System.out.println(neueWelt.Archipelzahl + " Archipel wurden auf der Karte "+kartenabschnitt+" verteilt. Inselverteilung wird gestartet...");
 		}
 
 		/* Archipel sind jetzt auf der Karte verteilt und können in die Datenbank eingetragen werden.

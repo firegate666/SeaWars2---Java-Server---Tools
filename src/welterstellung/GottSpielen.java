@@ -28,11 +28,6 @@ class GottSpielen
 		{
 			try
 			{
-				if (args[i].matches("-cardpart"))
-				{
-					i++;
-					welt.kartenabschnitt = Integer.parseInt(args[i]);
-				}
 				if (args[i].matches("-sensitivity"))
 				{
 					i++;
@@ -65,8 +60,6 @@ class GottSpielen
 				if (args[i].matches("-h"))
 				{
 					System.out.println("Argument -h gefunden"); 
-					System.out.print("-cardpart 7 setzt den Kartenabschnitt der neuen Welt auf 7,");
-					System.out.println("            standardm‰ﬂig ist die 1 eingestellt. Dieser Parameter sollte unbedingt gesetzt werden!");
 					System.out.print("-path  c:\\Bild.bmp setzt den Pfad auf ein BMP nach Wahl,");
 					System.out.println("            standardm‰ﬂig ist c:\\Beispiel.bmp eingestellt.");
 					System.out.println("-archipelago 456 setzt die Archipelanzahl auf 456, standardm‰ﬂig sind 500 eingestellt.");
@@ -83,8 +76,6 @@ class GottSpielen
 				System.out.println("Exception: "+e.getMessage());
 				System.out.println("Welt wurde nicht erstellt. Falsche Kommandozeilenparameter.");
 				System.out.println("G¸ltig sind folgende Parameter:");
-				System.out.print("-cardpart 7 setzt den Kartenabschnitt der neuen Welt auf 7,");
-				System.out.println("            Wenn nichts eingestellt wird, funktioniert auch nichts.");
 				System.out.print("-path  c:\\Bild.bmp setzt den Pfad auf ein BMP nach Wahl,");
 				System.out.println("            standardm‰ﬂig ist c:\\Beispiel.bmp eingestellt.");
 				System.out.print("-archipelago 456 setzt die Archipelanzahl auf 456, standardm‰ﬂig sind 500 eingestellt.");
@@ -97,24 +88,7 @@ class GottSpielen
 				return;
 			}
 		}	
-		if (welt.kartenabschnitt==0)
-		{
-			System.out.println("Welt.Kartenabschnitt= 0");
-			System.out.println("Welt wurde nicht erstellt. Falsche Kommandozeilenparameter.");
-			System.out.println("G¸ltig sind folgende Parameter:");
-			System.out.print("-cardpart 7 setzt den Kartenabschnitt der neuen Welt auf 7,");
-			System.out.println("            Wenn nichts eingestellt wird, funktioniert auch nichts.");
-			System.out.print("-path  c:\\Bild.bmp setzt den Pfad auf ein BMP nach Wahl,");
-			System.out.println("            standardm‰ﬂig ist c:\\Beispiel.bmp eingestellt.");
-			System.out.print("-archipelago 456 setzt die Archipelanzahl auf 456, standardm‰ﬂig sind 500 eingestellt.");
-			System.out.print("-fileOutputFlag 1 schaltet die Ausgabe der Inseln in eine Excel-Textdatei ein.");
-			System.out.println("            Wenn dieses Flag gesetzt wird, sollte auch fileOutputPath gesetzt werden.");
-			System.out.print("-fileOutputPath \"C:\\Eigene Dateien\" gibt die Insel.txt in C:\\Eigene Dateien aus");
-			System.out.println("            standard ist der Pfad C:\\Inseln.txt");
-			System.out.println("-talkative schaltet die Konsolen-Kommentierung w‰hrend des Vorgangs ein.");
-			System.out.print("-sensitivity 0.76 setzt die Empfindlichkeit auf 0.76, was ziemlich viel ist.");
-			return;
-		}
+
 		welt.Erstellung();
 	}
 }
