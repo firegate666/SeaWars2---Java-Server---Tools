@@ -54,11 +54,10 @@ public class Welterstellung{
 	 */
 	public int OpenConn(){
 		try {
-			String url = "localhost";
+			String url = "athen062";
 			String dbname = "usr_web4_2";
 			SQLcf = new MysqlConnectionFactory(url, dbname);
-			SQLexec = new MysqlSQLExecution(SQLcf.getConnection("web4",
-					"sw666#GHf"));
+			SQLexec = new MysqlSQLExecution(SQLcf.getConnection("web4", "sw666#GHf"));
 
 		} catch (SQLException e1) {
 			e1.printStackTrace();
