@@ -20,6 +20,11 @@ public class InselBean implements Serializable {
 	private String name;
 	private int groesse;
 	private int x_pos;
+	private int y_pos;
+	private int spieler_id;
+	private int archipel_id;
+	private Date timestamp;
+	private int lager_id;
 	/**
 	 * @return Returns the archipel_id.
 	 */
@@ -128,9 +133,5 @@ public class InselBean implements Serializable {
 	public void setY_pos(int y_pos) {
 		this.y_pos = y_pos;
 	}
-	private int y_pos;
-	private int spieler_id;
-	private int archipel_id;
-	private Date timestamp;
-	private int lager_id;
+
 }

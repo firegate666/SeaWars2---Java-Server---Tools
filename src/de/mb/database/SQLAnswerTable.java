@@ -82,6 +82,17 @@ public class SQLAnswerTable {
     public String getDataCell(int columnNumber, int rowNumber) {
         return (String) (((ArrayList) fdata.get(rowNumber - 1)).get(columnNumber - 1));
     }
+    
+    /**
+     * Gets the content of data cell at columnNumber@rowNumber.
+     *
+     *@param  columnNumber  column number
+     *@param  rowNumber     row number
+     *@return               data cell
+     */
+    public String getDataCellStandard(int columnNumber, int rowNumber) {
+        return (String) (((ArrayList) fdata.get(rowNumber - 1)).get(columnNumber - 1));
+    }
 
     /**
      * Returns table contents as tab formatted String.

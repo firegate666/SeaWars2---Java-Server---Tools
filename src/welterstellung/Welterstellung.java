@@ -124,7 +124,10 @@ public class Welterstellung{
 	}
 	
 	public int Erstellung(){
-		if (OpenConn()==1) return 1; //Datenbankanbindung öffnen wenn möglich.
+		if (OpenConn()==1){//Datenbankanbindung öffnen wenn möglich.
+			if (testausgabe > 0) System.out.println("Die Datenbankverbindung konnte nicht geöffnet werden.");
+			return 1; 
+		}
 		long zeitstempel = new Date().getTime();
 		/* Zunächst wird das neueWelt-Objekt erzeugt, das die Archipelpositionen und -größen enthält.
 		 */
@@ -172,7 +175,7 @@ public class Welterstellung{
 			catch(SQLException e)
 			{
 				//Jaja... Ein bis zwei Archipel gehen in die Hose, aber wen störts?
-				//Es werden vorher auch zwei bis drei Archipel zu viel erzeugt :-)
+				//Es werden vorher auch zwei bis drei Archipel zu viel erzeugt (-;
 			}
 
 		}

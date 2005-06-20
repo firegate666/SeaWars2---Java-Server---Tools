@@ -30,11 +30,18 @@ public class MysqlConnectionFactory extends AbstractConnectionFactory{
 	protected void initialize() {
 		try {
 			// load mysql driver from library
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
 		} catch (ClassNotFoundException e) {
 			System.err.println(e.getLocalizedMessage());
 		}
-		
+		catch (IllegalAccessException e)
+		{
+			System.err.println(e.getLocalizedMessage());
+		}
+		catch (InstantiationException e)
+		{
+			System.err.println(e.getLocalizedMessage());
+		}
 	}
 	
 	/**
