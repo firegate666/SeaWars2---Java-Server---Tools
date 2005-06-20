@@ -5,8 +5,8 @@
  */
 
 package test;
-//import java.io.*;
-import welterstellung.*;
+import welterstellung.Welterstellung;
+
 //import welterstellung.InselErstellung;
 // import welterstellung.ZufallsNamen;
 
