@@ -50,7 +50,7 @@ public class Welterstellung{
 	 */
 	public int OpenConn(){
 		try {
-			String url = "athen062";
+			String url = "localhost";//"athen062";
 			String dbname = "usr_web4_2";
 			SQLcf = new MysqlConnectionFactory(url, dbname);
 			SQLexec = new MysqlSQLExecution(SQLcf.getConnection("web4", "sw666#GHf"));
