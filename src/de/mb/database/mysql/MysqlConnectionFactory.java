@@ -46,6 +46,7 @@ public class MysqlConnectionFactory extends AbstractConnectionFactory{
 	
 	/**
 	 * Returns connection to database
+	 * 
 	 * @param username		DBUser
 	 * @param password		DBPassword
 	 * @return				database connection
