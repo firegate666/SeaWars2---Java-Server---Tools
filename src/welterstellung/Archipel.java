@@ -105,6 +105,7 @@ public class Archipel
 	 */
 	public int inselnImArchipelVerteilen(int ArchipelX, int ArchipelY, int groessenklasse)
 	{
+
 		int archipelGebiet = 13;
 		/* Der AtollOperator kann verwendet werden, wenn ein Atoll gewünscht wird.
 		 * Multipliziert man ihn mit einem zufällig gefüllten Archipelgebiet, 
