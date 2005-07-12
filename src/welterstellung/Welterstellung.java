@@ -108,7 +108,7 @@ public class Welterstellung{
         	fout.close();
         } 
         catch (FileNotFoundException e) {
-	            System.out.println("Sorry, die Datei konnte nicht erstellt werden");
+	            System.out.println("Sorry, die Datei "+pfad+" konnte nicht erstellt werden");
 	            return 1;
         } 
         catch (IOException e) {
@@ -236,14 +236,13 @@ public class Welterstellung{
 				try
 				{
 					SQLexec.executeInsert(archipelQuery);
+					inselzahl++;
 				}
 				catch(SQLException e)
 				{
 					System.out.println("SQL-Insert funktioniert nicht mit folgendem Query: " + archipelQuery);
 				}
-				inselzahl++;
 			}
-			
 		}
 		if (testausgabe>0)
 		{ 

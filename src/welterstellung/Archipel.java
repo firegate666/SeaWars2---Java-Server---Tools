@@ -356,7 +356,7 @@ public class Archipel
 			{
 				if (archipelErweitert[i+1][j+1] > meeresspiegel)
 				{
-					inselGroesse = (int) (Math.random()*this.groesse);					
+					inselGroesse = (int) (Math.random()*this.groesse) +1;					
 					insel[inselZaehler++] = new InselErstellung(i, j, inselGroesse, this.archipelID);
 				}
 			}//for

@@ -94,6 +94,7 @@ public class InselErstellung
 	{
 		this.x_pos = x;
 		this.y_pos = y;
+
 		this.groesse =  setGroesse(groessenklasse);
 		this.archipelID = archipelID;
 		this.name = this.setZufallsName();
@@ -118,14 +119,29 @@ public class InselErstellung
 	 * @param groessenklasse setzt die Maximalgröße der Insel.
 	 */
 	public int setGroesse(int groessenklasse)
-	{
+	{		
 		switch (groessenklasse)
 		{
-			case 1: this.groesse = (int)(Math.random()*400) + 100;
-			case 2: this.groesse = (int)(Math.random()*900) + 100;
-			case 3: this.groesse = (int)(Math.random()*4000)+ 1000;
-			case 4: this.groesse = (int)(Math.random()*9000)+ 1000;
-			case 5: this.groesse = (int)(Math.random()*40000)+ 10000;
+			case 1: {
+				this.groesse =  100; 
+				break;
+				}
+			case 2: {
+				this.groesse = (int)(Math.random()*600) + 400; 
+				break;
+				}
+			case 3: {
+				this.groesse = (int)(Math.random()*4000)+ 1000; 
+				break;
+				}
+			case 4: {
+				this.groesse = (int)(Math.random()*9000)+ 1000; 
+				break;
+				}
+			case 5: {
+				this.groesse = (int)(Math.random()*40000)+ 10000; 
+				break;
+				}
 			default:{
 				//Größer als Klasse 5? Na gut, meinetwegen.
 				this.groesse = (int)(Math.random()*90000)+ 10000;
