@@ -33,7 +33,6 @@ import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Clob;
 import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.Ref;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -48,7 +47,7 @@ import com.mysql.jdbc.SQLError;
 /**
  * Wraps callable statements created by pooled connections.
  * 
- * @version $Id: CallableStatementWrapper.java,v 1.1 2005-06-20 20:46:00 sw Exp $
+ * @version $Id: CallableStatementWrapper.java,v 1.2 2005-07-15 14:49:37 sw Exp $
  */
 public class CallableStatementWrapper extends PreparedStatementWrapper 
 	implements CallableStatement {

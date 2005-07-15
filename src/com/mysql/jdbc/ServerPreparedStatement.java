@@ -24,18 +24,12 @@
  */
 package com.mysql.jdbc;
 
-import com.mysql.jdbc.profiler.ProfileEventSink;
-import com.mysql.jdbc.profiler.ProfilerEvent;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
-
 import java.math.BigDecimal;
-
 import java.net.URL;
-
 import java.sql.Array;
 import java.sql.Blob;
 import java.sql.Clob;
@@ -45,19 +39,19 @@ import java.sql.Ref;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Types;
-
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.Calendar;
-import java.util.Locale;
 import java.util.TimeZone;
+
+import com.mysql.jdbc.profiler.ProfileEventSink;
+import com.mysql.jdbc.profiler.ProfilerEvent;
 
 
 /**
  * JDBC Interface for MySQL-4.1 and newer server-side PreparedStatements.
  *
  * @author Mark Matthews
- * @version $Id: ServerPreparedStatement.java,v 1.1 2005-06-20 20:45:59 sw Exp $
+ * @version $Id: ServerPreparedStatement.java,v 1.2 2005-07-15 14:49:37 sw Exp $
  */
 public class ServerPreparedStatement extends PreparedStatement {
     /* 1 (length) + 2 (year) + 1 (month) + 1 (day) */

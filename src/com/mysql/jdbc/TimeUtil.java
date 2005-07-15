@@ -27,11 +27,9 @@ package com.mysql.jdbc;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
-
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 

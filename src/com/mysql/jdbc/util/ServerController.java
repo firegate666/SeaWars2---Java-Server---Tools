@@ -26,9 +26,7 @@ package com.mysql.jdbc.util;
 
 import java.io.File;
 import java.io.IOException;
-
 import java.util.Iterator;
-import java.util.Locale;
 import java.util.Properties;
 
 import com.mysql.jdbc.StringUtils;
@@ -36,7 +34,7 @@ import com.mysql.jdbc.StringUtils;
 /**
  * Controls a MySQL server using Java RunTime methods
  *
- * @version $Id: ServerController.java,v 1.1 2005-06-20 20:46:00 sw Exp $
+ * @version $Id: ServerController.java,v 1.2 2005-07-15 14:49:37 sw Exp $
  * @author Mark Matthews
  */
 public class ServerController {

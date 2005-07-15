@@ -24,20 +24,17 @@
  */
 package com.mysql.jdbc;
 
-import com.mysql.jdbc.profiler.ProfileEventSink;
-import com.mysql.jdbc.profiler.ProfilerEvent;
-import com.mysql.jdbc.util.LRUCache;
-
-import java.sql.DataTruncation;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
 import java.sql.Types;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
+
+import com.mysql.jdbc.profiler.ProfileEventSink;
+import com.mysql.jdbc.profiler.ProfilerEvent;
+import com.mysql.jdbc.util.LRUCache;
 
 
 /**
@@ -53,7 +50,7 @@ import java.util.Map;
  * </p>
  *
  * @author Mark Matthews
- * @version $Id: Statement.java,v 1.1 2005-06-20 20:45:59 sw Exp $
+ * @version $Id: Statement.java,v 1.2 2005-07-15 14:49:37 sw Exp $
  *
  * @see java.sql.Statement
  * @see ResultSet
