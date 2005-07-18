@@ -16,7 +16,8 @@ public class ship {
 	
 	public weapon [] weapon;	//Bewaffnung
 	public ship target;				//Aktuelles Ziel
-	double location = 0;			//Standpunkt im Bezug zu Startdistance
+	int order;								//Befehl
+	double location = 0;			//Standpunkt im Bezug zu Startdistanz (class battle)
 	double speed;							//Maximale Geschwindigkeit des Schiffes
 	double maxrange;					//Maximal mögliche Beschußdistanz
 	double minrange;					//Kleinste Beschußdistanz
@@ -25,8 +26,11 @@ public class ship {
 	double damage;						//Derzeitiges Schadensniveau 
 	double hold; 							//Frachtraum
 	double cargo;							//Derzeitige Zuladung
-	double rammschaden;				/**Begriff suchen**/
-	boolean spur = false; 		//Rammdorn
+	double ramdamage;					//Rammschaden
+	int marines;							//Marineinfanteristen um enteraktionen durchzuführen
+	boolean spur = false; 		//Rammdorn?
 	boolean underfire = false;//Letzte Runde unter Beschuß?
+	
+	int number;								//nur zu Testzwecken
 	
 }
