@@ -6,6 +6,9 @@
  */
 package de.seawars.kampfskript;
 
+import Kampfskript.ship;
+import Kampfskript.weapon;
+
 /**
  * @author Whistler
  *
@@ -50,8 +53,7 @@ public class battle {
 		//Aus dem Wetter und der Startzeit wird die Entfernung
 		//zwischen beiden Flotten	berechnet in der der Kampf startet
 		/**TODO Wetter, Uhrzeit und Sonnenauf bzw. untergangszeit einarbeiten**/
-	  
-	  
+	  	  
 		startdistance = 1000;
 	}
 	
@@ -66,9 +68,11 @@ public class battle {
 				a[i].target = d[i%d.length];
 	}
 	
-	private void damage(){
+	private void damage(ship s){
 		//Hier werden die Auswirkungen des Schadens eines Schiffes ermittelt.
 		/**TODO Alles!**/
+	  
+	  s.damageperc = s.damage / s.hitpoints;
 	}
 	
 	private ship closest(ship s, ship[] ta){
@@ -90,7 +94,7 @@ public class battle {
 	private double checkmove(ship s, double m){
 		//Hier wird auf die maximale Bewegungsfähigkeit des Schiffes geprüft
 		
-		return m < s.speed ?  m : s.speed;
+		return m < (s.speed * s.damageperc) ?  m : (s.speed * s.damageperc);
 	}
 	
 	private void movement(ship[] ship){
@@ -142,10 +146,7 @@ public class battle {
 				default:	//withdraw: Flucht (Feiglinge!)
 					s.location -= s.speed; 
 			}
-			
 		}
-		
-		
 	}
 	
 	private void newTargets(){
@@ -172,7 +173,6 @@ public class battle {
 	
 	
 	public static void main(String[] args) {
-		
 		
 	}
 }
