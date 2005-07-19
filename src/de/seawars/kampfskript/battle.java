@@ -6,9 +6,6 @@
  */
 package de.seawars.kampfskript;
 
-import Kampfskript.ship;
-import Kampfskript.weapon;
-
 /**
  * @author Whistler
  *

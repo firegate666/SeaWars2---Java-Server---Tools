@@ -22,8 +22,10 @@ public class ship {
 	double maxrange;					//Maximal mögliche Beschußdistanz
 	double minrange;					//Kleinste Beschußdistanz
 	double manoeuverability; 	//Manövrierfähigkeit
+	double hitpoints;					//Hitpoints eben
 	double armour;						//Panzerung gegen Beschuß 
-	double damage;						//Derzeitiges Schadensniveau 
+	double damage;						//Derzeitiges Schadensniveau
+	double damageperc;				//Schaden in Prozent
 	double hold; 							//Frachtraum
 	double cargo;							//Derzeitige Zuladung
 	double ramdamage;					//Rammschaden
