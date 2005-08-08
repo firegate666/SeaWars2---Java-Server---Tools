@@ -12,10 +12,10 @@ package de.seawars.kampfskript;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class ship {
+public class Ship {
 	
-	public weapon [] weapon;	//Bewaffnung
-	public ship target;				//Aktuelles Ziel
+	public Weapon [] weapon;	//Bewaffnung
+	public Ship target;				//Aktuelles Ziel
 	int order;								//Befehl
 	double location = 0;			//Standpunkt im Bezug zu Startdistanz (class battle)
 	double speed;							//Maximale Geschwindigkeit des Schiffes

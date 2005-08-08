@@ -35,11 +35,11 @@ package de.seawars.kampfskript;
  *   der dann neu erstellt wird. (casulties())(Siehe closest())
  * - 
  */
-public class battle {
+public class Battle {
 
-	private ship[] a;				//Attacker
-	private ship[] d;				//Defender
-	private weapon[] arms;	//Bewaffnung
+	private Ship[] a;				//Attacker
+	private Ship[] d;				//Defender
+	private Weapon[] arms;	//Bewaffnung
 	double startdistance;
 	double weather;
 	double time;
@@ -65,40 +65,40 @@ public class battle {
 				a[i].target = d[i%d.length];
 	}
 	
-	private void damage(ship s){
+	private void damage(Ship s){
 		//Hier werden die Auswirkungen des Schadens eines Schiffes ermittelt.
 		/**TODO Alles!**/
 	  
 	  s.damageperc = s.damage / s.hitpoints;
 	}
 	
-	private ship closest(ship s, ship[] ta){
+	private Ship closest(Ship s, Ship[] ta){
 		//Das nächste feindliche Schiff wird ermittelt
 		/** TODO Sicherstellen das ta[] kein null enthält**/
-		ship t = ta[0];
+		Ship t = ta[0];
 		
 		for (int i = 1; i < ta.length; i++)
 			t = distance(s, t) < distance(s, ta[i]) ? t : ta[i];
 		return t;
 	}
 	
-	private double distance(ship s, ship t){
+	private double distance(Ship s, Ship t){
 		//Berechnet die Distanz zwischen einem Schiff und seinem Ziel
 		
 		return startdistance - s.location - t.location;
 	}
 	
-	private double checkmove(ship s, double m){
+	private double checkmove(Ship s, double m){
 		//Hier wird auf die maximale Bewegungsfähigkeit des Schiffes geprüft
 		
 		return m < (s.speed * s.damageperc) ?  m : (s.speed * s.damageperc);
 	}
 	
-	private void movement(ship[] ship){
+	private void movement(Ship[] ship){
 		//Hier werden die Bewegungen der einzelnen Schiffe durchgeführt.
 		 
-		ship s;						//Das derzeitige Schiff
-		ship t;						//Das Ziel von s
+		Ship s;						//Das derzeitige Schiff
+		Ship t;						//Das Ziel von s
 		double movement;	//Die nötige Bewegung um den Befehl zu erfüllen	
 		double distance;	//Der Abstand zwischen s und t
 		

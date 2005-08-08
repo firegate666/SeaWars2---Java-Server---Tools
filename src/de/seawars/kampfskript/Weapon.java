@@ -12,7 +12,7 @@ package de.seawars.kampfskript;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class weapon {
+public class Weapon {
 	
 	double range;
 	double damage;
