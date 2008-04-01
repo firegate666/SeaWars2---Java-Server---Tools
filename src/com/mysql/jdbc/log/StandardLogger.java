@@ -36,7 +36,7 @@ import java.util.Date;
  * 
  * @author Mark Matthews
  * 
- * @version $Id: StandardLogger.java,v 1.1 2005-06-20 20:46:00 sw Exp $
+ * @version $Id: StandardLogger.java,v 1.2 2008-04-01 22:49:35 firegate666 Exp $
  */
 public class StandardLogger implements Log {
     private static final int FATAL = 0;

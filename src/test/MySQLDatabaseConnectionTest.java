@@ -27,13 +27,13 @@ public class MySQLDatabaseConnectionTest {
 			System.out.println(t.toString(true));
 			
 			// second way
-			ArrayList fields = new ArrayList();
-			fields.add("id");
-			fields.add("name");
-			ArrayList from = new ArrayList();
-			from.add("insel");
-			t = exec.executeQuery(fields, from);
-			System.out.println(t.toString(true));
+//			ArrayList fields = new ArrayList();
+//			fields.add("id");
+//			fields.add("name");
+//			ArrayList from = new ArrayList();
+//			from.add("insel");
+//			t = exec.executeQuery(fields, from);
+//			System.out.println(t.toString(true));
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}

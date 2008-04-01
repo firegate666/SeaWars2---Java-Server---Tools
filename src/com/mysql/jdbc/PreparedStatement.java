@@ -75,7 +75,7 @@ import java.util.TimeZone;
  * </p>
  *
  * @author Mark Matthews
- * @version $Id: PreparedStatement.java,v 1.1 2005-06-20 20:46:00 sw Exp $
+ * @version $Id: PreparedStatement.java,v 1.2 2008-04-01 22:49:35 firegate666 Exp $
  *
  * @see java.sql.ResultSet
  * @see java.sql.PreparedStatement

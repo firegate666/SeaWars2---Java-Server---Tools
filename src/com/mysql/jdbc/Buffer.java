@@ -34,7 +34,7 @@ import java.sql.SQLException;
 /**
  * Buffer contains code to read and write packets from/to the MySQL server.
  *
- * @version $Id: Buffer.java,v 1.1 2005-06-20 20:45:59 sw Exp $
+ * @version $Id: Buffer.java,v 1.2 2008-04-01 22:49:35 firegate666 Exp $
  * @author Mark Matthews
  */
 abstract class Buffer {

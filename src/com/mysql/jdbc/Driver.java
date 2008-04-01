@@ -45,7 +45,7 @@ import java.sql.SQLException;
  * @see org.gjt.mm.mysql.Connection
  * @see java.sql.Driver
  * @author Mark Matthews
- * @version $Id: Driver.java,v 1.1 2005-06-20 20:45:59 sw Exp $
+ * @version $Id: Driver.java,v 1.2 2008-04-01 22:49:35 firegate666 Exp $
  */
 public class Driver extends NonRegisteringDriver implements java.sql.Driver {
     //~ Static fields/initializers ---------------------------------------------

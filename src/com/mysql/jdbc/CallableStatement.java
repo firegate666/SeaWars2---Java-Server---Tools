@@ -49,7 +49,7 @@ import java.util.Map;
  * Representation of stored procedures for JDBC
  *
  * @author Mark Matthews
- * @version $Id: CallableStatement.java,v 1.2 2005-07-15 14:49:37 sw Exp $
+ * @version $Id: CallableStatement.java,v 1.3 2008-04-01 22:49:35 firegate666 Exp $
  */
 public class CallableStatement extends PreparedStatement
     implements java.sql.CallableStatement {

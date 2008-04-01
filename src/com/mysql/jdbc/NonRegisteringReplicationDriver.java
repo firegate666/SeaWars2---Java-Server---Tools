@@ -35,7 +35,7 @@ import java.util.StringTokenizer;
  * the connection is not read-only, and use slave(s) when the connection
  * is read-only.
  * 
- * @version $Id: NonRegisteringReplicationDriver.java,v 1.1 2005-06-20 20:45:59 sw Exp $
+ * @version $Id: NonRegisteringReplicationDriver.java,v 1.2 2008-04-01 22:49:35 firegate666 Exp $
  */
 public class NonRegisteringReplicationDriver extends NonRegisteringDriver {
 	public NonRegisteringReplicationDriver() throws SQLException {

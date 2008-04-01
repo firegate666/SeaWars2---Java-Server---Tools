@@ -48,7 +48,7 @@ import com.mysql.jdbc.log.StandardLogger;
  * expose properties as JDBC DriverPropertyInfo if required as well.
  *
  * @author Mark Matthews
- * @version $Id: ConnectionProperties.java,v 1.1 2005-06-20 20:45:59 sw Exp $
+ * @version $Id: ConnectionProperties.java,v 1.2 2008-04-01 22:49:35 firegate666 Exp $
  */
 public class ConnectionProperties {
     private static final String STANDARD_LOGGER_NAME = StandardLogger.class.getName();

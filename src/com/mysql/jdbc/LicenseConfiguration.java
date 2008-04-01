@@ -34,7 +34,7 @@ import java.util.Map;
  * commercially-licensed servers as part of the licensing terms.
  *
  * @author Mark Matthews
- * @version $Id: LicenseConfiguration.java,v 1.1 2005-06-20 20:45:59 sw Exp $
+ * @version $Id: LicenseConfiguration.java,v 1.2 2008-04-01 22:49:35 firegate666 Exp $
  */
 class LicenseConfiguration {
    

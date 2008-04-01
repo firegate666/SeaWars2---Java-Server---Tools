@@ -50,7 +50,7 @@ import com.mysql.jdbc.util.LRUCache;
  * </p>
  *
  * @author Mark Matthews
- * @version $Id: Statement.java,v 1.2 2005-07-15 14:49:37 sw Exp $
+ * @version $Id: Statement.java,v 1.3 2008-04-01 22:49:35 firegate666 Exp $
  *
  * @see java.sql.Statement
  * @see ResultSet

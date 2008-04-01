@@ -87,7 +87,7 @@ import com.mysql.jdbc.Driver;
 * include the code that you have just written using this class.
 * 
 * @author Mark Matthews
-* @version $Id: BaseBugReport.java,v 1.1 2005-06-20 20:46:00 sw Exp $
+* @version $Id: BaseBugReport.java,v 1.2 2008-04-01 22:49:35 firegate666 Exp $
 */
 public abstract class BaseBugReport {
 	

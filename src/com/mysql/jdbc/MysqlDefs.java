@@ -32,7 +32,7 @@ import java.sql.Types;
  * with the MySQL server.
  *
  * @author Mark Matthews
- * @version $Id: MysqlDefs.java,v 1.1 2005-06-20 20:45:59 sw Exp $
+ * @version $Id: MysqlDefs.java,v 1.2 2008-04-01 22:49:35 firegate666 Exp $
  */
 final class MysqlDefs {
     //~ Static fields/initializers ---------------------------------------------

@@ -35,7 +35,7 @@ import java.util.logging.Logger;
  * 
  * @author Mark Matthews
  *
- * @version $Id: Jdk14Logger.java,v 1.1 2005-06-20 20:46:00 sw Exp $
+ * @version $Id: Jdk14Logger.java,v 1.2 2008-04-01 22:49:35 firegate666 Exp $
  */
 public class Jdk14Logger implements Log {
     private static final Level DEBUG = Level.FINE;

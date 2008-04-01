@@ -55,7 +55,7 @@ import java.util.Calendar;
  *
  * @author Mark Matthews
  *
- * @version $Id: PreparedStatementWrapper.java,v 1.1 2005-06-20 20:46:00 sw Exp $
+ * @version $Id: PreparedStatementWrapper.java,v 1.2 2008-04-01 22:49:35 firegate666 Exp $
  */
 class PreparedStatementWrapper extends StatementWrapper
     implements PreparedStatement {

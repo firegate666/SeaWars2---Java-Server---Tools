@@ -51,7 +51,7 @@ import com.mysql.jdbc.profiler.ProfilerEvent;
  * JDBC Interface for MySQL-4.1 and newer server-side PreparedStatements.
  *
  * @author Mark Matthews
- * @version $Id: ServerPreparedStatement.java,v 1.2 2005-07-15 14:49:37 sw Exp $
+ * @version $Id: ServerPreparedStatement.java,v 1.3 2008-04-01 22:49:35 firegate666 Exp $
  */
 public class ServerPreparedStatement extends PreparedStatement {
     /* 1 (length) + 2 (year) + 1 (month) + 1 (day) */

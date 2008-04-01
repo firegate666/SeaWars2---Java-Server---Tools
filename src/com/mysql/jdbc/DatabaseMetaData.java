@@ -64,7 +64,7 @@ import java.util.TreeMap;
  * </p>
  *
  * @author Mark Matthews
- * @version $Id: DatabaseMetaData.java,v 1.1 2005-06-20 20:45:59 sw Exp $
+ * @version $Id: DatabaseMetaData.java,v 1.2 2008-04-01 22:49:35 firegate666 Exp $
  */
 public class DatabaseMetaData implements java.sql.DatabaseMetaData {
     private static final byte[] TABLE_AS_BYTES = "TABLE".getBytes();
@@ -1411,7 +1411,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
      * @throws java.sql.SQLException DOCUMENT ME!
      */
     public String getDriverVersion() throws java.sql.SQLException {
-        return "mysql-connector-java-3.1.8 ( $Date: 2005-06-20 20:45:59 $, $Revision: 1.1 $ )";
+        return "mysql-connector-java-3.1.8 ( $Date: 2008-04-01 22:49:35 $, $Revision: 1.2 $ )";
     }
 
     /**

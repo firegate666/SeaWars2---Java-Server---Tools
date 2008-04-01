@@ -38,7 +38,7 @@ import java.sql.SQLException;
  * Simplistic implementation of java.sql.Clob for MySQL Connector/J
  *
  * @author Mark Matthews
- * @version $Id: Clob.java,v 1.1 2005-06-20 20:45:59 sw Exp $
+ * @version $Id: Clob.java,v 1.2 2008-04-01 22:49:35 firegate666 Exp $
  */
 public class Clob implements java.sql.Clob, OutputStreamWatcher, WriterWatcher {
     private String charData;

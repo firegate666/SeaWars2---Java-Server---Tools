@@ -40,7 +40,7 @@ import java.util.TreeMap;
  * error codes as is required by the JDBC spec.
  *
  * @author Mark Matthews <mmatthew_at_worldserver.com>
- * @version $Id: SQLError.java,v 1.1 2005-06-20 20:45:59 sw Exp $
+ * @version $Id: SQLError.java,v 1.2 2008-04-01 22:49:35 firegate666 Exp $
  */
 public class SQLError {
     public static final String SQL_STATE_TIMEOUT_EXPIRED = "S1T00"; //$NON-NLS-1$
