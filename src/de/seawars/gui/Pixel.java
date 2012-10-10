@@ -15,18 +15,18 @@ import de.seawars.gui.listener.ClickPixelMouseListener;
 
 /**
  * Pixel stellt einen Pixel auf dem Display dar.
- * 
+ *
  * @author Marco Behnke
- * 
+ *
  */
 public class Pixel extends JLabel {
 
 	boolean _set;
 	private int _x;
 	private int _y;
-	
+
 	private PixelFarm _pixelFarm;
-	
+
 	private void setXY(int x,int y) {
 		setX(x);
 		setY(y);
@@ -34,25 +34,25 @@ public class Pixel extends JLabel {
 
 	/**
 	 * Returns if pixel is set
-	 * 
+	 *
 	 * @return pixel set?
 	 */
 	public boolean isSet() {
 		return _set;
 	}
 
-	/** 
-	 * Gibt die X-Koordinate des Pixels auf dem Display zurück.
-	 * 
+	/**
+	 * Gibt die X-Koordinate des Pixels auf dem Display zurÃ¼ck.
+	 *
 	 * @return X-Koordinate in der PixelFarm
 	 */
 	public int getX() {
 		return _x;
 	}
 
-	/** 
-	 * Gibt die Y-Koordinate des Pixels auf dem Display zurück.
-	 * 
+	/**
+	 * Gibt die Y-Koordinate des Pixels auf dem Display zurÃ¼ck.
+	 *
 	 * @return Y-Koordinate in der PixelFarm
 	 */
 	public int getY() {
@@ -69,26 +69,26 @@ public class Pixel extends JLabel {
 	}
 
 	/**
-	 * Ändert die Farbe aller Pixel von grün auf schwarz bzw. von schwarz auf grün
+	 * Ã„ndert die Farbe aller Pixel von grÃ¼n auf schwarz bzw. von schwarz auf grÃ¼n
 	 */
 	public void invert() {
 		if (isSet())
 			unset();
 		else
 			set();
-			
+
 	}
 
 	/**
 	 * Public constructor
-	 * 
+	 *
 	 * @param x X-Koordinate in der PixelFarm
 	 * @param y Y-Koordinate in der PixelFarm
 	 */
 	public Pixel(int x,int y) {
 		initialize(x,y);
 	}
-	
+
 	private void initialize(int x, int y) {
 		setXY(x,y);
 		setOpaque(true);
@@ -98,7 +98,7 @@ public class Pixel extends JLabel {
 	}
 
 	/**
-	 * Setzt die Farbe des Pixels auf grün.
+	 * Setzt die Farbe des Pixels auf grÃ¼n.
 	 */
 	public void unset() {
 		if(isSet()){
@@ -118,7 +118,7 @@ public class Pixel extends JLabel {
 	}
 
 	// Interne Klassen
-	
+
 
 
 }
