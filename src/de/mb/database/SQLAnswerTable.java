@@ -2,15 +2,15 @@ package de.mb.database;
 
 /*
  * SEP-Projekt WS 2001-2002 -- Questionaire
- * 
+ *
  * Projektteilnehmer:
  * Marco Behnke <marco@firegate.de>
  * Sebastian Davids <sdavids@gmx.de>
  * Martin Koose <martin@koose-hh.de>
- * 
- * Projektbegleitung: 
+ *
+ * Projektbegleitung:
  * Prof. Dr. Bernd Kahlbrandt <Bernd.Kahlbrandt@informatik.fh-hamburg.de>
- * 
+ *
  * Copyright (c)2001 Behnke, Davids & Koose. Alle Rechte vorbehalten.
  * ===========================================================================
  */
@@ -33,26 +33,26 @@ public class SQLAnswerTable {
 
     /**
      * return iterator of header cells
-     * 
+     *
      * @return	iterator
      */
     public Iterator getHeaderIterator() {
     	return fheader.iterator();
     }
-    
+
     /**
      * return iterator of data rows
-     * 
+     *
      * @return	iterator
      */
     public Iterator getDataIterator() {
     	return fdata.iterator();
     }
-    
+
     /**
      *  Constructor for the SQLAnswerTable object
      *
-     *@param  rs contains a <code>ResultSet</code> with the 
+     *@param  rs contains a <code>ResultSet</code> with the
      *return data from a select query
      *@exception  SQLException
      */
@@ -82,7 +82,7 @@ public class SQLAnswerTable {
     public String getDataCell(int columnNumber, int rowNumber) {
         return (String) (((ArrayList) fdata.get(rowNumber - 1)).get(columnNumber - 1));
     }
-    
+
     /**
      * Gets the content of data cell at columnNumber@rowNumber.
      *
@@ -127,7 +127,7 @@ public class SQLAnswerTable {
     }
 
     /**
-     *  Gets the number of rows this answer table contains, excluding the header. 
+     *  Gets the number of rows this answer table contains, excluding the header.
      *
      *@return    row count
      */

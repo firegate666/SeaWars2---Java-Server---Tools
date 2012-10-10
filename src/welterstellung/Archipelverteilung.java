@@ -282,4 +282,3 @@ public class Archipelverteilung
 			}//for
 	}//Archipel erzeugen
 }//Klasse
-

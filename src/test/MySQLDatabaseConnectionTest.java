@@ -9,11 +9,11 @@ import de.mb.database.mysql.MysqlSQLExecution;
 
 /**
  * Testclass
- * 
+ *
  * @author Marco Behnke
  */
 public class MySQLDatabaseConnectionTest {
-	
+
 	public static void main(String[] args) {
 		try {
 			String url = "localhost";
@@ -25,7 +25,7 @@ public class MySQLDatabaseConnectionTest {
 			// one way: Give Query
 			SQLAnswerTable t = exec.executeQuery("SELECT * FROM insel");
 			System.out.println(t.toString(true));
-			
+
 			// second way
 //			ArrayList fields = new ArrayList();
 //			fields.add("id");

@@ -22,10 +22,10 @@ public class ClickPixelMouseListener implements MouseListener {
 		public ClickPixelMouseListener(Pixel app) {
 			_pixel=app;
 		}
-		
+
 		/**
 		 * Returns Pixel where listener has been activated
-		 * 
+		 *
 		 * @return Pixel
 		 */
 		public Pixel getPixel() {
@@ -37,7 +37,7 @@ public class ClickPixelMouseListener implements MouseListener {
 		 */
 		private void draw() {
 			PaintActionName pa=PaintActionName.PEN ;
-			
+
 			if(pa==PaintActionName.PEN ) getPixel().invert();
 			else if(pa==PaintActionName.ERASER ) getPixel().unset();
 			else;
