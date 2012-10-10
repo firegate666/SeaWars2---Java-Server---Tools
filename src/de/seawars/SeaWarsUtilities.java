@@ -16,16 +16,16 @@ import de.seawars.gui.Mainframe;
  */
 public class SeaWarsUtilities {
 	private Mainframe gui;
-	
+
 	public SeaWarsUtilities(){
 		this.initialize();
 	}
 	private void initialize(){
 		gui = new Mainframe();
 		gui.setBounds(0,0,200,200 );
-		gui.show();
+		gui.setVisible(true);
 	}
-	
+
 	public static void main(String[] args) {
 		SeaWarsUtilities app = new SeaWarsUtilities();
 	}
