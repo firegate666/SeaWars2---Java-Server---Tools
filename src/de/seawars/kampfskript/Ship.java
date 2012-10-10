@@ -13,26 +13,26 @@ package de.seawars.kampfskript;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public class Ship {
-	
+
 	public Weapon [] weapon;	//Bewaffnung
 	public Ship target;				//Aktuelles Ziel
 	int order;								//Befehl
 	double location = 0;			//Standpunkt im Bezug zu Startdistanz (class battle)
 	double speed;							//Maximale Geschwindigkeit des Schiffes
-	double maxrange;					//Maximal mögliche Beschußdistanz
-	double minrange;					//Kleinste Beschußdistanz
-	double manoeuverability; 	//Manövrierfähigkeit
+	double maxrange;					//Maximal mÃ¶gliche BeschuÃŸdistanz
+	double minrange;					//Kleinste BeschuÃŸdistanz
+	double manoeuverability; 	//ManÃ¶vrierfÃ¤higkeit
 	double hitpoints;					//Hitpoints eben
-	double armour;						//Panzerung gegen Beschuß 
+	double armour;						//Panzerung gegen BeschuÃŸ
 	double damage;						//Derzeitiges Schadensniveau
 	double damageperc;				//Schaden in Prozent
 	double hold; 							//Frachtraum
 	double cargo;							//Derzeitige Zuladung
 	double ramdamage;					//Rammschaden
-	int marines;							//Marineinfanteristen um enteraktionen durchzuführen
+	int marines;							//Marineinfanteristen um enteraktionen durchzufÃ¼hren
 	boolean spur = false; 		//Rammdorn?
-	boolean underfire = false;//Letzte Runde unter Beschuß?
-	
+	boolean underfire = false;//Letzte Runde unter BeschuÃŸ
+
 	int number;								//nur zu Testzwecken
-	
+
 }

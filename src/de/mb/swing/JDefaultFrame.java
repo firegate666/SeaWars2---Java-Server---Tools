@@ -5,13 +5,12 @@ import java.awt.Component;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ResourceBundle;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
  * @author Marco Behnke
- * 
+ *
  */
 
 public class JDefaultFrame extends JFrame {

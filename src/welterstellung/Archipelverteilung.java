@@ -2,7 +2,7 @@
  * This Package allows you to spread a variable Number of Points
  * over a field of 1000 by 1000 Points
  * Copyright (C) 2005  Andreas Wagener
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
@@ -15,13 +15,13 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  * The Author can be contacted by writing an email to "hohlebirne@yahoo.de"
- *________________________________________________________________________________ 
- * 
+ *________________________________________________________________________________
+ *
  * VerteilungAusfuehren() aus Konstruktor entfernt
- * Programmaufruf nach instatiierung ausführen
- * besser Lösung statt überladene Konstruktoren wären getter und setter
- * 
- * letzte Änderung von Andreas am 25. Mai 2005
+ * Programmaufruf nach instatiierung ausfÃ¼hren
+ * besser LÃ¶sung statt Ã¼berladene Konstruktoren wÃ¤ren getter und setter
+ *
+ * letzte Ã„nderung von Andreas am 25. Mai 2005
  */
 
 package welterstellung;
@@ -35,19 +35,19 @@ public class Archipelverteilung
 	private double[][] Karte;
 	public Archipel[] Orte;
 	public int Archipelzahl;
-	
+
 	private double empfindlichkeit = 0.5;
 	private int Archipelanzahl = 1000;
 	private String Bildpfad = "Blubber.bmp";
-	
+
 /**
  *  Erzeugt 1000 Archipel mit dem Bild "Blubber.bmp" und der Empfindlichkeit 0.5
- */	
+ */
 	public Archipelverteilung()
 	{
 	}
 	/**
-	 * Erzeugt mit Archipel dem Bild Blubber.bmp und der Empfindlichkeit 0.5 
+	 * Erzeugt mit Archipel dem Bild Blubber.bmp und der Empfindlichkeit 0.5
 	 * @param Archipelanzahl Anzahl der Archipel
 	 */
 	public Archipelverteilung(int Archipelanzahl)
@@ -57,7 +57,7 @@ public class Archipelverteilung
 	/**
 	 * Erzeugt Archipel mit der Empfindlichkeit 0.5.
 	 * @param Archipelanzahl Anzahl der Archipel
-	 * @param Bildpfad Pfad zu einem Bild im BMP-Format, 1000x1000 Pixel, 
+	 * @param Bildpfad Pfad zu einem Bild im BMP-Format, 1000x1000 Pixel,
 	 * 8-Bit Graustufen
 	 */
 	public Archipelverteilung(int Archipelanzahl, String Bildpfad)
@@ -71,9 +71,9 @@ public class Archipelverteilung
 	 * @param Bildpfad Pfad zu einem Bild im BMP-Format, 1000*1000 Pixel,
 	 * 8-Bit Graustufen
 	 * @param empfindlichkeit stellt ein, wie empfindlich die Verteilungsfunktion
-	 * auf das BMP reagiert. Bei Werten von 1 oder höher sammeln sich fast alle 
-	 * Archipel nur in den weißen Bereichen des BMP. Je kleiner der Wert, desto weniger
-	 * hält sich die Verteilungsfunktion an die Vorgaben des BMP. Sinnvoll ist 0,5 bis
+	 * auf das BMP reagiert. Bei Werten von 1 oder hï¿½her sammeln sich fast alle
+	 * Archipel nur in den weiï¿½en Bereichen des BMP. Je kleiner der Wert, desto weniger
+	 * hï¿½lt sich die Verteilungsfunktion an die Vorgaben des BMP. Sinnvoll ist 0,5 bis
 	 * 0,7 bei den meisten Bildern. Bei empfindlichkeit =0 wird das Bild nicht beachtet.
 	 */
 	public Archipelverteilung(int Archipelanzahl, String Bildpfad, double empfindlichkeit)
@@ -81,25 +81,25 @@ public class Archipelverteilung
 		this(Archipelanzahl, Bildpfad);
 		this.empfindlichkeit = empfindlichkeit;
 	}
-	
-	
+
+
 	public void VerteilungAusfuehren()
 	{
 		// Reading from defaults
 		int Archipelanzahl = this.Archipelanzahl;
 		String Bildpfad = this.Bildpfad;
 		double empfindlichkeit = this.empfindlichkeit;
-		
+
 	    int[] Bildpunkte;
 		Karte = new double[1000][1000];
 
 		for (int i=0; i<1000; i++)
 			for (int j=0; j<1000; j++)
 			{
-				//Karte mit Werten zwischen 0 und 1 füllen
+				//Karte mit Werten zwischen 0 und 1 fï¿½llen
 				Karte[i][j]=Math.random();
 			}
-		//Bilddatei öffnen und auslesen
+		//Bilddatei ï¿½ffnen und auslesen
 		try
 		{
 			FileInputStream Bild = new FileInputStream(Bildpfad);
@@ -108,15 +108,15 @@ public class Archipelverteilung
 			int ch;
 			//Dateikopf ignorieren
 			do
-			{			
+			{
 				while (Bilddaten.readUnsignedByte() != 255);
-			} 
+			}
 			while (Bilddaten.readUnsignedByte()!=255);
 			Bilddaten.readUnsignedByte();
 			Bilddaten.readUnsignedByte();
 			//Mit dem auslesen anfangen
 			int i=0;
-			Bildpunkte = new int[1000000]; //Dynamisch wäre wünschenswert
+			Bildpunkte = new int[1000000]; //Dynamisch wï¿½re wï¿½nschenswert
 			while ( i<Bildpunkte.length) {
 				Bildpunkte[i++]=  Bilddaten.readUnsignedByte();
 			}
@@ -134,7 +134,7 @@ public class Archipelverteilung
 			return;
 		}
 		/* Nachdem nun hoffentlich ein Integer-Array des Bilds vorliegt, sollen die Archipel
-		 * mit dem Array verrechnet werden. 
+		 * mit dem Array verrechnet werden.
 		 */
 		if (empfindlichkeit > 0.01)
 		{
@@ -144,17 +144,17 @@ public class Archipelverteilung
 				for (int j=0; j<1000; j++)
 				{
 					/*Kartenwerte mit Bild multiplizieren, es ergeben sich weiterhin Werte zwischen 0 und 1
-					Die mordskomplizierte Formel ergibt sich für die komfortable Empfindlichkeitseinstellung.
-					Wenn man auf die Empfindlichkeitseinstellung verzichten kann und mag, dann kann der 
+					Die mordskomplizierte Formel ergibt sich fï¿½r die komfortable Empfindlichkeitseinstellung.
+					Wenn man auf die Empfindlichkeitseinstellung verzichten kann und mag, dann kann der
 					Ort auf der Karte rechenzeitsparender mit diesen Zeilen aktualisiert werden:
 					Punkt = Bildpunkt [j*1000+i];
-					Karte[i][j] = Karte[i][j] * Punkt/256; 
+					Karte[i][j] = Karte[i][j] * Punkt/256;
 					*/
 					Punkt = ((double) Bildpunkte[j*1000+i])/256*(3/empfindlichkeit)-2;
-					// Tanh mittels Exponentialfunktionen 
+					// Tanh mittels Exponentialfunktionen
 					Punkt = (Math.exp(2*Punkt)-1)/(Math.exp(2*Punkt)+1);
 					// Kartenwertumrechnung
-					Karte[i][j]=Karte[i][j] * (Punkt +1)/2; 
+					Karte[i][j]=Karte[i][j] * (Punkt +1)/2;
 				}
 		}
 		//Archipel aus dem Boden heben, Werte zwischen 0 und "genauigkeit"
@@ -172,7 +172,7 @@ public class Archipelverteilung
 				if ((Karte[i][j]<genauigkeit) && (Karte[i][j]>0))
 					histogramm[(int)Karte[i][j]]++;
 			}
-		//meeresspiegel für die perfekte Archipelanzahl aus dem Histogramm auslesen
+		//meeresspiegel fï¿½r die perfekte Archipelanzahl aus dem Histogramm auslesen
 		int archipelZaehler = 0;
 		int meeresspiegel =0;
 		for (int i=(genauigkeit -1); ((meeresspiegel==0) && (i>0)); i--)
@@ -182,11 +182,11 @@ public class Archipelverteilung
 				meeresspiegel = i;
 		}
 
-		//Inseln generieren, Schritt 4: Positionen aller Inseln mit (höhe > meeresspiegel) auslesen, 
-		//Abstände kontrollieren, notfalls Inseln löschen und meeresspiegel senken
-		{ //Neuen Bereich anfangen, damit der saugroße Abstandsoperator wieder gelöscht wird,
+		//Inseln generieren, Schritt 4: Positionen aller Inseln mit (hï¿½he > meeresspiegel) auslesen,
+		//Abstï¿½nde kontrollieren, notfalls Inseln lï¿½schen und meeresspiegel senken
+		{ //Neuen Bereich anfangen, damit der saugroï¿½e Abstandsoperator wieder gelï¿½scht wird,
 		  //wenn er nicht mehr gebraucht wird
-		int[][] abstandsOperator = 
+		int[][] abstandsOperator =
 		{{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -216,7 +216,7 @@ public class Archipelverteilung
 		};
 		this.Archipelzahl = archipelZaehler;
 		archipelZaehler = 0;
-		meeresspiegel++; 
+		meeresspiegel++;
 		do
 		{
 			meeresspiegel--;
@@ -226,7 +226,7 @@ public class Archipelverteilung
 				{
 					if (Karte[i][j] > meeresspiegel)
 					{
-						archipelZaehler++; //Insel gefunden! Zählen!
+						archipelZaehler++; //Insel gefunden! Zï¿½hlen!
 						for (int k =0; k<25; k++)
 							for (int l = 0; l<25; l++)
 							{
@@ -237,9 +237,9 @@ public class Archipelverteilung
 								catch (ArrayIndexOutOfBoundsException e)
 								{
 									//Nichts schlimmes ist passiert. Nur der abstandsOperator
-									//wurde am Rand des Archipels ausgeführt. Programm darf
+									//wurde am Rand des Archipels ausgefï¿½hrt. Programm darf
 									//ganz normal weiter laufen. Zum Vermeiden dieses Fehlers
-									//könnte man das Archipel um jeweils eine blinde Reihe
+									//kï¿½nnte man das Archipel um jeweils eine blinde Reihe
 									//an jedem Rand erweitern...
 								}
 							}
@@ -248,16 +248,16 @@ public class Archipelverteilung
 		}
 		while(archipelZaehler < Archipelzahl && meeresspiegel > 0);
 		this.Archipelzahl = archipelZaehler;
-		
+
 		// Wenn der meeresspiegel auf 0 sinkt, ist die Inselherstellung misslungen und muss
 		// wiederholt werden.
-		if (meeresspiegel ==0) 
+		if (meeresspiegel ==0)
 		{
 			System.out.println("Meeresspiegel auf Null gesunken, defekte Weltkarte erzeugt");
 		}
 		} //Abstandsoperator-Bereich beenden
-		
-		// Positionen aller Archipel, die über dem meeresspiegel liegen, speichern
+
+		// Positionen aller Archipel, die ï¿½ber dem meeresspiegel liegen, speichern
 		Orte = new Archipel[archipelZaehler+1];
 		Archipelzahl = archipelZaehler;
 		archipelZaehler = 0;
@@ -268,7 +268,7 @@ public class Archipelverteilung
 			{
 				if (Karte[i][j] > meeresspiegel)
 				{
-					Archipelgroesse = (int) (Math.random()*5);					
+					Archipelgroesse = (int) (Math.random()*5);
 					try{
 						Orte[archipelZaehler++] = new Archipel(i, j, Archipelgroesse, 0, archipelID++ );
 					}

@@ -1,6 +1,6 @@
 /**
  * Package zum testen der anderen Klassen.
- * Letzte Änderung von Andreas am 22. Mai 2005:
+ * Letzte Ã„nderung von Andreas am 22. Mai 2005:
  * Aufrufe an die neuen Klassen in "Welterstellung" angepasst
  */
 
@@ -18,8 +18,8 @@ for (int i=0; i<args.length; i++)
 		if (args[i] == "-Verbose")
 		{
 			i++;
-			
-			
+
+
 		}
 }
 // ******************************************************************************************
@@ -35,9 +35,9 @@ for (int i=0; i<args.length; i++)
 
 // ******************************************************************************************
 		/*  */
-		
 
-/*		
+
+/*
 // ******************************************************************************************
  // Test des Namensgenerators
  for (int i=0; i<100; i++)
@@ -50,7 +50,7 @@ for (int i=0; i<args.length; i++)
 
 /*
 // ******************************************************************************************
-// Test der Zufallsgenerierung über ein Histogramm
+// Test der Zufallsgenerierung Ã¼ber ein Histogramm
    int[] j= new int[] {0,0,0,0,0,0,0,0,0,0};
    for (int i=0; i<1000000; i++)
    {
@@ -58,7 +58,7 @@ for (int i=0; i<args.length; i++)
    }
    for (int i=0; i<j.length; i++) System.out.println("j["+i+"]= " + j[i] + "\n");
 // *******************************************************************************************
-/*	*/	
+/*	*/
 
 // *******************************************************************************************
 /*
@@ -85,7 +85,7 @@ for (int i=0; i<args.length; i++)
 			if (i%10 ==0) System.out.println("         "+(int)((double)i*100/Archipelzahl) + "% ");
 //			int zeilenumbruch=0; String zeile = "";
 //			zeile = zeile + neueWelt.Orte[i].inselAnzahl + ";  ";
-//			if (zeilenumbruch++ == 20) 
+//			if (zeilenumbruch++ == 20)
 //				{
 //				zeilenumbruch = 0;
 //				System.out.println(zeile);
@@ -106,15 +106,15 @@ for (int i=0; i<args.length; i++)
         	FileOutputStream fout = new FileOutputStream(file);
         	fout.write(Inselpositionen.getBytes());
         	fout.close();
-        } 
+        }
         catch (FileNotFoundException e) {
 	            System.out.println("Sorry, die Positionsdatei konnte nicht erstellt werden");
-        } 
+        }
         catch (IOException e) {
 	            System.out.println("Sorry, die Positionsdatei konnte nicht erstellt werden");
         }
         System.out.println("Fertig. Dieses Mal wurden " + inselzahl+ " Inseln erzeugt.");
-/*	*/        
+/*	*/
 // *******************************************************************************************
 
 	}

@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -29,7 +28,7 @@ public class JAdvancedTextArea extends JTextArea {
 
     /**
      * Public constructor
-     * 
+     *
      * @param text
      */
     public JAdvancedTextArea(String text) {
@@ -39,7 +38,7 @@ public class JAdvancedTextArea extends JTextArea {
 
     /**
      * Public constructor
-     * 
+     *
      * @param rows
      * @param columns
      */
@@ -50,7 +49,7 @@ public class JAdvancedTextArea extends JTextArea {
 
     /**
      * Public constructor
-     * 
+     *
      * @param text
      * @param rows
      * @param columns
@@ -62,7 +61,7 @@ public class JAdvancedTextArea extends JTextArea {
 
     /**
      * Public constructor
-     * 
+     *
      * @param doc
      */
     public JAdvancedTextArea(Document doc) {
@@ -187,9 +186,9 @@ public class JAdvancedTextArea extends JTextArea {
 
         private void initialize() {
             _copy = new JMenuItem("Kopieren");
-            _paste = new JMenuItem("Einfügen");
+            _paste = new JMenuItem("Einfï¿½gen");
             _cut = new JMenuItem("Ausschneiden");
-            _delete = new JMenuItem("Löschen");
+            _delete = new JMenuItem("Lï¿½schen");
 
             this.add(_copy);
             this.add(_paste);

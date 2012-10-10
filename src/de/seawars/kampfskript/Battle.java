@@ -11,29 +11,29 @@ package de.seawars.kampfskript;
  *
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
- * 
+ *
  * Der Kampfablauf soll wie folgt gestaltet werden:
- * 
+ *
  * A. Kampfvorbereitungen
- * - Die Daten der Schiffe und Waffen werden aus der Datenbank geholt und mit 
- *   den jeweiligen Klassen instanziert. 
+ * - Die Daten der Schiffe und Waffen werden aus der Datenbank geholt und mit
+ *   den jeweiligen Klassen instanziert.
  * - Die Startdistanz der beiden Flotten wird ermittelt. (startdistance())
  * - Einem jeden Schiff einer Flotte wird genau ein Ziel in der gegnerischen
  *   Flotte zugewiesen. (initialTargets())
- * 
+ *
  * B. Kampfablauf
- * - Jedes Schiff wird auf seinen prozentualen Schaden überprüft und die Kampfwerte
+ * - Jedes Schiff wird auf seinen prozentualen Schaden Ã¼berprÃ¼ft und die Kampfwerte
  *   werden dementsprechend angepsst. (damage())
  * - Jede Schiff einer Flotte wird, beginend mit dem Angreifer, bewegt.
  *   Ramm und Enterangriffe werden bereits in dieser Phase abgewickelt,
- *   da sich die potenziellen Ziele sonst wegbewegen würden. (movement())
- * - Jedem Schiff wird, basierend auf seinem Befehl, möglicherweise ein neues Ziel zugewiesen.
- *   Im Regelfall wird immer auf die nächsten Gegner geschossen. (closest())
- * - Die Schußphase wird abgehandelt. auch hier erst der Angreifer,
+ *   da sich die potenziellen Ziele sonst wegbewegen wÃ¼rden. (movement())
+ * - Jedem Schiff wird, basierend auf seinem Befehl, mÃ¶glicherweise ein neues Ziel zugewiesen.
+ *   Im Regelfall wird immer auf die nÃ¤chsten Gegner geschossen. (closest())
+ * - Die SchuÃŸphase wird abgehandelt. auch hier erst der Angreifer,
  *   dann der Vetreidiger. (shooting())
- * - Möglicherweise aufgetretene Verluste werden aus den arrays entfernt,
+ * - MÃ¶glicherweise aufgetretene Verluste werden aus den arrays entfernt,
  *   der dann neu erstellt wird. (casulties())(Siehe closest())
- * - 
+ * -
  */
 public class Battle {
 
@@ -45,131 +45,131 @@ public class Battle {
 	double time;
 	double sunrise;
 	double sunset;
-	
+
 	private void startdistance(){
 		//Aus dem Wetter und der Startzeit wird die Entfernung
 		//zwischen beiden Flotten	berechnet in der der Kampf startet
 		/**TODO Wetter, Uhrzeit und Sonnenauf bzw. untergangszeit einarbeiten**/
-	  	  
+
 		startdistance = 1000;
 	}
-	
+
 	private void initialTargets(){
-		//Hier wird, ausschließlich zu Begin des Kampfes, jedem Schiff ein Gegner zugewiesen.
-		
+		//Hier wird, ausschlieÃŸlich zu Begin des Kampfes, jedem Schiff ein Gegner zugewiesen.
+
 		if (a.length <= d.length )
-			for(int i = 0; i < a.length; i++) 
+			for(int i = 0; i < a.length; i++)
 				a[i].target = d[i];
 		else
 			for(int i = 0; i < a.length; i++)
 				a[i].target = d[i%d.length];
 	}
-	
+
 	private void damage(Ship s){
 		//Hier werden die Auswirkungen des Schadens eines Schiffes ermittelt.
 		/**TODO Alles!**/
-	  
+
 	  s.damageperc = s.damage / s.hitpoints;
 	}
-	
+
 	private Ship closest(Ship s, Ship[] ta){
-		//Das nächste feindliche Schiff wird ermittelt
-		/** TODO Sicherstellen das ta[] kein null enthält**/
+		//Das nÃ¤chste feindliche Schiff wird ermittelt
+		/** TODO Sicherstellen das ta[] kein null enthÃ¤lt**/
 		Ship t = ta[0];
-		
+
 		for (int i = 1; i < ta.length; i++)
 			t = distance(s, t) < distance(s, ta[i]) ? t : ta[i];
 		return t;
 	}
-	
+
 	private double distance(Ship s, Ship t){
 		//Berechnet die Distanz zwischen einem Schiff und seinem Ziel
-		
+
 		return startdistance - s.location - t.location;
 	}
-	
+
 	private double checkmove(Ship s, double m){
-		//Hier wird auf die maximale Bewegungsfähigkeit des Schiffes geprüft
-		
+		//Hier wird auf die maximale BewegungsfÃ¤higkeit des Schiffes geprÃ¼ft
+
 		return m < (s.speed * s.damageperc) ?  m : (s.speed * s.damageperc);
 	}
-	
+
 	private void movement(Ship[] ship){
-		//Hier werden die Bewegungen der einzelnen Schiffe durchgeführt.
-		 
+		//Hier werden die Bewegungen der einzelnen Schiffe durchgefÃ¼hrt.
+
 		Ship s;						//Das derzeitige Schiff
 		Ship t;						//Das Ziel von s
-		double movement;	//Die nötige Bewegung um den Befehl zu erfüllen	
+		double movement;	//Die nÃ¶tige Bewegung um den Befehl zu erfÃ¼llen
 		double distance;	//Der Abstand zwischen s und t
-		
+
 		for (int i = 0; i < ship.length; i++){
 			s = ship[i];
 			t = s.target;
 			switch (s.order){
-			
+
 				case 0:		//longrangefire: Kampf auf maximale Waffenreichweite
 					movement = Math.abs(distance(s, t) - s.maxrange - 10);
-					if (distance(s, t) <= s.maxrange)		
+					if (distance(s, t) <= s.maxrange)
 						s.location -= checkmove (s, movement);
 					else
 					  s.location += checkmove (s, movement);
 					break;
-					
+
 				case 1:		//shortrangefire: Kampf auf optimale Waffenreichweite
 					movement = Math.abs(distance(s, t) - s.minrange - 10);
-					if (distance(s, t) <= s.minrange)		
+					if (distance(s, t) <= s.minrange)
 						s.location -= checkmove (s, movement);
 					else
 					  s.location += checkmove (s, movement);
 					break;
-					
-				case 2:		//boarding: Entermänöver
+
+				case 2:		//boarding: EntermanÃ¶ver
 					movement = distance(s, t);
 		      s.location += checkmove (s, movement);
 		      break;
-		      
-				case 3:		//ramming: Rammmanöver (tolle deutsche Rechtschreibung)
+
+				case 3:		//ramming: RammmanÃ¶ver (tolle deutsche Rechtschreibung)
 					movement = distance(s, t);
 		      s.location += checkmove (s, movement);
 		      break;
-		      
-				case 4:		//disengage: Rückzug aus gegnerischer Waffenreichweite
-					/**TODO Sicherstellen, daß Schiffe mit diesem Befehl nicht die dem
-					 * Gegenr nächsten sind, ohne auf die Waffenreichweite des Feindes zu schielen.
-					 * Solange Es nicht beschossen wurde und ein eignes Kampfschiff näher am gegner ist
-					 * bleibt es an Ort und Stelle. Ansonsten fährt es eine Runde lang mit höchster
+
+				case 4:		//disengage: RÃ¼ckzug aus gegnerischer Waffenreichweite
+					/**TODO Sicherstellen, daÃŸ Schiffe mit diesem Befehl nicht die dem
+					 * Gegenr nÃ¤chsten sind, ohne auf die Waffenreichweite des Feindes zu schielen.
+					 * Solange Es nicht beschossen wurde und ein eignes Kampfschiff nÃ¤her am gegner ist
+					 * bleibt es an Ort und Stelle. Ansonsten fÃ¤hrt es eine Runde lang mit hÃ¶chster
 					 * Geschwindigkeit vom Gegner weg.**/
-					
+
 				default:	//withdraw: Flucht (Feiglinge!)
-					s.location -= s.speed; 
+					s.location -= s.speed;
 			}
 		}
 	}
-	
+
 	private void newTargets(){
 		/*
 		 *Hier werden gegebenenfalls neue Gegner zugewiesen.
 		 *Dies passiert nur, wenn das letzte Zielschiff nicht mehr das
-		 *nächste ist.
+		 *nï¿½chste ist.
 		 */
 	}
-	
+
 	private void shooting(){
 		/*
-		 *Hier wird der Beschuß der einzelnen Schiffe durchgeführt.
+		 *Hier wird der Beschuï¿½ der einzelnen Schiffe durchgefï¿½hrt.
 		 */
 	}
-	
+
 	private void casulties(){
 		/*
 		 *Hier werden die Verluste entfernt und gegebenenfalls den nun
 		 *ziellosen Schiffen neue Gegner zugewiesen.
 		 */
 	}
-	
-	
-	
+
+
+
 	public static void main(String[] args) {
-		
+
 	}
 }
