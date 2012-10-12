@@ -138,6 +138,15 @@ public class Welterstellung{
 			if (testausgabe > 0) System.out.println("Die Datenbankverbindung konnte nicht ge�ffnet werden.");
 			return 1;
 		}
+
+		try {
+			SQLexec.startTransaction();
+		} catch (SQLException ex) {
+			Logger.getLogger(Welterstellung.class.getName()).log(Level.SEVERE, null, ex);
+			ex.printStackTrace();
+			System.exit(-1);
+		}
+
 		long zeitstempel = new Date().getTime();
 		/* Zun�chst wird das neueWelt-Objekt erzeugt, das die Archipelpositionen und -gr��en enth�lt.
 		 */
@@ -290,6 +299,14 @@ public class Welterstellung{
 			System.out.println("Fertig. Dieses Mal wurden " + inselzahl+ " Inseln erzeugt.");
 			System.out.println("gesamte Laufzeit:" + ((new Date().getTime())-zeitstempel) + " ms." );
 		}
+
+		try {
+			SQLexec.commitTransaction();
+		} catch (SQLException ex) {
+			Logger.getLogger(Welterstellung.class.getName()).log(Level.SEVERE, null, ex);
+			System.exit(-1);
+		}
+
 	    CloseConn(); //SQL-Datenbankanbindung wieder schlie�en
 
 		return 0;
