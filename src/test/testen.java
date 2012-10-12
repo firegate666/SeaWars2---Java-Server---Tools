@@ -1,11 +1,11 @@
 /**
  * Package zum testen der anderen Klassen.
  * Letzte Änderung von Andreas am 22. Mai 2005:
- * Aufrufe an die neuen Klassen in "Welterstellung" angepasst
+ * Aufrufe an die neuen Klassen in "WorldCreator" angepasst
  */
 
 package test;
-import welterstellung.Welterstellung;
+import welterstellung.WorldCreator;
 
 //import welterstellung.InselErstellung;
 // import welterstellung.ZufallsNamen;
@@ -23,14 +23,14 @@ for (int i=0; i<args.length; i++)
 		}
 }
 // ******************************************************************************************
-// Test der Welterstellung (Schluck!)
-	Welterstellung welt = new Welterstellung(1);
-	welt.archipelAnzahl = 500;
-	welt.bildPfad = "C:\\Eigene Dateien\\C- Programme\\SeaWars\\Beispiel.bmp";
-	welt.empfindlichkeit = 0.7;
-	welt.dateiAusgabeFlag = 0;
-	welt.testausgabe = 0;
-	welt.Erstellung();
+// Test der WorldCreator (Schluck!)
+	WorldCreator welt = new WorldCreator(1);
+	welt.numberOfArchipelagos = 500;
+	welt.imagePath = "C:\\Eigene Dateien\\C- Programme\\SeaWars\\Beispiel.bmp";
+	welt.sensitivity = 0.7;
+	welt.fileOutputFlag = 0;
+	welt.debugOutput = 0;
+	welt.run();
 
 
 // ******************************************************************************************
@@ -66,7 +66,7 @@ for (int i=0; i<args.length; i++)
    		String Inselpositionen = "";
 		Archipelverteilung neueWelt;
 		int Archipelzahl = 500;
-		System.out.println("Welterstellung gestartet. Archipel werden verteilt...");
+		System.out.println("WorldCreator gestartet. Archipel werden verteilt...");
 		neueWelt = new Archipelverteilung(Archipelzahl,"C:\\Eigene Dateien\\C- Programme\\SeaWars\\Beispiel.bmp",0.7);
 		//neueWelt = new Archipelverteilung(100,"C:\\Eigene Dateien\\C- Programme\\SeaWars\\Blubber.bmp",0.5);
 		neueWelt.VerteilungAusfuehren();

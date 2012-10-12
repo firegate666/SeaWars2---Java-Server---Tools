@@ -17,7 +17,7 @@
  * The Author can be contacted by writing an email to "hohlebirne@yahoo.de"
  *________________________________________________________________________________
  *
- * VerteilungAusfuehren() aus Konstruktor entfernt
+ * run() aus Konstruktor entfernt
  * Programmaufruf nach instatiierung ausführen
  * besser Lösung statt überladene Konstruktoren wären getter und setter
  *
@@ -26,102 +26,104 @@
 
 package welterstellung;
 
-import java.io.*;
-import java.lang.Math;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 public class Archipelverteilung
 {
-	private double[][] Karte;
-	public Archipel[] Orte;
+	private double[][] Map;
+	public Archipelago[] Orte;
 	public int Archipelzahl;
 
-	private double empfindlichkeit = 0.5;
+	private double sensitivity = 0.5;
 	private int Archipelanzahl = 1000;
-	private String Bildpfad = "Blubber.bmp";
+	private String imagePath = "Blubber.bmp";
 
 /**
- *  Erzeugt 1000 Archipel mit dem Bild "Blubber.bmp" und der Empfindlichkeit 0.5
+ *  Erzeugt 1000 Archipelago mit dem Bild "Blubber.bmp" und der Empfindlichkeit 0.5
  */
 	public Archipelverteilung()
 	{
 	}
 	/**
-	 * Erzeugt mit Archipel dem Bild Blubber.bmp und der Empfindlichkeit 0.5
-	 * @param Archipelanzahl Anzahl der Archipel
+	 * Erzeugt mit Archipelago dem Bild Blubber.bmp und der Empfindlichkeit 0.5
+	 * @param Archipelanzahl Anzahl der Archipelago
 	 */
 	public Archipelverteilung(int Archipelanzahl)
 	{
 		this.Archipelanzahl = Archipelanzahl;
 	}
 	/**
-	 * Erzeugt Archipel mit der Empfindlichkeit 0.5.
-	 * @param Archipelanzahl Anzahl der Archipel
+	 * Erzeugt Archipelago mit der Empfindlichkeit 0.5.
+	 * @param Archipelanzahl Anzahl der Archipelago
 	 * @param Bildpfad Pfad zu einem Bild im BMP-Format, 1000x1000 Pixel,
 	 * 8-Bit Graustufen
 	 */
 	public Archipelverteilung(int Archipelanzahl, String Bildpfad)
 	{
 		this(Archipelanzahl);
-		this.Bildpfad = Bildpfad;
+		this.imagePath = Bildpfad;
 	}
 	/**
 	 * Erzeugt Archipelkoordinaten
-	 * @param Archipelanzahl Anzahl der Archipel
+	 * @param Archipelanzahl Anzahl der Archipelago
 	 * @param Bildpfad Pfad zu einem Bild im BMP-Format, 1000*1000 Pixel,
 	 * 8-Bit Graustufen
 	 * @param empfindlichkeit stellt ein, wie empfindlich die Verteilungsfunktion
 	 * auf das BMP reagiert. Bei Werten von 1 oder h�her sammeln sich fast alle
-	 * Archipel nur in den wei�en Bereichen des BMP. Je kleiner der Wert, desto weniger
+	 * Archipelago nur in den wei�en Bereichen des BMP. Je kleiner der Wert, desto weniger
 	 * h�lt sich die Verteilungsfunktion an die Vorgaben des BMP. Sinnvoll ist 0,5 bis
 	 * 0,7 bei den meisten Bildern. Bei empfindlichkeit =0 wird das Bild nicht beachtet.
 	 */
 	public Archipelverteilung(int Archipelanzahl, String Bildpfad, double empfindlichkeit)
 	{
 		this(Archipelanzahl, Bildpfad);
-		this.empfindlichkeit = empfindlichkeit;
+		this.sensitivity = empfindlichkeit;
 	}
 
 
-	public void VerteilungAusfuehren()
+	public void run()
 	{
 		// Reading from defaults
 		int Archipelanzahl = this.Archipelanzahl;
-		String Bildpfad = this.Bildpfad;
-		double empfindlichkeit = this.empfindlichkeit;
+		String Bildpfad = this.imagePath;
+		double empfindlichkeit = this.sensitivity;
 
 	    int[] Bildpunkte;
-		Karte = new double[1000][1000];
+		Map = new double[1000][1000];
 
 		for (int i=0; i<1000; i++)
 			for (int j=0; j<1000; j++)
 			{
 				//Karte mit Werten zwischen 0 und 1 f�llen
-				Karte[i][j]=Math.random();
+				Map[i][j]=Math.random();
 			}
 		//Bilddatei �ffnen und auslesen
 		try
 		{
-			FileInputStream Bild = new FileInputStream(Bildpfad);
-			DataInputStream Bilddaten = new DataInputStream(Bild);
+			FileInputStream image = new FileInputStream(Bildpfad);
+			DataInputStream imageData = new DataInputStream(image);
 			//Reader in = new BufferedReader(Bilddaten);
 			int ch;
 			//Dateikopf ignorieren
 			do
 			{
-				while (Bilddaten.readUnsignedByte() != 255);
+				while (imageData.readUnsignedByte() != 255);
 			}
-			while (Bilddaten.readUnsignedByte()!=255);
-			Bilddaten.readUnsignedByte();
-			Bilddaten.readUnsignedByte();
+			while (imageData.readUnsignedByte()!=255);
+			imageData.readUnsignedByte();
+			imageData.readUnsignedByte();
 			//Mit dem auslesen anfangen
 			int i=0;
 			Bildpunkte = new int[1000000]; //Dynamisch w�re w�nschenswert
 			while ( i<Bildpunkte.length) {
-				Bildpunkte[i++]=  Bilddaten.readUnsignedByte();
+				Bildpunkte[i++]=  imageData.readUnsignedByte();
 			}
-			Bilddaten.close();
-			Bild.close();
+			imageData.close();
+			image.close();
 		}
 		catch(FileNotFoundException e){
 			System.out.println("Sorry, die Datei scheint nicht zu existieren.");
@@ -133,7 +135,7 @@ public class Archipelverteilung
 					"vielleicht zu klein?");
 			return;
 		}
-		/* Nachdem nun hoffentlich ein Integer-Array des Bilds vorliegt, sollen die Archipel
+		/* Nachdem nun hoffentlich ein Integer-Array des Bilds vorliegt, sollen die Archipelago
 		 * mit dem Array verrechnet werden.
 		 */
 		if (empfindlichkeit > 0.01)
@@ -154,7 +156,7 @@ public class Archipelverteilung
 					// Tanh mittels Exponentialfunktionen
 					Punkt = (Math.exp(2*Punkt)-1)/(Math.exp(2*Punkt)+1);
 					// Kartenwertumrechnung
-					Karte[i][j]=Karte[i][j] * (Punkt +1)/2;
+					Map[i][j]=Map[i][j] * (Punkt +1)/2;
 				}
 		}
 		//Archipel aus dem Boden heben, Werte zwischen 0 und "genauigkeit"
@@ -162,15 +164,15 @@ public class Archipelverteilung
 		for (int i=0; i<1000; i++)
 			for (int j=0; j<1000; j++)
 			{
-				Karte[i][j]=Karte[i][j]*genauigkeit;
+				Map[i][j]=Map[i][j]*genauigkeit;
 			}
 		//Histogramm erstellen
 		int[] histogramm = new int[genauigkeit];
 		for (int i=0; i<1000; i++)
 			for (int j=0; j<1000; j++)
 			{
-				if ((Karte[i][j]<genauigkeit) && (Karte[i][j]>0))
-					histogramm[(int)Karte[i][j]]++;
+				if ((Map[i][j]<genauigkeit) && (Map[i][j]>0))
+					histogramm[(int)Map[i][j]]++;
 			}
 		//meeresspiegel f�r die perfekte Archipelanzahl aus dem Histogramm auslesen
 		int archipelZaehler = 0;
@@ -224,7 +226,7 @@ public class Archipelverteilung
 			for (int i=0; i<1000; i++)
 				for (int j=0; j<1000; j++)
 				{
-					if (Karte[i][j] > meeresspiegel)
+					if (Map[i][j] > meeresspiegel)
 					{
 						archipelZaehler++; //Insel gefunden! Z�hlen!
 						for (int k =0; k<25; k++)
@@ -232,14 +234,14 @@ public class Archipelverteilung
 							{
 								try{
 									//Nachbarschaft eliminieren
-									Karte[i-12+k][j-12+l] *= abstandsOperator[k][l];
+									Map[i-12+k][j-12+l] *= abstandsOperator[k][l];
 								}
 								catch (ArrayIndexOutOfBoundsException e)
 								{
 									//Nichts schlimmes ist passiert. Nur der abstandsOperator
 									//wurde am Rand des Archipels ausgef�hrt. Programm darf
 									//ganz normal weiter laufen. Zum Vermeiden dieses Fehlers
-									//k�nnte man das Archipel um jeweils eine blinde Reihe
+									//k�nnte man das Archipelago um jeweils eine blinde Reihe
 									//an jedem Rand erweitern...
 								}
 							}
@@ -257,8 +259,8 @@ public class Archipelverteilung
 		}
 		} //Abstandsoperator-Bereich beenden
 
-		// Positionen aller Archipel, die �ber dem meeresspiegel liegen, speichern
-		Orte = new Archipel[archipelZaehler+1];
+		// Positionen aller Archipelago, die �ber dem meeresspiegel liegen, speichern
+		Orte = new Archipelago[archipelZaehler+1];
 		Archipelzahl = archipelZaehler;
 		archipelZaehler = 0;
 		int Archipelgroesse = 0;
@@ -266,11 +268,11 @@ public class Archipelverteilung
 		for (int i=0; i<1000; i++)
 			for (int j=0; j<1000; j++)
 			{
-				if (Karte[i][j] > meeresspiegel)
+				if (Map[i][j] > meeresspiegel)
 				{
 					Archipelgroesse = (int) (Math.random()*5);
 					try{
-						Orte[archipelZaehler++] = new Archipel(i, j, Archipelgroesse, 0, archipelID++ );
+						Orte[archipelZaehler++] = new Archipelago(i, j, Archipelgroesse, 0, archipelID++ );
 					}
 					catch (ArrayIndexOutOfBoundsException e)
 					{

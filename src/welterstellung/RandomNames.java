@@ -17,6 +17,9 @@ import java.util.StringTokenizer; // used for external properties file
 
 // Namensklasse
 
+
+
+
 /**
  *
  * @author Andreas
@@ -27,72 +30,72 @@ import java.util.StringTokenizer; // used for external properties file
  * wird, um zusätzliche Sprachähnlichkeit der generierten Wörter mit echten Wörtern
  * zu erreichen.
  */
-class Buch {
-	String buchstabe;
-	double wahrscheinlichkeit;
-	public Buch(String buchstabe, double wahrscheinlichkeit)
+class Book {
+	String character;
+	double probability;
+	public Book(String buchstabe, double wahrscheinlichkeit)
 	{
-		this.buchstabe = buchstabe;
-		this.wahrscheinlichkeit = wahrscheinlichkeit;
+		this.character = buchstabe;
+		this.probability = wahrscheinlichkeit;
 	}
 }
 
 
 
-public class ZufallsNamen
+public class RandomNames
 {
 
-	private Buch[] hartKon;
-	private Buch[] weicKon;
-	private Buch[] langKon;
-	private Buch[] klinKon;
-	private Buch[] voka;
-	private Buch[] umlaute;
+	private Book[] hartKon;
+	private Book[] weicKon;
+	private Book[] langKon;
+	private Book[] klinKon;
+	private Book[] voka;
+	private Book[] umlaute;
 
-	public ZufallsNamen()
+	public RandomNames()
 	{
-		this.hartKon = new Buch[7];
-		hartKon[0] = new Buch("c", 2.06); //$NON-NLS-1$
-		hartKon[1] = new Buch("k", 1.21); //$NON-NLS-1$
-		hartKon[2] = new Buch("qu", 0.02); //$NON-NLS-1$
-		hartKon[3] = new Buch("p", 0.79); //$NON-NLS-1$
-		hartKon[4] = new Buch("t", 6.15); //$NON-NLS-1$
-		hartKon[5] = new Buch("x", 0.03); //$NON-NLS-1$
-		hartKon[6] = new Buch("z", 1.13); //$NON-NLS-1$
+		this.hartKon = new Book[7];
+		hartKon[0] = new Book("c", 2.06); //$NON-NLS-1$
+		hartKon[1] = new Book("k", 1.21); //$NON-NLS-1$
+		hartKon[2] = new Book("qu", 0.02); //$NON-NLS-1$
+		hartKon[3] = new Book("p", 0.79); //$NON-NLS-1$
+		hartKon[4] = new Book("t", 6.15); //$NON-NLS-1$
+		hartKon[5] = new Book("x", 0.03); //$NON-NLS-1$
+		hartKon[6] = new Book("z", 1.13); //$NON-NLS-1$
 
-		this.weicKon = new Buch[4];
-	    weicKon[0] = new Buch("b", 1.89); //$NON-NLS-1$
-	    weicKon[1] = new Buch("d", 5.08); //$NON-NLS-1$
-	    weicKon[2] = new Buch("g", 3.01); //$NON-NLS-1$
-	    weicKon[3] = new Buch("h", 4.76); //$NON-NLS-1$
+		this.weicKon = new Book[4];
+	    weicKon[0] = new Book("b", 1.89); //$NON-NLS-1$
+	    weicKon[1] = new Book("d", 5.08); //$NON-NLS-1$
+	    weicKon[2] = new Book("g", 3.01); //$NON-NLS-1$
+	    weicKon[3] = new Book("h", 4.76); //$NON-NLS-1$
 
-	    this.langKon = new Buch[5];// {"f", "s", "v", "sch", "ch"};
-	    langKon[0] = new Buch("f", 1.66); //$NON-NLS-1$
-	    langKon[1] = new Buch("s", 5.27);
-	    langKon[2] = new Buch("v", 0.67); //$NON-NLS-1$
-	    langKon[3] = new Buch("sch", 2.00);
-	    langKon[4] = new Buch("ch", 1.00); //$NON-NLS-1$
+	    this.langKon = new Book[5];// {"f", "s", "v", "sch", "ch"};
+	    langKon[0] = new Book("f", 1.66); //$NON-NLS-1$
+	    langKon[1] = new Book("s", 5.27);
+	    langKon[2] = new Book("v", 0.67); //$NON-NLS-1$
+	    langKon[3] = new Book("sch", 2.00);
+	    langKon[4] = new Book("ch", 1.00); //$NON-NLS-1$
 
-	    this.klinKon = new Buch[7];// {"m", "n", "r", "w", "y", "j"};
-	    klinKon[0] = new Buch("m", 2.53); //$NON-NLS-1$
-	    klinKon[1] = new Buch("n", 9.78); //$NON-NLS-1$
-	    klinKon[2] = new Buch("r", 7.00); //$NON-NLS-1$
-	    klinKon[3] = new Buch("w", 1.89); //$NON-NLS-1$
-	    klinKon[4] = new Buch("y", 0.04); //$NON-NLS-1$
-	    klinKon[5] = new Buch("j", 0.27); //$NON-NLS-1$
-	    klinKon[6] = new Buch("l", 3.44);
+	    this.klinKon = new Book[7];// {"m", "n", "r", "w", "y", "j"};
+	    klinKon[0] = new Book("m", 2.53); //$NON-NLS-1$
+	    klinKon[1] = new Book("n", 9.78); //$NON-NLS-1$
+	    klinKon[2] = new Book("r", 7.00); //$NON-NLS-1$
+	    klinKon[3] = new Book("w", 1.89); //$NON-NLS-1$
+	    klinKon[4] = new Book("y", 0.04); //$NON-NLS-1$
+	    klinKon[5] = new Book("j", 0.27); //$NON-NLS-1$
+	    klinKon[6] = new Book("l", 3.44);
 
-		this.voka = new Buch[5];// {"a", "e", "i", "o", "u" };
-	    voka[0] = new Buch("a", 6.51); //$NON-NLS-1$
-	    voka[1] = new Buch("e", 17.40); //$NON-NLS-1$
-	    voka[2] = new Buch("i", 7.55); //$NON-NLS-1$
-	    voka[3] = new Buch("o", 2.51); //$NON-NLS-1$
-	    voka[4] = new Buch("u", 4.35); //$NON-NLS-1$
+		this.voka = new Book[5];// {"a", "e", "i", "o", "u" };
+	    voka[0] = new Book("a", 6.51); //$NON-NLS-1$
+	    voka[1] = new Book("e", 17.40); //$NON-NLS-1$
+	    voka[2] = new Book("i", 7.55); //$NON-NLS-1$
+	    voka[3] = new Book("o", 2.51); //$NON-NLS-1$
+	    voka[4] = new Book("u", 4.35); //$NON-NLS-1$
 
-	    this.umlaute = new Buch[3]; // ä, ö und ü
-		umlaute[0] = new Buch("ä", 0.4); //$NON-NLS-1$
-		umlaute[1] = new Buch("ö", 0.4); //$NON-NLS-1$
-		umlaute[2] = new Buch("ü", 0.4); //$NON-NLS-1$
+	    this.umlaute = new Book[3]; // ä, ö und ü
+		umlaute[0] = new Book("ä", 0.4); //$NON-NLS-1$
+		umlaute[1] = new Book("ö", 0.4); //$NON-NLS-1$
+		umlaute[2] = new Book("ü", 0.4); //$NON-NLS-1$
 
 		/*
 		 * Buchstabenhäufigkeiten am Wortanfang
@@ -189,10 +192,10 @@ public class ZufallsNamen
 					if (vokalErlaubt || vokaMuss >=2)
 					{
 							buchstabenwahl = (int) (Math.random()*voka.length);
-						if (voka[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
+						if (voka[buchstabenwahl].probability > Math.random()*100)
 						{
-							name=name+voka[buchstabenwahl].buchstabe;
-							//voka[buchstabenwahl].wahrscheinlichkeit=0;
+							name=name+voka[buchstabenwahl].character;
+							//voka[buchstabenwahl].probability=0;
 							klinKonErlaubt = true;
 							langKonErlaubt = true;
 							weicKonErlaubt = true;
@@ -207,17 +210,17 @@ public class ZufallsNamen
 					if (klinKonErlaubt)
 					{
 						buchstabenwahl = (int) (Math.random()*klinKon.length);
-						if (klinKon[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
+						if (klinKon[buchstabenwahl].probability > Math.random()*100)
 						{
-							name=name+klinKon[buchstabenwahl].buchstabe;
-							//klinKon[buchstabenwahl].wahrscheinlichkeit=0;
+							name=name+klinKon[buchstabenwahl].character;
+							//klinKon[buchstabenwahl].probability=0;
 							klinKonErlaubt = false;
 							langKonErlaubt = false;
 							weicKonErlaubt = true;
 							hartKonErlaubt = true;
 							vokalErlaubt = true;
 							//Falls es ein "L" ist, das direkt auf einen Vokal folgt...
-							if (klinKon[buchstabenwahl].buchstabe == "l" && vokaMuss ==0)
+							if (klinKon[buchstabenwahl].character == "l" && vokaMuss ==0)
 							{
 								klinKonErlaubt = true;
 								langKonErlaubt = true;
@@ -232,10 +235,10 @@ public class ZufallsNamen
 					if (langKonErlaubt)
 					{
 						buchstabenwahl = (int) (Math.random()*langKon.length);
-						if (langKon[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
+						if (langKon[buchstabenwahl].probability > Math.random()*100)
 						{
-							name=name +langKon[buchstabenwahl].buchstabe;
-							//langKon[buchstabenwahl].wahrscheinlichkeit=0;
+							name=name +langKon[buchstabenwahl].character;
+							//langKon[buchstabenwahl].probability=0;
 							klinKonErlaubt = true;
 							langKonErlaubt = false;
 							weicKonErlaubt = false;
@@ -250,10 +253,10 @@ public class ZufallsNamen
 					if (weicKonErlaubt)
 					{
 						buchstabenwahl = (int) (Math.random()*weicKon.length);
-						if (weicKon[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
+						if (weicKon[buchstabenwahl].probability > Math.random()*100)
 						{
-							name=name+weicKon[buchstabenwahl].buchstabe;
-							//weicKon[buchstabenwahl].wahrscheinlichkeit=0;
+							name=name+weicKon[buchstabenwahl].character;
+							//weicKon[buchstabenwahl].probability=0;
 							klinKonErlaubt = false;
 							langKonErlaubt = false;
 							weicKonErlaubt = false;
@@ -268,10 +271,10 @@ public class ZufallsNamen
 					if (hartKonErlaubt)
 					{
 						buchstabenwahl = (int) (Math.random()*hartKon.length);
-						if (hartKon[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
+						if (hartKon[buchstabenwahl].probability > Math.random()*100)
 						{
-							name=name+hartKon[buchstabenwahl].buchstabe;
-							hartKon[buchstabenwahl].wahrscheinlichkeit=0;
+							name=name+hartKon[buchstabenwahl].character;
+							hartKon[buchstabenwahl].probability=0;
 							klinKonErlaubt = false;
 							langKonErlaubt = false;
 							weicKonErlaubt = false;
@@ -286,9 +289,9 @@ public class ZufallsNamen
 					if (umlaErlaubt && ((Math.random()*100) < 1))
 					{
 						buchstabenwahl = (int) (Math.random()*umlaute.length);
-						if (umlaute[buchstabenwahl].wahrscheinlichkeit > Math.random()*100)
+						if (umlaute[buchstabenwahl].probability > Math.random()*100)
 						{
-							name=name+umlaute[buchstabenwahl].buchstabe;
+							name=name+umlaute[buchstabenwahl].character;
 							umlaErlaubt = false;
 							klinKonErlaubt = true;
 							langKonErlaubt = true;
@@ -313,7 +316,7 @@ public class ZufallsNamen
 			if (vokaMuss >=2 )
 			{
 				buchstabenwahl = (int) (Math.random()*voka.length);
-				name=name+voka[buchstabenwahl].buchstabe;
+				name=name+voka[buchstabenwahl].character;
 			}
 
 			/*

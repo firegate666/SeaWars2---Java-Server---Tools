@@ -18,14 +18,14 @@ import java.util.logging.Logger;
  *
  */
 
-public class Welterstellung{
-	public int dateiAusgabeFlag;
-	public String dateiAusgabePfad;
-	public int testausgabe;
-	public int archipelAnzahl;
-	public double empfindlichkeit;
-	public String bildPfad;
-	public int kartenabschnitt;
+public class WorldCreator{
+	public int fileOutputFlag;
+	public String fileOutputPath;
+	public int debugOutput;
+	public int numberOfArchipelagos;
+	public double sensitivity;
+	public String imagePath;
+	public int mapSection;
 
 	private MysqlConnectionFactory SQLcf;
 	private MysqlSQLExecution SQLexec;
@@ -38,13 +38,13 @@ public class Welterstellung{
 
 
 
-	public Welterstellung(int kartenabschnittID)
+	public WorldCreator(int mapSectionId)
 	{
-		dateiAusgabeFlag = 1;
-		testausgabe = 1;
-		archipelAnzahl = 500;
-		empfindlichkeit = 0.5;
-		this.kartenabschnitt = kartenabschnittID;
+		fileOutputFlag = 1;
+		debugOutput = 1;
+		numberOfArchipelagos = 500;
+		sensitivity = 0.5;
+		this.mapSection = mapSectionId;
 
 	}
 
@@ -71,6 +71,7 @@ public class Welterstellung{
 			e1.printStackTrace();
 		}
 	}
+
 	public void SendQuery(String Query)
 	{
 		try {
@@ -83,7 +84,7 @@ public class Welterstellung{
 			fields.add("id");
 			fields.add("name");
 			ArrayList from = new ArrayList();
-			from.add("insel");
+			from.add("island");
 			t = exec.executeQuery(fields, from);
 			System.out.println(t.toString(true));
 			/* */
@@ -101,7 +102,7 @@ public class Welterstellung{
 	 * 1: konnte nicht erstellt werden da die Textdatei nicht gefunden wurde
 	 * 2: Konnte aufgrund einer IOException nicht erstellt werden.
 	 */
-	public int dateiAusgabe(String ausgabe, String pfad)
+	public int fileOutput(String ausgabe, String pfad)
 	{
 		try {
        		File file = new File(pfad);
@@ -120,28 +121,28 @@ public class Welterstellung{
         return 0;
 	}
 
-	public int Erstellung(){
-		if (bildPfad == null) {
+	public int run(){
+		if (imagePath == null) {
 			System.err.println("Bildpfad nicht gesetzt");
 			System.exit(1);
 		}
 
-		File f = new File(bildPfad);
+		File f = new File(imagePath);
 		if (!f.exists()) {
-			System.err.println("Bildpfad '" + bildPfad + "' existiert nicht");
+			System.err.println("Bildpfad '" + imagePath + "' existiert nicht");
 			System.exit(1);
 		}
 
 
 		if (OpenConn()==1){//Datenbankanbindung �ffnen wenn m�glich.
-			if (testausgabe > 0) System.out.println("Die Datenbankverbindung konnte nicht ge�ffnet werden.");
+			if (debugOutput > 0) System.out.println("Die Datenbankverbindung konnte nicht ge�ffnet werden.");
 			return 1;
 		}
 
 		try {
 			SQLexec.startTransaction();
 		} catch (SQLException ex) {
-			Logger.getLogger(Welterstellung.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(WorldCreator.class.getName()).log(Level.SEVERE, null, ex);
 			ex.printStackTrace();
 			System.exit(-1);
 		}
@@ -157,12 +158,20 @@ public class Welterstellung{
 		try
 		{
 			welt_id = Integer.parseInt(SQLAntwort.getDataCell(1, 1));
+
+			SendQuery("SELECT count(*) FROM MapSection WHERE worldID = " + welt_id + ";");
+			int sectionCount = Integer.parseInt(SQLAntwort.getDataCell(1, 1));
+			if (sectionCount > 0) {
+				System.err.println("Die aktuelle Welt '" + welt_id + "' hat bereits generierte Daten. Es muss eine neue leere Welt erstellt werden.");
+				System.exit(1);
+			}
+
 		} catch (NumberFormatException e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "Create a world prior to creating islands");
 			System.exit(0);
 		}
 
-		if (testausgabe > 0) System.out.println("Nächster Kartenabschnitt");
+		if (debugOutput > 0) System.out.println("Nächster Kartenabschnitt");
 
 		try
 		{
@@ -172,7 +181,7 @@ public class Welterstellung{
 			SendQuery("SELECT max(id) FROM MapSection;");
 			try
 			{
-				kartenabschnitt = Integer.parseInt(SQLAntwort.getDataCell(1,1));
+				mapSection = Integer.parseInt(SQLAntwort.getDataCell(1,1));
 			}
 			catch (NumberFormatException e)
 			{
@@ -181,9 +190,9 @@ public class Welterstellung{
 			}
 
 			// TODO fix the section links
-			/*if (kartenabschnitt > 1) {
-				SQLexec.executeUpdate("UPDATE LOW_PRIORITY MapSection SET leftSectionId = "+(kartenabschnitt-1)+" WHERE id = " +
-									(kartenabschnitt) + ";");
+			/*if (mapSection > 1) {
+				SQLexec.executeUpdate("UPDATE LOW_PRIORITY MapSection SET leftSectionId = "+(mapSection-1)+" WHERE id = " +
+									(mapSection) + ";");
 			}*/
 		}
 		catch(SQLException e)
@@ -192,29 +201,29 @@ public class Welterstellung{
 			e.printStackTrace();
 			System.exit(0);
 		}
-		if (testausgabe>0) System.out.println("Welterstellung gestartet. Archipel werden verteilt...");
+		if (debugOutput>0) System.out.println("Welterstellung gestartet. Archipel werden verteilt...");
 		Archipelverteilung neueWelt;
-		neueWelt = new Archipelverteilung(archipelAnzahl, bildPfad, empfindlichkeit);
-		neueWelt.VerteilungAusfuehren();
-		/* Neue Archipel in die Datenbank eintragen und mit Namen versehen.
+		neueWelt = new Archipelverteilung(numberOfArchipelagos, imagePath, sensitivity);
+		neueWelt.run();
+		/* Neue Archipelago in die Datenbank eintragen und mit Namen versehen.
 		 */
 		String archipelQuery="";
-		ZufallsNamen name = new ZufallsNamen();
+		RandomNames name = new RandomNames();
 		String SqlSyntaxName;
 		for (int i=0; i<neueWelt.Archipelzahl; i++)
 		{
 			SqlSyntaxName = name.setZufallsName().replaceAll("'","\\\\'");
 			archipelQuery = "INSERT LOW_PRIORITY "+
 			"INTO Archipelago (createdAt, xPos, yPos, name, magnitude, mapSectionId) "+
-			"VALUES("+ createdAt + ", " + neueWelt.Orte[i].x+", "+ neueWelt.Orte[i].y +", '"+ SqlSyntaxName +"', "+ (neueWelt.Orte[i].groesse+1) +", "+ kartenabschnitt +");";
+			"VALUES("+ createdAt + ", " + neueWelt.Orte[i].x+", "+ neueWelt.Orte[i].y +", '"+ SqlSyntaxName +"', "+ (neueWelt.Orte[i].magnitude+1) +", "+ mapSection +");";
 			try
 			{
 				SQLexec.executeInsert(archipelQuery);
 			}
 			catch(SQLException e)
 			{
-				//Jaja... Ein bis zwei Archipel gehen in die Hose, aber wen st�rts?
-				//Es werden vorher auch zwei bis drei Archipel zu viel erzeugt (-;
+				//Jaja... Ein bis zwei Archipelago gehen in die Hose, aber wen st�rts?
+				//Es werden vorher auch zwei bis drei Archipelago zu viel erzeugt (-;
 				System.err.println(SQLexec.getLastQuery());
 				e.printStackTrace();
 				System.exit(0);
@@ -222,29 +231,29 @@ public class Welterstellung{
 
 		}
 
-		if (testausgabe>0)
+		if (debugOutput>0)
 		{
 			System.out.println("Bisherige Laufzeit: " + ((new Date().getTime())-zeitstempel) + " ms. Pro Archipel sind das " +((new Date().getTime())-zeitstempel)/neueWelt.Archipelzahl + " ms.");
-			System.out.println(neueWelt.Archipelzahl + " Archipel wurden auf der Karte "+kartenabschnitt+" verteilt. Inselverteilung wird gestartet...");
+			System.out.println(neueWelt.Archipelzahl + " Archipel wurden auf der Karte "+mapSection+" verteilt. Inselverteilung wird gestartet...");
 		}
 
-		/* Archipel sind jetzt auf der Karte verteilt und k�nnen in die Datenbank eingetragen werden.
+		/* Archipelago sind jetzt auf der Karte verteilt und k�nnen in die Datenbank eingetragen werden.
 		 * Ab hier werden die Inseln in den Archipeln verteilt. Es werden alle Archipele nacheinander
-		 * durchgegangen und zu jedem Archipel die Inseln erzeugt. Aufgrund der vielen 2-D-Operatoren
+		 * durchgegangen und zu jedem Archipelago die Inseln erzeugt. Aufgrund der vielen 2-D-Operatoren
 		 * kann dieser Vorgang mehrere Minuten in Anspruch nehmen.
 		 * In die Inseltabelle m�ssen folgende Werte eingetragen werden:
-		 * name, groesse, x_pos, y_pos, archipel_id
-		 * Alle Inseln werden mit nur einem Archipel erzeugt, das aber jeweils aus der Datenbank die
+		 * name, magnitude, xPos, yPos, archipel_id
+		 * Alle Inseln werden mit nur einem Archipelago erzeugt, das aber jeweils aus der Datenbank die
 		 * neuen Eigenschaften bekommt. Der Grund ist, dass die Methode, die unter testen.java
 		 * angewendet wurde und alle Inseln im Hauptspeicher hielt, den Rechner doch arg stark aus-
 		 * gelastet hat. Jetzt entfallen extrem viele Konstruktoraufrufe, was das ganze schon schneller
 		 * machen d�rfte.
 		 */
 		int inselzahl = 0;
-		Archipel archipel = new Archipel();
+		Archipelago archipel = new Archipelago();
 		SendQuery("SELECT id, xPos, yPos, magnitude "+
 				"FROM Archipelago "+
-				"WHERE mapSectionId = "+ this.kartenabschnitt + ";");
+				"WHERE mapSectionId = "+ this.mapSection + ";");
 
 		SQLAnswerTable SQLAntwortArchipel;
 		SQLAntwortArchipel = SQLAntwort;
@@ -252,16 +261,16 @@ public class Welterstellung{
 		// SQLAntwort z�hlt beginnend mit der 1! (Schweinerei, wer macht denn sowas? ;-) )
 		for (int i=1; i<=SQLAntwortArchipel.rowCount(); i++)
 		{
-			archipel.archipelID = Integer.parseInt(SQLAntwortArchipel.getDataCell(1,i));
+			archipel.archipelagoId = Integer.parseInt(SQLAntwortArchipel.getDataCell(1,i));
 			archipel.x 			= Integer.parseInt(SQLAntwortArchipel.getDataCell(2,i));
 			archipel.y 			= Integer.parseInt(SQLAntwortArchipel.getDataCell(3,i));
-			archipel.groesse	= Integer.parseInt(SQLAntwortArchipel.getDataCell(4,i));
+			archipel.magnitude	= Integer.parseInt(SQLAntwortArchipel.getDataCell(4,i));
 			while( archipel.inselnImArchipelVerteilen() == 0);
-			if ((testausgabe>0) && (i%10 ==0)) System.out.println((int)((double)i*100/archipelAnzahl) + "% ");
+			if ((debugOutput>0) && (i%10 ==0)) System.out.println((int)((double)i*100/numberOfArchipelagos) + "% ");
 
-			for (int j=0; j<archipel.inselAnzahl; j++)
+			for (int j=0; j<archipel.numberOfIslands; j++)
 			{
-				SqlSyntaxName = archipel.insel[j].getName().replaceAll("'","\\\\'");
+				SqlSyntaxName = archipel.island[j].getName().replaceAll("'","\\\\'");
 				// Lager f�r die Insel erstellen. Kapazit�t =0. Egal. Ihr wolltet es so.
 				try
 				{
@@ -299,7 +308,7 @@ public class Welterstellung{
 				}
 			}
 		}
-		if (testausgabe>0)
+		if (debugOutput>0)
 		{
 			System.out.println("Fertig. Dieses Mal wurden " + inselzahl+ " Inseln erzeugt.");
 			System.out.println("gesamte Laufzeit:" + ((new Date().getTime())-zeitstempel) + " ms." );
@@ -308,7 +317,7 @@ public class Welterstellung{
 		try {
 			SQLexec.commitTransaction();
 		} catch (SQLException ex) {
-			Logger.getLogger(Welterstellung.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(WorldCreator.class.getName()).log(Level.SEVERE, null, ex);
 			System.exit(-1);
 		}
 

@@ -4,23 +4,23 @@ package welterstellung;
 class GottSpielen
 {
 	/**
-	 * Ausführbare Welterstellung. Vorsicht, kann einige Minuten dauern.
+	 * Ausführbare WorldCreator. Vorsicht, kann einige Minuten dauern.
 	 * @param args
 	 * -cardpart 7 setzt den Kartenabschnitt der neuen Welt auf 7
 	 * -path "c:\Bild.bmp" setzt den Pfad auf ein BMP nach Wahl
 	 * -archipelago 500 setzt die Archipelanzahl auf 500
 	 * -fileOutputFlag 1 schaltet die Ausgabe der Inseln in eine Excel-Textdatei ein
-	 * -fileOutputPath "C:\Eigene Dateien" gibt die Insel.txt in C:\Eigene Dateien aus
+	 * -fileOutputFlag "C:\Eigene Dateien" gibt die Insel.txt in C:\Eigene Dateien aus
 	 * -talkative schaltet die Konsolen-Kommentierung während des Vorgangs ein.
 	 *
 	 */
 	public static void main(String[] args) {
-		Welterstellung welt = new Welterstellung(1);
-		welt.archipelAnzahl = 500;
-		welt.empfindlichkeit = 0.7;
-		welt.dateiAusgabeFlag = 0;
-		welt.testausgabe = 1;
-		welt.kartenabschnitt=0;
+		WorldCreator worldCreator = new WorldCreator(1);
+		worldCreator.numberOfArchipelagos = 500;
+		worldCreator.sensitivity = 0.7;
+		worldCreator.fileOutputFlag = 0;
+		worldCreator.debugOutput = 1;
+		worldCreator.mapSection=0;
 
 		for (int i=0; i<args.length; i++)
 		{
@@ -29,52 +29,52 @@ class GottSpielen
 				if (args[i].matches("-dbhost"))
 				{
 					i++;
-					welt.dbhost = args[i];
+					worldCreator.dbhost = args[i];
 				}
 				if (args[i].matches("-dbname"))
 				{
 					i++;
-					welt.dbname = args[i];
+					worldCreator.dbname = args[i];
 				}
 				if (args[i].matches("-dbuser"))
 				{
 					i++;
-					welt.dbuser = args[i];
+					worldCreator.dbuser = args[i];
 				}
 				if (args[i].matches("-dbpass"))
 				{
 					i++;
-					welt.dbpass = args[i];
+					worldCreator.dbpass = args[i];
 				}
 
 				if (args[i].matches("-sensitivity"))
 				{
 					i++;
-					welt.empfindlichkeit = Double.parseDouble(args[i]);
+					worldCreator.sensitivity = Double.parseDouble(args[i]);
 				}
 				if (args[i].matches("-path"))
 				{
 					i++;
-					welt.bildPfad = args[i];
+					worldCreator.imagePath = args[i];
 				}
 				if (args[i].matches("-archipelago"))
 				{
 					i++;
-					welt.archipelAnzahl = Integer.parseInt(args[i]);
+					worldCreator.numberOfArchipelagos = Integer.parseInt(args[i]);
 				}
 				if (args[i].matches("-fileOutputFlag"))
 				{
 					i++;
-					welt.dateiAusgabeFlag = Integer.parseInt(args[i]);
+					worldCreator.fileOutputFlag = Integer.parseInt(args[i]);
 				}
 				if (args[i].matches("-fileOutputPath"))
 				{
 					i++;
-					welt.dateiAusgabePfad = args[i];
+					worldCreator.fileOutputPath = args[i];
 				}
 				if (args[i].matches("-talkative"))
 				{
-					welt.testausgabe = 1;
+					worldCreator.debugOutput = 1;
 				}
 				if (args[i].matches("-h"))
 				{
@@ -108,6 +108,6 @@ class GottSpielen
 			}
 		}
 
-		welt.Erstellung();
+		worldCreator.run();
 	}
 }

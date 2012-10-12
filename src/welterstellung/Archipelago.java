@@ -1,86 +1,86 @@
 package welterstellung;
 /**
- *	Diese Klasse stellt alle Datenbankrelevanten Werte für ein Archipel zur Verfügung und
+ *	Diese Klasse stellt alle Datenbankrelevanten Werte für ein Archipelago zur Verfügung und
  *	bietet obendrein die Möglichkeit, neue Archipele zu erstellen. Dabei werden verschiedene
- *  Archipel-Operatoren angeboten, mit denen man das Aussehen eines Archipels verändern kann.
+ *  Archipelago-Operatoren angeboten, mit denen man das Aussehen eines Archipels verändern kann.
  *  letzte Änderung von Andreas am 25. Mai 2005
  */
-public class Archipel
+public class Archipelago
 {
 	public int x;
 	public int y;
-	public int groesse;
-	public int kartenabschnitt_id;
-	public int inselAnzahl;
-	public InselErstellung[] insel;
-	public int archipelID;
+	public int magnitude;
+	public int mapSectionId;
+	public int numberOfIslands;
+	public IslandCreator[] island;
+	public int archipelagoId;
 
-	public Archipel()
+	public Archipelago()
 	{
 		this.x = 0;
 		this.y = 0;
-		this.groesse = 1;
-		this.kartenabschnitt_id = 1;
-		this.inselAnzahl = 10;
-		this.archipelID = 0;
+		this.magnitude = 1;
+		this.mapSectionId = 1;
+		this.numberOfIslands = 10;
+		this.archipelagoId = 0;
 	}
 
-	public Archipel(int x, int y)
+	public Archipelago(int x, int y)
 	{
 		this.x = x;
 		this.y = y;
-		this.groesse = 3;
-		this.archipelID = 0;
+		this.magnitude = 3;
+		this.archipelagoId = 0;
 	}
 	/**
-	 * Diese Klasse beschreibt ein Archipel so, dass damit auch Datenbankeinträge
+	 * Diese Klasse beschreibt ein Archipelago so, dass damit auch Datenbankeinträge
 	 * generiert werden können.
 	 * @param x gibt die x-Koordinate auf der Karte an.
 	 * @param y gibt die y-Koordinate auf der Karte an.
-	 * @param groesse gibt an, wie groß und fortgeschritten Inseln dieses Archipels
+	 * @param magnitude gibt an, wie groß und fortgeschritten Inseln dieses Archipels
 	 * sein können und liegt zwischen 1 und 5
 	 */
-	public Archipel (int x, int y, int groesse)
+	public Archipelago (int x, int y, int groesse)
 	{
 		this.x = x;
 		this.y = y;
-		this.groesse = groesse;
-		this.kartenabschnitt_id = 1;
-		this.archipelID = 0;
+		this.magnitude = groesse;
+		this.mapSectionId = 1;
+		this.archipelagoId = 0;
 	}
 	/**
-	 * Diese Klasse beschreibt ein Archipel so, dass damit auch Datenbankeinträge
+	 * Diese Klasse beschreibt ein Archipelago so, dass damit auch Datenbankeinträge
 	 * generiert werden können.
 	 * @param x gibt die x-Koordinate auf der Karte an.
 	 * @param y gibt die y-Koordinate auf der Karte an.
-	 * @param groesse gibt an, wie groß und fortgeschritten Inseln dieses Archipels
-	 * @param kartenabschnitt_id gibt an, in welchem Kartenabschnitt dieses Archipel zu finden ist.
+	 * @param magnitude gibt an, wie groß und fortgeschritten Inseln dieses Archipels
+	 * @param mapSectionId gibt an, in welchem Kartenabschnitt dieses Archipelago zu finden ist.
 	 * sein können und liegt zwischen 1 und 5
 	 */
-	public Archipel (int x, int y, int groesse, int kartenabschnitt_id)
+	public Archipelago (int x, int y, int groesse, int kartenabschnitt_id)
 	{
 		this.x = x;
 		this.y = y;
-		this.groesse = groesse;
-		this.kartenabschnitt_id = kartenabschnitt_id;
-		this.archipelID = 0;
+		this.magnitude = groesse;
+		this.mapSectionId = kartenabschnitt_id;
+		this.archipelagoId = 0;
 	}
 	/**
-	 * Diese Klasse beschreibt ein Archipel so, dass damit auch Datenbankeinträge
+	 * Diese Klasse beschreibt ein Archipelago so, dass damit auch Datenbankeinträge
 	 * generiert werden können.
 	 * @param x gibt die x-Koordinate auf der Karte an.
 	 * @param y gibt die y-Koordinate auf der Karte an.
-	 * @param groesse gibt an, wie groß und fortgeschritten Inseln dieses Archipels
-	 * @param kartenabschnitt_id gibt an, in welchem Kartenabschnitt dieses Archipel zu finden ist.
+	 * @param magnitude gibt an, wie groß und fortgeschritten Inseln dieses Archipels
+	 * @param mapSectionId gibt an, in welchem Kartenabschnitt dieses Archipelago zu finden ist.
 	 * sein können und liegt zwischen 1 und 5
 	 */
-	public Archipel (int x, int y, int groesse, int kartenabschnitt_id, int archipelID)
+	public Archipelago (int x, int y, int groesse, int kartenabschnitt_id, int archipelID)
 	{
 		this.x = x;
 		this.y = y;
-		this.groesse = groesse;
-		this.kartenabschnitt_id = kartenabschnitt_id;
-		this.archipelID = archipelID;
+		this.magnitude = groesse;
+		this.mapSectionId = kartenabschnitt_id;
+		this.archipelagoId = archipelID;
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class Archipel
 	 */
 	public int inselnImArchipelVerteilen()
 	{
-		return inselnImArchipelVerteilen(this.x, this.y, this.groesse);
+		return inselnImArchipelVerteilen(this.x, this.y, this.magnitude);
 	}
 
 	/**
@@ -121,9 +121,9 @@ public class Archipel
 		 * Der erste Operator erzeugt einen typischen Atollring.
 		 * Der zweite Operator stellt im Prinzip den vollen Archipelplatz zur Verf�gung, ist
 		 * jedoch abgerundet, damit den Spielern die Ecken nicht so ins Auge fallen.
-		 * Der dritte Operator erzeugt ein schmaleres, langgestrecktes Archipel, das schr�g
+		 * Der dritte Operator erzeugt ein schmaleres, langgestrecktes Archipelago, das schr�g
 		 * liegt.
-		 * Der vierte Operator erzeugt ein pfeilf�rmiges Archipel.
+		 * Der vierte Operator erzeugt ein pfeilf�rmiges Archipelago.
 		 */
 		int[][][] archipelOperator ={
 		{{0,0,0,0,1,1,1,1,1,0,0,0,0},
@@ -197,7 +197,7 @@ public class Archipel
 				archipel[i][j]=(Math.random());
 			}
 		// Je nach Gr��enklasse verchiedene Dinge mit dem Archipelgebiet anstellen.
-		archipelwaehler = (int) (Math.random()*4-2+this.groesse);
+		archipelwaehler = (int) (Math.random()*4-2+this.magnitude);
 		if (archipelwaehler < 0) archipelwaehler = 0;
 		if (archipelwaehler >= archipelOperator.length-1) archipelwaehler = archipelOperator.length-1;
 
@@ -265,7 +265,7 @@ public class Archipel
 		}// Switch
 
 		/* Jetzt wird das Archipelgebiet mit dem Operator getrimmt, so kann das Aussehen bestimmt werden.
-		 * Zus�tzlich wird das Archipel um jeweils eine blinde Reihe rundherum erweitert, damit der Ab-
+		 * Zus�tzlich wird das Archipelago um jeweils eine blinde Reihe rundherum erweitert, damit der Ab-
 		 * standsoperator keine ArrayIndexOutOfBoundsExceptions hervorruft, wenn er ganz am Rand aus-
 		 * gef�hrt wird. Das Verfahren beschleunigt die Inselherstellung ein wenig im Vergleich zur Try/-
 		 * Catch-Arithmetik, die f�r die Exceptions notwendig w�re.
@@ -305,7 +305,7 @@ public class Archipel
 			if (inselZaehler > inselAnzahl)
 				meeresspiegel = i;
 		}
-		// TODO: Wenn der Fall "meeresspiegel == 0" auftritt, sind zu wenig Inseln in dem Archipel
+		// TODO: Wenn der Fall "meeresspiegel == 0" auftritt, sind zu wenig Inseln in dem Archipelago
 		// erzeugt worden. Derzeit wird einfach abgebrochen, das Wiederholen der Methode wird der
 		// aufrufenden Klasse �berlassen. Hier sollte noch nachgebessert werden!
 		if (meeresspiegel <= 0){
@@ -316,7 +316,7 @@ public class Archipel
 
 		//Inseln generieren, Schritt 4: Positionen aller Inseln mit (h�he > meeresspiegel) auslesen,
 		//Abst�nde kontrollieren, notfalls Inseln l�schen und Meeresspiegel senken
-		this.inselAnzahl = inselZaehler;
+		this.numberOfIslands = inselZaehler;
 		inselZaehler = 0;
 		meeresspiegel++;
 		do
@@ -339,7 +339,7 @@ public class Archipel
 				}//for
 		}
 		while(inselZaehler < inselAnzahl && meeresspiegel >= 1);
-		this.inselAnzahl = inselZaehler;
+		this.numberOfIslands = inselZaehler;
 		// TODO: Wenn der Meeresspiegel auf 0 sinkt, ist die Inselherstellung misslungen und muss
 		// wiederholt werden.
 		if (meeresspiegel <=1)
@@ -349,15 +349,15 @@ public class Archipel
 		}
 		//Inseln generieren, Schritt 5: Inselobjekte erzeugen
 		int inselGroesse;
-		insel = new InselErstellung[inselZaehler];
+		island = new IslandCreator[inselZaehler];
 		inselZaehler=0;
 		for (i=0; i<archipelGebiet; i++)
 			for (j=0; j<archipelGebiet; j++)
 			{
 				if (archipelErweitert[i+1][j+1] > meeresspiegel)
 				{
-					inselGroesse = (int) (Math.random()*this.groesse) +1;
-					insel[inselZaehler++] = new InselErstellung(i, j, inselGroesse, this.archipelID);
+					inselGroesse = (int) (Math.random()*this.magnitude) +1;
+					island[inselZaehler++] = new IslandCreator(i, j, inselGroesse, this.archipelagoId);
 				}
 			}//for
 
@@ -368,10 +368,10 @@ public class Archipel
 		if (this.x > 999 - (int)(archipelGebiet/2))	this.x = (int)(archipelGebiet/2);
 		if (this.y > 999 - (int)(archipelGebiet/2))	this.y = (int)(archipelGebiet/2);
 
-		for (i=0; i<this.inselAnzahl;i++)
+		for (i=0; i<this.numberOfIslands;i++)
 		{
-			insel[i].x_pos = insel[i].x_pos-(int)(archipelGebiet/2)+this.x;
-			insel[i].y_pos = insel[i].y_pos-(int)(archipelGebiet/2)+this.y;
+			island[i].xPos = island[i].xPos-(int)(archipelGebiet/2)+this.x;
+			island[i].yPos = island[i].yPos-(int)(archipelGebiet/2)+this.y;
 		}
 		return inselZaehler;
 	}
