@@ -8,22 +8,22 @@ import de.mb.database.AbstractConnectionFactory;
 
 /**
  * This class is for retrieving databaseconnections from MySQL databases
- * 
+ *
  * @author Marco Behnke
  *
  */
 public class MysqlConnectionFactory extends AbstractConnectionFactory{
-	
+
 	/**
 	 * Public constructor, port is default 3306
-	 * 
+	 *
 	 * @param url		database servername / address
 	 * @param dbname	database name
 	 */
 	public MysqlConnectionFactory(String url, String dbname) {
 		super(url, "3306", dbname);
 	}
-	
+
 	/**
 	 * initializes database driver
 	 */
@@ -43,10 +43,10 @@ public class MysqlConnectionFactory extends AbstractConnectionFactory{
 			System.err.println(e.getLocalizedMessage());
 		}
 	}
-	
+
 	/**
 	 * Returns connection to database
-	 * 
+	 *
 	 * @param username		DBUser
 	 * @param password		DBPassword
 	 * @return				database connection
@@ -54,7 +54,6 @@ public class MysqlConnectionFactory extends AbstractConnectionFactory{
 	 */
 	public Connection getConnection(String username, String password) throws SQLException {
 		String url = "jdbc:mysql://"+_url+":"+_port+"/"+_dbname+"?user="+username+"&password="+password;
-		System.out.println(url);
 		return DriverManager.getConnection(url);
 	}
 }
