@@ -33,12 +33,12 @@ public class Archipel
 		this.archipelID = 0;
 	}
 	/**
-	 * Diese Klasse beschreibt ein Archipel so, dass damit auch Datenbankeintr�ge
-	 * generiert werden k�nnen.
+	 * Diese Klasse beschreibt ein Archipel so, dass damit auch Datenbankeinträge
+	 * generiert werden können.
 	 * @param x gibt die x-Koordinate auf der Karte an.
 	 * @param y gibt die y-Koordinate auf der Karte an.
-	 * @param groesse gibt an, wie gro� und fortgeschritten Inseln dieses Archipels
-	 * sein k�nnen und liegt zwischen 1 und 5
+	 * @param groesse gibt an, wie groß und fortgeschritten Inseln dieses Archipels
+	 * sein können und liegt zwischen 1 und 5
 	 */
 	public Archipel (int x, int y, int groesse)
 	{
@@ -49,13 +49,13 @@ public class Archipel
 		this.archipelID = 0;
 	}
 	/**
-	 * Diese Klasse beschreibt ein Archipel so, dass damit auch Datenbankeintr�ge
-	 * generiert werden k�nnen.
+	 * Diese Klasse beschreibt ein Archipel so, dass damit auch Datenbankeinträge
+	 * generiert werden können.
 	 * @param x gibt die x-Koordinate auf der Karte an.
 	 * @param y gibt die y-Koordinate auf der Karte an.
-	 * @param groesse gibt an, wie gro� und fortgeschritten Inseln dieses Archipels
+	 * @param groesse gibt an, wie groß und fortgeschritten Inseln dieses Archipels
 	 * @param kartenabschnitt_id gibt an, in welchem Kartenabschnitt dieses Archipel zu finden ist.
-	 * sein k�nnen und liegt zwischen 1 und 5
+	 * sein können und liegt zwischen 1 und 5
 	 */
 	public Archipel (int x, int y, int groesse, int kartenabschnitt_id)
 	{
@@ -66,13 +66,13 @@ public class Archipel
 		this.archipelID = 0;
 	}
 	/**
-	 * Diese Klasse beschreibt ein Archipel so, dass damit auch Datenbankeintr�ge
-	 * generiert werden k�nnen.
+	 * Diese Klasse beschreibt ein Archipel so, dass damit auch Datenbankeinträge
+	 * generiert werden können.
 	 * @param x gibt die x-Koordinate auf der Karte an.
 	 * @param y gibt die y-Koordinate auf der Karte an.
-	 * @param groesse gibt an, wie gro� und fortgeschritten Inseln dieses Archipels
+	 * @param groesse gibt an, wie groß und fortgeschritten Inseln dieses Archipels
 	 * @param kartenabschnitt_id gibt an, in welchem Kartenabschnitt dieses Archipel zu finden ist.
-	 * sein k�nnen und liegt zwischen 1 und 5
+	 * sein können und liegt zwischen 1 und 5
 	 */
 	public Archipel (int x, int y, int groesse, int kartenabschnitt_id, int archipelID)
 	{
@@ -84,10 +84,10 @@ public class Archipel
 	}
 
 	/**
-	 * Setzt die Positionen einiger Inseln in Abh�ngigkeit von ihrer Archipelposition.
-	 * Dabei werden je nach Gr��enklasse verschiedene Verteilungen angestrebt.
-	 * @return gibt die Anzahl der Inseln zur�ck, wenn alles geklappt hat.
-	 * Wenn 0 zur�ckgegeben wird, muss die Inselherstellung wiederholt werden.
+	 * Setzt die Positionen einiger Inseln in Abhängigkeit von ihrer Archipelposition.
+	 * Dabei werden je nach Größenklasse verschiedene Verteilungen angestrebt.
+	 * @return gibt die Anzahl der Inseln zurück, wenn alles geklappt hat.
+	 * Wenn 0 zurückgegeben wird, muss die Inselherstellung wiederholt werden.
 	 */
 	public int inselnImArchipelVerteilen()
 	{
@@ -95,13 +95,13 @@ public class Archipel
 	}
 
 	/**
-	 * Setzt die Positionen einiger Inseln in Abh�ngigkeit von ihrer Archipelposition.
-	 * Dabei werden je nach Gr��enklasse verschiedene Verteilungen angestrebt.
+	 * Setzt die Positionen einiger Inseln in Abhängigkeit von ihrer Archipelposition.
+	 * Dabei werden je nach Größenklasse verschiedene Verteilungen angestrebt.
 	 * @param ArchipelX ist die Zentrale Postion des Archipels in X-Richtung
 	 * @param ArchipelY ist die Zentrale Position des Archipels in Y-Richtung
-	 * @param groessenklasse ist die Gr��enklasse des Archipels
-	 * @return gibt die Anzahl der Inseln zur�ck, wenn alles geklappt hat.
-	 * Wenn 0 zur�ckgegeben wird, muss die Inselherstellung wiederholt werden.
+	 * @param groessenklasse ist die Größenklasse des Archipels
+	 * @return gibt die Anzahl der Inseln zurück, wenn alles geklappt hat.
+	 * Wenn 0 zurückgegeben wird, muss die Inselherstellung wiederholt werden.
 	 */
 	public int inselnImArchipelVerteilen(int ArchipelX, int ArchipelY, int groessenklasse)
 	{
