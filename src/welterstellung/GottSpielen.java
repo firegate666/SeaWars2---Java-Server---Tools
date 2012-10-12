@@ -4,14 +4,14 @@ package welterstellung;
 class GottSpielen
 {
 	/**
-	 * Ausf�hrbare Welterstellung. Vorsicht, kann einige Minuten dauern.
+	 * Ausführbare Welterstellung. Vorsicht, kann einige Minuten dauern.
 	 * @param args
 	 * -cardpart 7 setzt den Kartenabschnitt der neuen Welt auf 7
 	 * -path "c:\Bild.bmp" setzt den Pfad auf ein BMP nach Wahl
 	 * -archipelago 500 setzt die Archipelanzahl auf 500
 	 * -fileOutputFlag 1 schaltet die Ausgabe der Inseln in eine Excel-Textdatei ein
 	 * -fileOutputPath "C:\Eigene Dateien" gibt die Insel.txt in C:\Eigene Dateien aus
-	 * -talkative schaltet die Konsolen-Kommentierung w�hrend des Vorgangs ein.
+	 * -talkative schaltet die Konsolen-Kommentierung während des Vorgangs ein.
 	 *
 	 */
 	public static void main(String[] args) {
