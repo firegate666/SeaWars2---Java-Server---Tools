@@ -287,10 +287,10 @@ public class WorldCreator{
 				archipelQuery = "INSERT LOW_PRIORITY "+
 				"INTO Island (name, size, xPos, yPos, archipelagoId, storageId, createdAt) "+
 				"VALUES('"+SqlSyntaxName+"'"+
-				", "+ archipel.insel[j].groesse +
-				", "+ archipel.insel[j].x_pos +
-				", "+ archipel.insel[j].y_pos +
-				", "+ archipel.insel[j].archipelID +
+				", "+ archipel.island[j].size +
+				", "+ archipel.island[j].xPos +
+				", "+ archipel.island[j].yPos +
+				", "+ archipel.island[j].archipelagosId +
 				", "+ SQLAntwort.getDataCell(1,1) +
 				", "+ createdAt +
 				");";
