@@ -1,15 +1,14 @@
 package welterstellung;
 
+import de.mb.database.SQLAnswerTable;
+import de.mb.database.mysql.MysqlConnectionFactory;
+import de.mb.database.mysql.MysqlSQLExecution;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
-
-import de.mb.database.SQLAnswerTable;
-import de.mb.database.mysql.MysqlConnectionFactory;
-import de.mb.database.mysql.MysqlSQLExecution;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -148,50 +147,50 @@ public class Welterstellung{
 		}
 
 		long zeitstempel = new Date().getTime();
-		/* Zun�chst wird das neueWelt-Objekt erzeugt, das die Archipelpositionen und -gr��en enth�lt.
+
+		String createdAt = "'" + new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + "'";
+
+		/* Zunächst wird das neueWelt-Objekt erzeugt, das die Archipelpositionen und -größen enthält.
 		 */
-		SendQuery("SELECT max(id) FROM welt;");
+		SendQuery("SELECT max(id) FROM World;");
 		int welt_id = 1;
 		try
 		{
 			welt_id = Integer.parseInt(SQLAntwort.getDataCell(1, 1));
-		}catch(NumberFormatException e) {
-			try {
-				SQLexec.executeInsert("INSERT INTO welt (name) VALUES ('Erste Welt')");
-			} catch (SQLException ex) {
-				Logger.getLogger(Welterstellung.class.getName()).log(Level.SEVERE, null, ex);
-			}
+		} catch (NumberFormatException e) {
+			Logger.getAnonymousLogger().log(Level.SEVERE, "Create a world prior to creating islands");
+			System.exit(0);
 		}
 
-		SendQuery("SELECT max(id) FROM kartenabschnitt;");
-		try
-		{
-			kartenabschnitt = Integer.parseInt(SQLAntwort.getDataCell(1,1)) +1;
-		}
-		catch (NumberFormatException e)
-		{
-			if (testausgabe>0) System.out.println(e);
-			kartenabschnitt = 0;
-		}
-		if (testausgabe > 0) System.out.println("Nächster Kartenabschnitt " + kartenabschnitt);
-		try
-		{
-			if (kartenabschnitt == 0) {
-				SQLexec.executeInsert("INSERT LOW_PRIORITY INTO kartenabschnitt (id,  kartennummer, links_id, welt_id) VALUES ("+
-						kartenabschnitt +", "+ kartenabschnitt+ ", "+ kartenabschnitt+ ", " + welt_id+ ");");
+		if (testausgabe > 0) System.out.println("Nächster Kartenabschnitt");
 
-			} else {
-				SQLexec.executeInsert("INSERT LOW_PRIORITY INTO kartenabschnitt (id,  kartennummer, links_id, welt_id) VALUES ("+
-						kartenabschnitt +", "+ kartenabschnitt+ ", "+ (kartenabschnitt-1)+ ", " + welt_id+ ");");
+		try
+		{
+			SQLexec.executeInsert("INSERT LOW_PRIORITY INTO MapSection (createdAt, worldId) VALUES ("+
+				createdAt +", " + welt_id+ ");");
+
+			SendQuery("SELECT max(id) FROM MapSection;");
+			try
+			{
+				kartenabschnitt = Integer.parseInt(SQLAntwort.getDataCell(1,1));
 			}
-			if (kartenabschnitt > 1)
-				SQLexec.executeUpdate("UPDATE LOW_PRIORITY kartenabschnitt SET rechts_id = "+kartenabschnitt+" WHERE id = " +
-									(kartenabschnitt -1) + ";");
+			catch (NumberFormatException e)
+			{
+				e.printStackTrace();
+				System.exit(1);
+			}
+
+			// TODO fix the section links
+			/*if (kartenabschnitt > 1) {
+				SQLexec.executeUpdate("UPDATE LOW_PRIORITY MapSection SET leftSectionId = "+(kartenabschnitt-1)+" WHERE id = " +
+									(kartenabschnitt) + ";");
+			}*/
 		}
 		catch(SQLException e)
 		{
 			System.err.println(SQLexec.getLastQuery());
 			e.printStackTrace();
+			System.exit(0);
 		}
 		if (testausgabe>0) System.out.println("Welterstellung gestartet. Archipel werden verteilt...");
 		Archipelverteilung neueWelt;
@@ -206,8 +205,8 @@ public class Welterstellung{
 		{
 			SqlSyntaxName = name.setZufallsName().replaceAll("'","\\\\'");
 			archipelQuery = "INSERT LOW_PRIORITY "+
-			"INTO archipel (x_pos, y_pos, name, groessenklasse, kartenabschnitt_id) "+
-			"VALUES("+ neueWelt.Orte[i].x+", "+ neueWelt.Orte[i].y +", '"+ SqlSyntaxName +"', "+ (neueWelt.Orte[i].groesse+1) +", "+ kartenabschnitt +");";
+			"INTO Archipelago (createdAt, xPos, yPos, name, magnitude, mapSectionId) "+
+			"VALUES("+ createdAt + ", " + neueWelt.Orte[i].x+", "+ neueWelt.Orte[i].y +", '"+ SqlSyntaxName +"', "+ (neueWelt.Orte[i].groesse+1) +", "+ kartenabschnitt +");";
 			try
 			{
 				SQLexec.executeInsert(archipelQuery);
@@ -218,9 +217,11 @@ public class Welterstellung{
 				//Es werden vorher auch zwei bis drei Archipel zu viel erzeugt (-;
 				System.err.println(SQLexec.getLastQuery());
 				e.printStackTrace();
+				System.exit(0);
 			}
 
 		}
+
 		if (testausgabe>0)
 		{
 			System.out.println("Bisherige Laufzeit: " + ((new Date().getTime())-zeitstempel) + " ms. Pro Archipel sind das " +((new Date().getTime())-zeitstempel)/neueWelt.Archipelzahl + " ms.");
@@ -241,9 +242,9 @@ public class Welterstellung{
 		 */
 		int inselzahl = 0;
 		Archipel archipel = new Archipel();
-		SendQuery("SELECT id, x_pos, y_pos, groessenklasse "+
-				"FROM archipel "+
-				"WHERE kartenabschnitt_id = "+ this.kartenabschnitt + ";");
+		SendQuery("SELECT id, xPos, yPos, magnitude "+
+				"FROM Archipelago "+
+				"WHERE mapSectionId = "+ this.kartenabschnitt + ";");
 
 		SQLAnswerTable SQLAntwortArchipel;
 		SQLAntwortArchipel = SQLAntwort;
@@ -264,21 +265,25 @@ public class Welterstellung{
 				// Lager f�r die Insel erstellen. Kapazit�t =0. Egal. Ihr wolltet es so.
 				try
 				{
-					SQLexec.executeInsert("INSERT LOW_PRIORITY INTO lager (kapazitaet) VALUES (0);");
+					SQLexec.executeInsert("INSERT LOW_PRIORITY INTO Storage (createdAt, capacity) VALUES (" + createdAt + ", 0);");
 				}
 				catch (SQLException e)
 				{
-					System.out.println ("Es konnte kein Lager f�r diese Insel erstellt werden: "+ SqlSyntaxName);
+
+					System.out.println ("Es konnte kein Lager für diese Insel erstellt werden: "+ SqlSyntaxName);
+					e.printStackTrace();
+					System.exit(1);
 				}
-				SendQuery("SELECT  max(id)FROM lager;");
+				SendQuery("SELECT  max(id) FROM Storage;");
 				archipelQuery = "INSERT LOW_PRIORITY "+
-				"INTO insel (spieler_id, name, groesse, x_pos, y_pos, archipel_id, lager_id) "+
-				"VALUES(null, '"+SqlSyntaxName+"'"+
+				"INTO Island (name, size, xPos, yPos, archipelagoId, storageId, createdAt) "+
+				"VALUES('"+SqlSyntaxName+"'"+
 				", "+ archipel.insel[j].groesse +
 				", "+ archipel.insel[j].x_pos +
 				", "+ archipel.insel[j].y_pos +
 				", "+ archipel.insel[j].archipelID +
 				", "+ SQLAntwort.getDataCell(1,1) +
+				", "+ createdAt +
 				");";
 				try
 				{
